@@ -1,11 +1,9 @@
 package com.swu.cho4.fixswu;
 
-<<<<<<< HEAD
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-=======
-        >>>>>>> origin/master
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
