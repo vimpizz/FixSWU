@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mFirebaseAuth.signOut();
+        mFirebaseAuth.signOut(); // 로그아웃
 
         findViewById(R.id.btnGoogleSignIn).setOnClickListener(mClicks);
 
