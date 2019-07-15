@@ -179,7 +179,7 @@
         android:layout_weight="0.15"
         android:layout_margin="15dp"
         android:inputType="textPersonName"
-        android:text="수리 내용" />
+        android:text="수리 내용"/>
 
     <LinearLayout
         android:layout_width="match_parent"
