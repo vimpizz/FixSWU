@@ -24,7 +24,8 @@
                 android:layout_weight="3"
                 android:gravity="center|left"
                 android:text="번호"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="15dp"/>
 
             <TextView
                 android:id="@+id/txtvCondition"
@@ -32,7 +33,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="7"
                 android:gravity="center|right"
-                android:text="상태" />
+                android:text="상태"
+                android:textSize="15dp"/>
         </LinearLayout>
 
         <TextView
@@ -44,7 +46,8 @@
             android:gravity="center|left"
             android:lines="2"
             android:maxLines="2"
-            android:text="내용" />
+            android:text="내용"
+            android:textSize="15dp"/>
 
         <TextView
             android:id="@+id/txtvInfo"
@@ -52,7 +55,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center|left"
-            android:text="기관, 방, 호수" />
+            android:text="기관, 방, 호수"
+            android:textSize="15dp"/>
 
         <TextView
             android:id="@+id/txtvDate"
@@ -60,7 +64,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center|left"
-            android:text="신청날짜,시간" />
+            android:text="신청날짜,시간"
+            android:textSize="15dp"/>
 
     </LinearLayout>
 </LinearLayout>
