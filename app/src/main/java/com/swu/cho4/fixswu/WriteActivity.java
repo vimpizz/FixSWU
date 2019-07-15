@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class WriteActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

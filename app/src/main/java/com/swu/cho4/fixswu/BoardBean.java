@@ -14,5 +14,4 @@ public class BoardBean {
     public String comment;
     public boolean like;
     public transient Bitmap bmpTitle;
-
 }
