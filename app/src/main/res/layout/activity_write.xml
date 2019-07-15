@@ -87,7 +87,8 @@
                 android:id="@+id/spinnerHouse"
                 android:layout_width="215dp"
                 android:layout_height="40dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:entries="@array/기관" />
 
         </LinearLayout>
 
@@ -188,14 +189,14 @@
         android:gravity="center"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btnStudentCancel"
+            android:id="@+id/btnStuCancel"
             android:layout_width="130dp"
             android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
             android:text="취소" />
 
         <Button
-            android:id="@+id/btnStudentSave"
+            android:id="@+id/btnStuSave"
             android:layout_width="130dp"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
