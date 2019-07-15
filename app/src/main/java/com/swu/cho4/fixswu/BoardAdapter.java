@@ -51,7 +51,7 @@ public class BoardAdapter extends BaseAdapter {
         final BoardBean boardBean = mBoardList.get(i);
 
         txtvNum.setText(boardBean.ApplyNum);
-        txtvCondition.setText(boardBean.Condition);
+        txtvCondition.setText(boardBean.condition);
         txtvContents.setText(boardBean.content);
         txtvInfo.setText(boardBean.house + boardBean.roomNum + boardBean.deskNum);
         txtvDate.setText(boardBean.date);
