@@ -101,7 +101,9 @@ public class WriteActivity extends AppCompatActivity {
             mEdtRoomNum.setText(mBoardBean.roomNum);
             mEdtDeskNum.setText(mBoardBean.deskNum);
             mEdtContent.setText(mBoardBean.content);
-            mBoardBean.date=
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
+            mBoardBean.date=sdf.format(new Date());
 
         }*/
 
