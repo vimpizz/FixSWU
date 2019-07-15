@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -70,6 +71,14 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
+        
+        //카메라를 사용하기 위한 퍼미션을 요청한다.
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+        }, 0);
+
 
         mImgProfile = findViewById(R.id.imgWrite);
         mEdtStuNum = findViewById(R.id.edtStuNum);
@@ -108,13 +117,6 @@ public class WriteActivity extends AppCompatActivity {
         }*/
 
 
-        //카메라를 사용하기 위한 퍼미션을 요청한다.
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA
-        }, 0);
-
 
 
 
@@ -125,9 +127,37 @@ public class WriteActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
         findViewById(R.id.btnStuSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(TextUtils.isEmpty(mEdtStuNum.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"학번을 입력하세요",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(TextUtils.isEmpty(mEdtName.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"이름을 입력하세요",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(TextUtils.isEmpty(mEdtRoomNum.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"호수를 입력하세요",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"번호를 입력하세요",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(TextUtils.isEmpty(mEdtContent.getText().toString())){
+                    Toast.makeText(getApplicationContext(),"수리내용을 입력하세요",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
                 builder.setTitle("알림창");
                 builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이나 삭제가 불가합니다.\n허위기재 시 불이익을 받으실 수 있습니다.");
@@ -163,7 +193,7 @@ public class WriteActivity extends AppCompatActivity {
 
     }
 
-    //새메모 등록
+
     private void upload(){
 
         if(mPhotoPath == null){
@@ -239,7 +269,7 @@ public class WriteActivity extends AppCompatActivity {
             mCaptureUri = Uri.fromFile( getOutPutMediaFile() );
         } else {
             mCaptureUri = FileProvider.getUriForFile(this,
-                    "com.example.guru2classexam", getOutPutMediaFile());
+                    "com.swu.cho4.fixswu", getOutPutMediaFile());
         }
 
         i.putExtra(MediaStore.EXTRA_OUTPUT, mCaptureUri);
