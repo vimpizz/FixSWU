@@ -24,12 +24,6 @@
             android:layout_weight="4"
             android:layout_margin="5dp"/>
 
-        <TextView
-            android:id="@+id/heartNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="개"
-            android:layout_weight="1"/>
 
 
         <ImageView
@@ -40,6 +34,16 @@
             app:srcCompat="@drawable/heart"
             android:background="@android:drawable/screen_background_light_transparent"
             android:scaleType="fitCenter"/>
+
+        <TextView
+            android:id="@+id/heartNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개"
+            android:textSize="13dp"
+            android:layout_weight="1"/>
+
+
 
 
 
