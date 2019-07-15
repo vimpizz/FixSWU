@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="기관">
+        <item>샬롬하우스 A동</item>
+        <item>샬롬하우스 B동</item>
+        <item>국제생활관</item>
+        <item>바롬관 10층</item>
+    </string-array>
+</resources>
