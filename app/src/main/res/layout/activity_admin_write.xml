@@ -14,6 +14,7 @@
         android:layout_weight="1"
         android:textStyle="bold"
         android:textSize="25dp"
+        android:fontFamily="@font/kopubdotumbold"
         android:text="영선신청 상세보기"
         android:gravity="center|left"/>
 
@@ -46,6 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:fontFamily="@font/kopubdotummedium"
                     android:hint="글번호"
                     android:gravity="center|left"
                     android:textSize="15dp"/>
@@ -55,6 +57,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:fontFamily="@font/kopubdotummedium"
                     android:hint="상태"
                     android:gravity="center|left"
                     android:textSize="15dp"/>
@@ -71,6 +74,7 @@
                     android:id="@+id/txtHouse"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/kopubdotummedium"
                     android:layout_weight="1"
                     android:hint="기관"
                     android:gravity="center|left"
@@ -80,6 +84,7 @@
                     android:id="@+id/txtRoomNum"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/kopubdotummedium"
                     android:layout_weight="1"
                     android:hint="호수"
                     android:gravity="center|left"/>
@@ -96,6 +101,7 @@
                     android:id="@+id/txtDeskNum"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/kopubdotummedium"
                     android:layout_weight="1"
                     android:hint="번호"
                     android:gravity="center|left"
@@ -105,6 +111,7 @@
                     android:id="@+id/txtName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/kopubdotummedium"
                     android:layout_weight="1"
                     android:hint="이름"
                     android:gravity="center|left"
@@ -116,6 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
+                android:fontFamily="@font/kopubdotummedium"
                 android:gravity="center|right"
                 android:hint="시간"
                 android:textSize="15dp" />
@@ -130,6 +138,7 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:hint="수리 요청 내용"
+        android:fontFamily="@font/kopubdotummedium"
         android:textSize="15dp"/>
 
     <LinearLayout
@@ -144,6 +153,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:fontFamily="@font/kopubdotummedium"
             android:text="상태"
             android:textSize="15dp"/>
 
@@ -162,6 +172,7 @@
         android:layout_weight="2"
         android:ems="10"
         android:hint="기사님 코멘트:"
+        android:fontFamily="@font/kopubdotummedium"
         android:textSize="15dp"/>
 
     <LinearLayout
