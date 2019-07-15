@@ -111,7 +111,7 @@ public class AdminWriteActivity extends AppCompatActivity {
     }
 
     private void update(){
-            mBoardBean.condition = false;
+            //mBoardBean.condition = mE;
             mBoardBean.comment=mEdtComment.getText().toString();
 
             //DB 업로드

@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class BoardBean implements Serializable {
     public String ApplyNum;
-    public boolean condition;
+    public String condition;
 
     public String id;
     public String userId;
