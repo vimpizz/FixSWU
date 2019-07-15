@@ -2,7 +2,6 @@ package com.swu.cho4.fixswu;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class BoardAdapter extends BaseAdapter {
+public class AdminBoardAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<BoardBean> mBoardList;
 
-    public BoardAdapter(Context context, List<BoardBean> boardList) {
+    public AdminBoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
         mBoardList = boardList;
     }
@@ -60,7 +59,7 @@ public class BoardAdapter extends BaseAdapter {
         applyBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(mContext, WriteActivity.class);
+                Intent i = new Intent(mContext, AdminWriteActivity.class);
                 i.putExtra(BoardBean.class.getName(), boardBean);
                 mContext.startActivity(i);
             }
