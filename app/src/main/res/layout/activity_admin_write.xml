@@ -165,15 +165,19 @@
         <Button
             android:id="@+id/btnAdminCancel"
             android:layout_width="130dp"
-            android:layout_marginRight="10dp"
             android:layout_height="wrap_content"
-            android:text="취소" />
+            android:layout_marginRight="10dp"
+            android:text="취소"
+            android:textColor="#FFFFFF"
+            android:background="#9E1A20"/>
 
         <Button
             android:id="@+id/btnAdminSave"
             android:layout_width="130dp"
-            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:text="확인" />
+            android:layout_marginLeft="10dp"
+            android:background="#9E1A20"
+            android:text="확인"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </LinearLayout>
