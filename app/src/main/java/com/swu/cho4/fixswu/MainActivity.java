@@ -1,6 +1,7 @@
 package com.swu.cho4.fixswu;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,7 +11,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnWrite).setOnClickListener(mBtnClick);
 
         // 최초 데이터 세팅
-        //mBoardAdapter = new BoardAdapter(this, mBoardList);
-        //mListView.setAdapter(mBoardAdapter);
+        mBoardAdapter = new BoardAdapter(this, mBoardList);
+        mListView.setAdapter(mBoardAdapter);
     }
 
     @Override
@@ -48,6 +52,28 @@ public class MainActivity extends AppCompatActivity {
         // 데이터 취득
         String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
         String uuid = WriteActivity.getUseridFromUUID(userEmail);
+        mFirebaseDB.getReference().child("board").child(uuid).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        // 데이터를 받아와서 List에 저장
+                        mBoardList.clear();
+
+                        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            BoardBean bean = snapshot.getValue(BoardBean.class);
+                            mBoardList.add(0,bean);
+                        }
+                        // 바뀐 데이터로 새로고침
+                        if(mBoardAdapter != null) {
+                            mBoardAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                }
+        );
+        // 어댑터 생성
     }
 
     private View.OnClickListener mBtnClick = new View.OnClickListener() {

@@ -8,7 +8,7 @@ public class BoardBean implements Serializable {
     public String ApplyNum;
     public String condition;
 
-    public String id;
+    public String id; // 보드 구분 아이디
     public String userId;
 
     public String stuNum;
