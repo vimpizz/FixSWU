@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "851715624135",
+    "firebase_url": "https://fixswu.firebaseio.com",
+    "project_id": "fixswu",
+    "storage_bucket": "fixswu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851715624135:android:c22a9a420da43068",
+        "android_client_info": {
+          "package_name": "com.swu.cho4.fixswu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851715624135-3rvgltlciebu6eru5i9rub2vn29sac6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.swu.cho4.fixswu",
+            "certificate_hash": "2311d4d97fd1660edbcef48f497d7533587dd206"
+          }
+        },
+        {
+          "client_id": "851715624135-lc3p1744b8r90ahobvq8vmekvmamcg45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6HuybJjDgz5BGj_bQY0aFZxJU4FvjM0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851715624135-lc3p1744b8r90ahobvq8vmekvmamcg45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
