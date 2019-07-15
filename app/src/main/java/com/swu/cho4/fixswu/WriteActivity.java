@@ -47,7 +47,7 @@ import java.util.UUID;
 
 public class WriteActivity extends AppCompatActivity {
 
-    public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com/";
+    public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com";
 
     private BoardBean mBoardBean;
 
@@ -158,7 +158,7 @@ public class WriteActivity extends AppCompatActivity {
                 }
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
                 builder.setTitle("알림창");
                 builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이나 삭제가 불가합니다.\n허위기재 시 불이익을 받으실 수 있습니다.");
                 builder.setNegativeButton("뒤로가기",null);
@@ -175,7 +175,7 @@ public class WriteActivity extends AppCompatActivity {
         findViewById(R.id.btnStuCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
                 builder.setTitle("알림창");
                 builder.setMessage("게시글 작성을 취소하고 뒤로 가시겠습니까?");
                 builder.setNegativeButton("아니오",null);
