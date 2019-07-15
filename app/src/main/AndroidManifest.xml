@@ -14,8 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BoardActivity"></activity>
-        <activity android:name=".BoardAdapter" />
         <activity android:name=".AdminWriteActivity" />
         <activity android:name=".AdminMainActivity" />
         <activity android:name=".UserInfoActivity" />

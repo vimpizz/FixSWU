@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +28,8 @@
             android:id="@+id/imgWriteAdmin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:scaleType="fitCenter"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -155,14 +157,35 @@
             android:entries="@array/상태" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edtComment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:ems="10"
-        android:hint="기사님 코멘트:"
-        android:textSize="15dp"/>
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="기사님
+            코멘트"/>
+
+        <EditText
+            android:id="@+id/edtComment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:ems="10"
+            android:hint="코멘트를 입력해주세요."
+            android:textSize="15dp"
+            android:inputType="textMultiLine"
+            android:maxLines="3"/>
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
