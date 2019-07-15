@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,12 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
             Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
-            goBoardMainActivity();
+            goMainActivity();
         }
 }
     //게시판 메인 화면으로 이동한다.
-    private void goBoardMainActivity() {
-        Intent i = new Intent(this, BoardActivity.class);
+    private void goMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
     }
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                             //FireBase 로그인 성공
                             Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             //메인화면으로 이동한다.
-                            goBoardMainActivity();
+                            goMainActivity();
                         } else {
                             //로그인 실패
                             Toast.makeText(getBaseContext(), "Firebase 로그인 실패", Toast.LENGTH_LONG).show();
