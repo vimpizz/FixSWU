@@ -1,6 +1,5 @@
 package com.swu.cho4.fixswu;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

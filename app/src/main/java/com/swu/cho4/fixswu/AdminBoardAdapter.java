@@ -19,18 +19,11 @@ public class AdminBoardAdapter extends BaseAdapter {
 
     public AdminBoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
-        mBoardList = boardList;
-        sortForDdate();
+        mBoardList =  Utils.getSortForDate(boardList);
     }
 
     public void setBoardList(List<BoardBean> boardList) {
-        mBoardList = boardList;
-        sortForDdate();
-    }
-
-    //리스트 정렬
-    private void sortForDdate() {
-
+        mBoardList =  Utils.getSortForDate(boardList);
     }
 
     @Override
