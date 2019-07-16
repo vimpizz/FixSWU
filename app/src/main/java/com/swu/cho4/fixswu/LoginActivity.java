@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,13 +30,12 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     //FireBase 인증객체
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    final FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        mFirebaseAuth.signOut(); // 로그아웃
 
         findViewById(R.id.btnGoogleSignIn).setOnClickListener(mClicks);
 
@@ -53,13 +53,19 @@ public class LoginActivity extends AppCompatActivity {
 
         if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
-            Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
             goMainActivity();
         }
 }
     //게시판 메인 화면으로 이동한다.
     private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    private void goAdminMainActivity(){
+        Intent i = new Intent(this, AdminMainActivity.class);
         startActivity(i);
         finish();
     }
@@ -90,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             //FireBase 로그인 성공
-                            Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             //메인화면으로 이동한다.
                             goMainActivity();
                         } else {
@@ -112,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 //구글 로그인 성공
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Toast.makeText(getBaseContext(), "구글 로그인에 성공 하였습니다.", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "구글 로그인에 성공 하였습니다.", Toast.LENGTH_LONG).show();
 
                 //FireBase 인증하러 가기
                 firebaseAuthWithGoogle(account);
