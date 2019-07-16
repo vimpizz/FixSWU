@@ -54,7 +54,15 @@ public class LoginActivity extends AppCompatActivity {
         if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
             //Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
-            goMainActivity();
+            if(mFirebaseAuth.getCurrentUser().getEmail().equals("boicesh@gmail.com")) {
+                Toast.makeText(getBaseContext(), "AdminMain"
+                        ,Toast.LENGTH_SHORT).show();
+                goAdminMainActivity();
+            } else {
+                Toast.makeText(getBaseContext(), "Main"
+                        , Toast.LENGTH_SHORT).show();
+                goMainActivity();
+            }
         }
 }
     //게시판 메인 화면으로 이동한다.
@@ -98,7 +106,15 @@ public class LoginActivity extends AppCompatActivity {
                             //FireBase 로그인 성공
                             //Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             //메인화면으로 이동한다.
-                            goMainActivity();
+                            if(mFirebaseAuth.getCurrentUser().getEmail().equals("boicesh@gmail.com")) {
+                                Toast.makeText(getBaseContext(), "AdminMain"
+                                        ,Toast.LENGTH_SHORT).show();
+                                goAdminMainActivity();
+                            } else {
+                                Toast.makeText(getBaseContext(), "Main"
+                                        , Toast.LENGTH_SHORT).show();
+                                goMainActivity();
+                            }
                         } else {
                             //로그인 실패
                             Toast.makeText(getBaseContext(), "Firebase 로그인 실패", Toast.LENGTH_LONG).show();
