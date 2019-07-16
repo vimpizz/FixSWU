@@ -111,6 +111,15 @@ public class WriteActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btnlike).setOnClickListener(new View.OnClickListener() {
+
+                                                          @Override
+                                                          public void onClick(View view) {
+
+                                                          }
+                                                      });
+
+
         findViewById(R.id.btnStuSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

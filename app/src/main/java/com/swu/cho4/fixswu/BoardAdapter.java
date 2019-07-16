@@ -26,6 +26,17 @@ public class BoardAdapter extends BaseAdapter {
     public BoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
         mBoardList = boardList;
+        sortForDdate();
+    }
+
+    public void setBoardList(List<BoardBean> boardList) {
+        mBoardList = boardList;
+        sortForDdate();
+    }
+
+    //리스트 정렬
+    private void sortForDdate() {
+
     }
 
     @Override
@@ -84,7 +95,6 @@ public class BoardAdapter extends BaseAdapter {
                 //i.putExtra("titleBitmap",boardBean.bmpTitle);
                 mContext.startActivity(i);}
         });
-
         return view;
     }
 }

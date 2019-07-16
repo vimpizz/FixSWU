@@ -178,7 +178,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:scaleType="fitCenter"
-            android:src="@drawable/heart" />
+            tools:srcCompat="@drawable/picture_box" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -194,7 +194,7 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:background="@color/SWUPURPLE"
+                android:background="@drawable/button_background"
                 android:fontFamily="@font/kopubdotummedium"
                 android:text="사진찍기"
                 android:textColor="#FFFFFF"
@@ -205,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/SWUPURPLE"
+                android:background="@drawable/button_background"
                 android:fontFamily="@font/kopubdotummedium"
                 android:text="사진선택"
                 android:textColor="#FFFFFF"
@@ -247,6 +247,64 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="기사님
+            코멘트"
+            android:fontFamily="@font/kopubdotummedium"
+            android:textSize="15dp"
+            android:gravity="center|left"/>
+
+        <TextView
+            android:id="@+id/txtComment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:textSize="15dp"
+            android:fontFamily="@font/kopubdotummedium"
+            android:gravity="center|left"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/heart" />
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/btnlike"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:text="좋아요"
+                android:fontFamily="@font/kopubdotummedium"
+                android:background="@color/PantoneCoolGray4C"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="horizontal">
@@ -259,7 +317,7 @@
             android:text="취소"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/kopubdotummedium"
-            android:background="@color/SWUPURPLE"/>
+            android:background="@drawable/button_background"/>
 
         <Button
             android:id="@+id/btnStuSave"
@@ -269,7 +327,7 @@
             android:text="확인"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/kopubdotummedium"
-            android:background="@color/SWUPURPLE"/>
+            android:background="@drawable/button_background"/>
 
     </LinearLayout>
 </LinearLayout>

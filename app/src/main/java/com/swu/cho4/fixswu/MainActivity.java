@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // 데이터 취득
         String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
         String uuid = WriteActivity.getUseridFromUUID(userEmail);
+
         mFirebaseDB.getReference().child("board").child(uuid).addValueEventListener(
                 new ValueEventListener() {
                     @Override

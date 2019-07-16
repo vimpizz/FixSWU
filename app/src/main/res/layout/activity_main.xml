@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/kopubdotumbold"
-            android:text="영선 신청 목록"
+            android:text="영선신청 목록"
             android:textSize="25dp"
             android:textStyle="bold"
             android:layout_weight="4"
