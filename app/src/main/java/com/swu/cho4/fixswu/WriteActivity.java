@@ -49,6 +49,8 @@ public class WriteActivity extends AppCompatActivity {
 
     public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com";
 
+    private BoardBean mBoardBean;
+
     private Uri mCaptureUri;
     public String mPhotoPath;
     public static final int REQUEST_IMAGE_CAPTURE = 200;
@@ -142,7 +144,9 @@ public class WriteActivity extends AppCompatActivity {
                 builder.setPositiveButton("게시물 등록", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        if(mBoardBean==null){
                             upload();
+                        }
                     }
                 });
                 builder.create().show();
@@ -165,6 +169,9 @@ public class WriteActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
+
+
+
     }
 
 
