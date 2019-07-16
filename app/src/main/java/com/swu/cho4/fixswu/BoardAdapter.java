@@ -1,18 +1,13 @@
 package com.swu.cho4.fixswu;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AlertDialog;
 
 import java.util.List;
 
@@ -25,18 +20,11 @@ public class BoardAdapter extends BaseAdapter {
 
     public BoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
-        mBoardList = boardList;
-        sortForDdate();
+        mBoardList =  Utils.getSortForDate(boardList);
     }
 
     public void setBoardList(List<BoardBean> boardList) {
-        mBoardList = boardList;
-        sortForDdate();
-    }
-
-    //리스트 정렬
-    private void sortForDdate() {
-
+        mBoardList =  Utils.getSortForDate(boardList);
     }
 
     @Override
