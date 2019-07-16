@@ -40,7 +40,6 @@ public class AdminWriteActivity extends AppCompatActivity {
     private ImageView mImgProfile;
     private TextView mTxtApplyNum,mTxtStuNum, mTxtName,mTxtRoomNum,mTxtDeskNum,mTxtContent,mTxtDate;
     private EditText mEdtComment;
-
     private Spinner mSpinner;
     private int intCondition=0; //보드 상태
 
@@ -83,6 +82,8 @@ public class AdminWriteActivity extends AppCompatActivity {
             }
             mTxtApplyNum.setText(mBoardBean.ApplyNum);
             mTxtName.setText(mBoardBean.name);
+
+
             mTxtRoomNum.setText(mBoardBean.roomNum);
             mTxtDeskNum.setText(mBoardBean.deskNum);
             mTxtDate.setText(mBoardBean.date);

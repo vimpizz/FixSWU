@@ -59,7 +59,7 @@ public class WriteActivity extends AppCompatActivity {
     private EditText mEdtStuNum, mEdtName,mEdtRoomNum,mEdtDeskNum,mEdtContent;
    // private Button mBtnCamera,mBtnGallery,mBtnStudentCancel,mBtnStudentSave;
     private Spinner mSpinner;
-    private int intHouse=0; //기관
+    private int mintHouse=0; //기관
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);
@@ -91,7 +91,7 @@ public class WriteActivity extends AppCompatActivity {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                intHouse=i;
+                mintHouse=i;
             }
 
             @Override
@@ -99,22 +99,35 @@ public class WriteActivity extends AppCompatActivity {
         });
 
 
-/*        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
-        if(mBoardBean != null){
-            mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
-            if(mBoardBean.bmpTitle != null){
-                mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
-            }
-            mEdtStuNum.setText(mBoardBean.content);
-            mEdtName.setText(mBoardBean.name);
-            mEdtRoomNum.setText(mBoardBean.roomNum);
-            mEdtDeskNum.setText(mBoardBean.deskNum);
-            mEdtContent.setText(mBoardBean.content);
+        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
+         if(mBoardBean != null ){
+             if(TextUtils.equals(mBoardBean.condition,"@string/conditon1")==false) {
+                 AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
+                 builder.setTitle("알림창");
+                 builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이 불가능합니다.");
+                 builder.setNegativeButton("뒤로가기", new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                     }
+                 });
+                 builder.setPositiveButton("", null);
+                 builder.create().show();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
-            mBoardBean.date=sdf.format(new Date());
+             }else if(TextUtils.equals(mBoardBean.condition,"@string/conditon1")) {
 
-        }*/
+                 mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
+                 if(mBoardBean.bmpTitle != null){
+                     mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
+                 }
+                 mEdtStuNum.setText(mBoardBean.content);
+                 mEdtName.setText(mBoardBean.name);
+                 mEdtRoomNum.setText(mBoardBean.roomNum);
+                 mEdtDeskNum.setText(mBoardBean.deskNum);
+                 mEdtContent.setText(mBoardBean.content);
+
+             }
+        }
 
 
 
@@ -165,7 +178,12 @@ public class WriteActivity extends AppCompatActivity {
                 builder.setPositiveButton("게시물 등록", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        upload();
+                        if(mBoardBean==null){
+                            upload();
+                        }else
+                        {
+                            update();
+                        }
                     }
                 });
                 builder.create().show();
@@ -191,6 +209,71 @@ public class WriteActivity extends AppCompatActivity {
 
 
 
+    }
+
+    //게시물 수정
+    private void update(){
+
+        // 안찍었을 경우 DB만 업데이트 시켜준다
+        if(mPhotoPath==null){
+            mBoardBean.stuNum=mEdtStuNum.getText().toString();
+            mBoardBean.name=mEdtName.getText().toString();
+            mBoardBean.roomNum=mEdtRoomNum.getText().toString();
+            mBoardBean.deskNum=mEdtDeskNum.getText().toString();
+            mBoardBean.content=mEdtContent.getText().toString();
+
+            //DB 업로드
+            DatabaseReference dbRef = mFirebaseDatabase.getReference();
+            String uuid = getUseridFromUUID(mBoardBean.userId);
+            dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
+            Toast.makeText(this,"수정 되었습니다",Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        //사진을 찍었을경우, 사진부터 업로드하고 DB만 업데이트한다
+        StorageReference storageRef = mFirebaseStorage.getReference();
+        final StorageReference imagesRef = storageRef.child("image/"+mCaptureUri.getLastPathSegment());
+        UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if(!task.isSuccessful())
+                    throw  task.getException();
+                return imagesRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                //파일 업로드 완료 후 호출된다
+                //기존이미지 파일 삭제한다.
+                if(mBoardBean.imgName!=null) {
+                    try {
+                        mFirebaseStorage.getReference().child("image").child(mBoardBean.imgName).delete();
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                mBoardBean.imgUri = task.getResult().toString();
+                mBoardBean.imgName = mCaptureUri.getLastPathSegment();
+
+                mBoardBean.stuNum=mEdtStuNum.getText().toString();
+                mBoardBean.name=mEdtName.getText().toString();
+                mBoardBean.roomNum=mEdtRoomNum.getText().toString();
+                mBoardBean.deskNum=mEdtDeskNum.getText().toString();
+                mBoardBean.content=mEdtContent.getText().toString();
+
+                //수정된 날짜로
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   hh:mm");
+                mBoardBean.date = sdf.format(new Date());
+
+                String uuid = getUseridFromUUID(mBoardBean.userId);
+                mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
+
+                Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 
 
@@ -224,6 +307,11 @@ public class WriteActivity extends AppCompatActivity {
         });
     }
 
+
+
+
+
+
     private void uploadDB(String imgUri,String imgName){
         //Firebase 데이터베이스에 메모를 등록한다.
         DatabaseReference dbRef = mFirebaseDatabase.getReference();
@@ -233,10 +321,12 @@ public class WriteActivity extends AppCompatActivity {
         BoardBean boardBean = new BoardBean();
         boardBean.id = id;
         boardBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
+        boardBean.condition = "@string/condition1";
+
 
         boardBean.stuNum = mEdtStuNum.getText().toString();
         boardBean.name = mEdtName.getText().toString();
-        boardBean.house = intHouse;
+        boardBean.house = mintHouse;
         boardBean.roomNum = mEdtRoomNum.getText().toString();
         boardBean.deskNum = mEdtDeskNum.getText().toString();
         boardBean.content = mEdtContent.getText().toString();
@@ -244,7 +334,7 @@ public class WriteActivity extends AppCompatActivity {
         boardBean.imgUri=imgUri;
         boardBean.imgName=imgName;
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   hh:mm");
         boardBean.date=sdf.format(new Date());
 
         //고유번호를 생성한다
