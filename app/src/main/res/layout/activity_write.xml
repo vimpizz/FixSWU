@@ -44,7 +44,7 @@
                 android:textSize="15dp" />
 
             <EditText
-                android:id="@+id/edtStuNum"
+                android:id="@+id/edtStuNumModify"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"

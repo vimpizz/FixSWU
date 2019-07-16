@@ -57,7 +57,6 @@ public class WriteActivity extends AppCompatActivity {
 
     private ImageView mImgProfile;
     private EditText mEdtStuNum, mEdtName,mEdtRoomNum,mEdtDeskNum,mEdtContent;
-   // private Button mBtnCamera,mBtnGallery,mBtnStudentCancel,mBtnStudentSave;
     private Spinner mSpinner;
     private int mintHouse=0; //기관
 

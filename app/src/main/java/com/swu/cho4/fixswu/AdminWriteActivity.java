@@ -53,7 +53,6 @@ public class AdminWriteActivity extends AppCompatActivity {
         mTxtContent = findViewById(R.id.txtContent);
         mSpinner=findViewById(R.id.spinnerCondition);
         mTxtDate = findViewById(R.id.txtDate);
-
         mEdtComment=findViewById(R.id.edtComment);
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
