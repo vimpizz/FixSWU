@@ -96,7 +96,7 @@ public class DetailBoardActivity extends AppCompatActivity {
                             try {
                                 FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
                                 Toast.makeText(DetailBoardActivity.this,"삭제되었습니다",Toast.LENGTH_SHORT).show();
-
+                                finish();
                             }catch (Exception e){
                                 e.printStackTrace();
                             }
