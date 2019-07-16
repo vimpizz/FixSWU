@@ -28,7 +28,8 @@
             android:id="@+id/imgWriteAdmin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:scaleType="fitCenter"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,15 +53,6 @@
                     android:gravity="center|left"
                     android:textSize="15dp"/>
 
-                <TextView
-                    android:id="@+id/txtCondition"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/kopubdotummedium"
-                    android:hint="상태"
-                    android:gravity="center|left"
-                    android:textSize="15dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -89,14 +81,6 @@
                     android:hint="호수"
                     android:gravity="center|left"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:orientation="horizontal">
-
                 <TextView
                     android:id="@+id/txtDeskNum"
                     android:layout_width="0dp"
@@ -106,6 +90,16 @@
                     android:hint="번호"
                     android:gravity="center|left"
                     android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+
 
                 <TextView
                     android:id="@+id/txtName"
@@ -165,15 +159,39 @@
             android:entries="@array/상태" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edtComment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:ems="10"
         android:hint="기사님 코멘트:"
         android:fontFamily="@font/kopubdotummedium"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="기사님
+            코멘트"/>
+
+        <EditText
+            android:id="@+id/edtComment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:ems="10"
+            android:hint="코멘트를 입력해주세요."
+            android:textSize="15dp"
+            android:inputType="textMultiLine"
+            android:maxLines="3"/>
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
