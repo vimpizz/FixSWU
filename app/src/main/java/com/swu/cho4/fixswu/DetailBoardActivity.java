@@ -67,7 +67,7 @@ public class DetailBoardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailBoardActivity.this);
-                builder.setTitle("삭제");
+                builder.setTitle("알림");
                 builder.setMessage("삭제하시겠습니까?");
                 builder.setNegativeButton("아니오",null);
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
@@ -144,7 +144,7 @@ public class DetailBoardActivity extends AppCompatActivity {
             } else if(mBoardBean.house == 3 ) {
                 house = "바롬관 10층";
             }
-            mTxtHouse.setText("기관: " +house);
+            mTxtHouse.setText(house);
             mTxtRoomNum.setText(mBoardBean.roomNum);
             mTxtDeskNum.setText(mBoardBean.deskNum);
             mTxtDate.setText(mBoardBean.date);
