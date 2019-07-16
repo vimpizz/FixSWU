@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WriteActivity"
     android:padding="20dp">
 
     <TextView
@@ -40,7 +39,7 @@
                 android:maxLines="1"/>
 
             <TextView
-                android:id="@+id/txtStuNum"
+                android:id="@+id/txtStuNumDetail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -63,7 +62,7 @@
                 android:textSize="15dp"/>
 
             <TextView
-                android:id="@+id/edtName"
+                android:id="@+id/txtNameDetail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -87,7 +86,7 @@
                 android:gravity="center|left"/>
 
             <TextView
-                android:id="@+id/spinnerHouse"
+                android:id="@+id/txtHouseDetail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -111,7 +110,7 @@
                 android:textSize="15dp"/>
 
             <TextView
-                android:id="@+id/edtRoomNum"
+                android:id="@+id/txtRoomNumDetail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -136,7 +135,7 @@
                 android:textSize="15dp"/>
 
             <TextView
-                android:id="@+id/edtDeskNum"
+                android:id="@+id/txtDeskNumDetail"
                 android:layout_width="0dp"
                 android:layout_weight="8"
                 android:layout_height="match_parent"
@@ -153,7 +152,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imgWrite"
+            android:id="@+id/imgWriteDetail"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="match_parent"
@@ -208,7 +207,7 @@
             android:gravity="center|left"/>
 
         <TextView
-            android:id="@+id/txtContent"
+            android:id="@+id/txtContentDetail"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
@@ -235,7 +234,7 @@
             android:gravity="center|left"/>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txtCommentDetail"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"
@@ -262,7 +261,7 @@
             </FrameLayout>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnLike"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
@@ -281,7 +280,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnStuCancel"
+            android:id="@+id/btnCancelDetail"
             android:layout_width="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_height="wrap_content"
@@ -290,7 +289,7 @@
             android:background="@drawable/button_background"/>
 
         <Button
-            android:id="@+id/btnStuSave"
+            android:id="@+id/btnModify"
             android:layout_width="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_height="wrap_content"

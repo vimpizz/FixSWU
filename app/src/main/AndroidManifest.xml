@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DetailBoardActivity"></activity>
-        <activity android:name=".ModifyBoardActivity" />
+        <activity android:name=".ModifyWriteActivity" />
         <activity android:name=".AdminWriteActivity" />
         <activity android:name=".AdminMainActivity" />
         <activity android:name=".UserInfoActivity" />
