@@ -26,4 +26,8 @@ public class BoardBean implements Serializable {
     public String comment;
     public boolean like;
     public transient Bitmap bmpTitle;
+
+    public long getMillisecond() {
+        return millisecond;
+    }
 }

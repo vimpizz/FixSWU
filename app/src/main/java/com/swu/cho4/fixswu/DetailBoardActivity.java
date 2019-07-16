@@ -1,23 +1,21 @@
 package com.swu.cho4.fixswu;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
@@ -67,7 +65,7 @@ public class DetailBoardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailBoardActivity.this);
-                builder.setTitle("삭제");
+                builder.setTitle("알림");
                 builder.setMessage("삭제하시겠습니까?");
                 builder.setNegativeButton("아니오",null);
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
@@ -113,7 +111,6 @@ public class DetailBoardActivity extends AppCompatActivity {
                 }else{
                     Intent i = new Intent(getApplicationContext(), ModifyWriteActivity.class);
                     i.putExtra(BoardBean.class.getName(), mBoardBean);
-                    i.putExtra("titleBitmap",mBoardBean.bmpTitle);
                     startActivity(i);
                 }
             }
@@ -145,12 +142,12 @@ public class DetailBoardActivity extends AppCompatActivity {
             } else if(mBoardBean.house == 3 ) {
                 house = "바롬관 10층";
             }
-            mTxtHouse.setText("기관: " +house);
+            mTxtHouse.setText(house);
             mTxtRoomNum.setText(mBoardBean.roomNum);
             mTxtDeskNum.setText(mBoardBean.deskNum);
             mTxtDate.setText(mBoardBean.date);
             mTxtContent.setText(mBoardBean.content);
-            //mTxtComment.setText(mBoardBean.comment);
+            mTxtComment.setText(mBoardBean.comment);
         }
 
     }

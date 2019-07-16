@@ -1,6 +1,5 @@
 package com.swu.cho4.fixswu;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                         ,Toast.LENGTH_SHORT).show();
                 goAdminMainActivity();
             } else {
-                Toast.makeText(getBaseContext(), "Main"
+                Toast.makeText(getBaseContext(), "Loading..."
                         , Toast.LENGTH_SHORT).show();
                 goMainActivity();
             }
@@ -111,8 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                                         ,Toast.LENGTH_SHORT).show();
                                 goAdminMainActivity();
                             } else {
-                                Toast.makeText(getBaseContext(), "Loading"
-                                        , Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(), "Loading...", Toast.LENGTH_SHORT).show();
                                 goMainActivity();
                             }
                         } else {
