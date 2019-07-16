@@ -100,37 +100,15 @@ public class WriteActivity extends AppCompatActivity {
 
 
         mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
-         if(mBoardBean != null ){
-             if(TextUtils.equals(mBoardBean.condition,"@string/conditon1")==false) {
-                 AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
-                 builder.setTitle("알림창");
-                 builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이 불가능합니다.");
-                 builder.setNegativeButton("뒤로가기", new DialogInterface.OnClickListener() {
-                     @Override
-                     public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
-                     }
-                 });
-                 builder.setPositiveButton("", null);
-                 builder.create().show();
-
-             }else if(TextUtils.equals(mBoardBean.condition,"@string/conditon1")) {
-
-                 mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
-                 if(mBoardBean.bmpTitle != null){
+        mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
+        if(mBoardBean.bmpTitle != null){
                      mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
-                 }
-                 mEdtStuNum.setText(mBoardBean.content);
-                 mEdtName.setText(mBoardBean.name);
-                 mEdtRoomNum.setText(mBoardBean.roomNum);
-                 mEdtDeskNum.setText(mBoardBean.deskNum);
-                 mEdtContent.setText(mBoardBean.content);
-
-             }
         }
-
-
-
+        mEdtStuNum.setText(mBoardBean.content);
+        mEdtName.setText(mBoardBean.name);
+        mEdtRoomNum.setText(mBoardBean.roomNum);
+        mEdtDeskNum.setText(mBoardBean.deskNum);
+        mEdtContent.setText(mBoardBean.content);
 
 
         findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener() {
@@ -172,7 +150,7 @@ public class WriteActivity extends AppCompatActivity {
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
-                builder.setTitle("알림창");
+                builder.setTitle("경고");
                 builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이나 삭제가 불가합니다.\n허위기재 시 불이익을 받으실 수 있습니다.");
                 builder.setNegativeButton("뒤로가기",null);
                 builder.setPositiveButton("게시물 등록", new DialogInterface.OnClickListener() {
@@ -321,7 +299,7 @@ public class WriteActivity extends AppCompatActivity {
         BoardBean boardBean = new BoardBean();
         boardBean.id = id;
         boardBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
-        boardBean.condition = "@string/condition1";
+        boardBean.condition = getString(R.string.condition1);
 
 
         boardBean.stuNum = mEdtStuNum.getText().toString();

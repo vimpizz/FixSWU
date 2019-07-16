@@ -1,13 +1,17 @@
 package com.swu.cho4.fixswu;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.List;
 
@@ -73,9 +77,23 @@ public class BoardAdapter extends BaseAdapter {
         applyBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!TextUtils.equals(boardBean.condition, mContext.getResources().getString(R.string.condition1))) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("알림창");
+                    builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이 불가능합니다.");
+                    builder.setNegativeButton("뒤로가기", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
+                    builder.setPositiveButton("", null);
+                    builder.create().show();
+
+                }else{
                 Intent i = new Intent(mContext, WriteActivity.class);
                 i.putExtra(BoardBean.class.getName(), boardBean);
-                mContext.startActivity(i);
+                mContext.startActivity(i);}
             }
         });
         return view;
