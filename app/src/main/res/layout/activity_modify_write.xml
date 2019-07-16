@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WriteActivity"
     android:padding="20dp">
 
     <TextView
@@ -41,7 +40,7 @@
                 android:maxLines="1"/>
 
             <EditText
-                android:id="@+id/edtStuNum"
+                android:id="@+id/edtStuNumModify"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -65,7 +64,7 @@
                 android:textSize="15dp"/>
 
             <EditText
-                android:id="@+id/edtName"
+                android:id="@+id/edtNameModify"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -90,7 +89,7 @@
                 android:gravity="center|left"/>
 
             <Spinner
-                android:id="@+id/spinnerHouse"
+                android:id="@+id/spinnerHouseModify"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -114,7 +113,7 @@
                 android:textSize="15dp"/>
 
             <EditText
-                android:id="@+id/edtRoomNum"
+                android:id="@+id/edtRoomNumModify"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
@@ -140,7 +139,7 @@
                 android:textSize="15dp"/>
 
             <EditText
-                android:id="@+id/edtDeskNum"
+                android:id="@+id/edtDeskNumModify"
                 android:layout_width="0dp"
                 android:layout_weight="8"
                 android:layout_height="match_parent"
@@ -158,7 +157,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imgWrite"
+            android:id="@+id/imgWriteModify"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="match_parent"
@@ -213,7 +212,7 @@
             android:gravity="center|left"/>
 
         <EditText
-            android:id="@+id/edtContent"
+            android:id="@+id/edtContentModify"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
@@ -242,7 +241,7 @@
             android:gravity="center|left"/>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txtComment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"
@@ -269,7 +268,7 @@
             </FrameLayout>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnLike"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
@@ -288,7 +287,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnStuCancel"
+            android:id="@+id/btnStuCancelModify"
             android:layout_width="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_height="wrap_content"
@@ -297,7 +296,7 @@
             android:background="@color/SWUPURPLE"/>
 
         <Button
-            android:id="@+id/btnStuSave"
+            android:id="@+id/btnStuSaveModify"
             android:layout_width="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_height="wrap_content"
