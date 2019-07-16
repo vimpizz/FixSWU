@@ -113,7 +113,6 @@ public class DetailBoardActivity extends AppCompatActivity {
                 }else{
                     Intent i = new Intent(getApplicationContext(), ModifyWriteActivity.class);
                     i.putExtra(BoardBean.class.getName(), mBoardBean);
-                    i.putExtra("titleBitmap",mBoardBean.bmpTitle);
                     startActivity(i);
                 }
             }
@@ -150,7 +149,7 @@ public class DetailBoardActivity extends AppCompatActivity {
             mTxtDeskNum.setText(mBoardBean.deskNum);
             mTxtDate.setText(mBoardBean.date);
             mTxtContent.setText(mBoardBean.content);
-            //mTxtComment.setText(mBoardBean.comment);
+            mTxtComment.setText(mBoardBean.comment);
         }
 
     }
