@@ -91,7 +91,7 @@ public class BoardAdapter extends BaseAdapter {
                     builder.create().show();
 
                 }else{
-                Intent i = new Intent(mContext, WriteActivity.class);
+                Intent i = new Intent(mContext, DetailBoardActivity.class);
                 i.putExtra(BoardBean.class.getName(), boardBean);
                 mContext.startActivity(i);}
             }

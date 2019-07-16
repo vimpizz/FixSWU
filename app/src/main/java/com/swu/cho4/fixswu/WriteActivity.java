@@ -104,10 +104,9 @@ public class WriteActivity extends AppCompatActivity {
         if(mBoardBean!=null) {
             mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
             if (mBoardBean.bmpTitle != null) {
-
                 mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
             }
-            mEdtStuNum.setText(mBoardBean.content);
+            mEdtStuNum.setText(mBoardBean.stuNum);
             mEdtName.setText(mBoardBean.name);
             mEdtRoomNum.setText(mBoardBean.roomNum);
             mEdtDeskNum.setText(mBoardBean.deskNum);
@@ -161,8 +160,7 @@ public class WriteActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(mBoardBean==null){
                             upload();
-                        }else
-                        {
+                        }else {
                             update();
                         }
                     }
@@ -300,10 +298,10 @@ public class WriteActivity extends AppCompatActivity {
 
         //데이터베이스에 저장한다.
         BoardBean boardBean = new BoardBean();
+
         boardBean.id = id;
         boardBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
         boardBean.condition = getString(R.string.condition1);
-
 
         boardBean.stuNum = mEdtStuNum.getText().toString();
         boardBean.name = mEdtName.getText().toString();
@@ -406,25 +404,20 @@ public class WriteActivity extends AppCompatActivity {
         File fileCacheItem = new File(strFilePath);
         OutputStream out = null;
 
-        try
-        {
+        try {
             fileCacheItem.createNewFile();
             out = new FileOutputStream(fileCacheItem);
 
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             e.printStackTrace();
         }
-        finally
-        {
-            try
-            {
+        finally {
+            try {
                 out.close();
             }
-            catch (IOException e)
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
