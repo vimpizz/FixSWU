@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,15 +27,17 @@
 
         <ImageView
             android:id="@+id/imgWriteAdmin"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/picture_box"
             android:scaleType="fitCenter"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
+            android:layout_weight="4"
             android:orientation="vertical">
 
             <LinearLayout
@@ -78,7 +81,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/kopubdotummedium"
                     android:layout_weight="1"
-                    android:hint="호수"
+                    android:hint="방"
                     android:gravity="center|left"/>
 
                 <TextView
@@ -128,6 +131,7 @@
     <TextView
         android:id="@+id/txtContent"
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="0dp"
         android:layout_weight="3"
         android:hint="수리 요청 내용"

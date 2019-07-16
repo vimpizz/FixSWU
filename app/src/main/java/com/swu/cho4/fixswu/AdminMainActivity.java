@@ -23,7 +23,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDB = FirebaseDatabase.getInstance();
     private ListView mListView;
     private List<BoardBean> mBoardList = new ArrayList<>();
-    private BoardAdapter mBoardAdapter;
+    private AdminBoardAdapter mBoardAdapter;
 
     private TextView hearNum;
 
@@ -39,7 +39,7 @@ public class AdminMainActivity extends AppCompatActivity {
         //hearNum.setText();
 
         // 최초 데이터 셋팅
-        mBoardAdapter = new BoardAdapter(this, mBoardList);
+        mBoardAdapter = new AdminBoardAdapter(this, mBoardList);
         mListView.setAdapter(mBoardAdapter);
     } // onCreate() 끝
 
@@ -49,20 +49,27 @@ public class AdminMainActivity extends AppCompatActivity {
 
         // 전체 회원의 데이터 취득
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference usersRef = rootRef.child("board");
-        ValueEventListener eventListner = new ValueEventListener() {
+        final DatabaseReference usersRef = rootRef.child("board");
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    //String name =ds.child()
+                    for(DataSnapshot ds2 : ds.getChildren()) {
+                        BoardBean bean = ds2.getValue(BoardBean.class);
+                        mBoardList.add(bean);
+                    }
                 }
+
+                //리스트 갱신
+                mBoardAdapter.setBoardList(mBoardList);
+                mBoardAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
     }
+
+
 }
