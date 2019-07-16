@@ -141,9 +141,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
+        android:gravity="top|left"
         android:orientation="horizontal"
-        android:gravity="top|left">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/textView28"
@@ -152,7 +153,7 @@
             android:layout_weight="2"
             android:fontFamily="@font/kopubdotummedium"
             android:text="상태"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
         <Spinner
             android:id="@+id/spinnerCondition"

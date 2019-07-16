@@ -70,7 +70,7 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
-        
+
         //카메라를 사용하기 위한 퍼미션을 요청한다.
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -206,10 +206,6 @@ public class WriteActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
     private void uploadDB(String imgUri,String imgName){
         //Firebase 데이터베이스에 메모를 등록한다.
         DatabaseReference dbRef = mFirebaseDatabase.getReference();
@@ -241,7 +237,6 @@ public class WriteActivity extends AppCompatActivity {
         Toast.makeText(this,"게시물이 등록되었습니다",Toast.LENGTH_SHORT).show();
         finish();
     }
-
 
 
     public static String getUseridFromUUID(String userEmail){
