@@ -58,6 +58,7 @@
             android:background="#9E1A20"
             android:text="취소"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/kopubdotummedium"
             android:textSize="15dp" />
 
         <Button
@@ -69,6 +70,7 @@
             android:background="#9E1A20"
             android:text="로그아웃"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/kopubdotummedium"
             android:textSize="15dp" />
 
     </LinearLayout>

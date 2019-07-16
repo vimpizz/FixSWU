@@ -100,16 +100,19 @@ public class WriteActivity extends AppCompatActivity {
 
 
         mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
-        mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
-        if(mBoardBean.bmpTitle != null){
-                     mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
-        }
-        mEdtStuNum.setText(mBoardBean.content);
-        mEdtName.setText(mBoardBean.name);
-        mEdtRoomNum.setText(mBoardBean.roomNum);
-        mEdtDeskNum.setText(mBoardBean.deskNum);
-        mEdtContent.setText(mBoardBean.content);
 
+        if(mBoardBean!=null) {
+            mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
+            if (mBoardBean.bmpTitle != null) {
+
+                mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
+            }
+            mEdtStuNum.setText(mBoardBean.content);
+            mEdtName.setText(mBoardBean.name);
+            mEdtRoomNum.setText(mBoardBean.roomNum);
+            mEdtDeskNum.setText(mBoardBean.deskNum);
+            mEdtContent.setText(mBoardBean.content);
+        }
 
         findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener() {
             @Override

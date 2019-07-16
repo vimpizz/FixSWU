@@ -16,6 +16,7 @@
         android:textStyle="bold"
         android:textSize="25dp"
         android:text="영선신청하기"
+        android:fontFamily="@font/kopubdotummedium"
         android:gravity="center|left"/>
 
     <LinearLayout
@@ -39,6 +40,7 @@
                 android:layout_weight="2"
                 android:text="학번"
                 android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"
                 android:maxLines="1"/>
 
             <EditText
@@ -47,7 +49,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:ems="10"
-                android:hint="학번" />
+                android:hint="학번"
+                android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"/>
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +67,8 @@
                 android:gravity="center|left"
                 android:layout_weight="2"
                 android:text="이름"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"/>
 
             <EditText
                 android:id="@+id/edtName"
@@ -72,6 +77,8 @@
                 android:layout_weight="8"
                 android:ems="10"
                 android:hint="이름"
+                android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -88,6 +95,7 @@
                 android:layout_weight="2"
                 android:text="기관"
                 android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"
                 android:gravity="center|left"/>
 
             <Spinner
@@ -112,7 +120,8 @@
                 android:layout_weight="2"
                 android:text="호수"
                 android:gravity="center|left"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"/>
 
             <EditText
                 android:id="@+id/edtRoomNum"
@@ -122,6 +131,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="호수"
+                android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -138,7 +149,8 @@
                 android:gravity="center|left"
                 android:layout_weight="2"
                 android:text="번호"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"/>
 
             <EditText
                 android:id="@+id/edtDeskNum"
@@ -147,6 +159,8 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:hint="번호"
+                android:textSize="15dp"
+                android:fontFamily="@font/kopubdotummedium"
                 android:inputType="textPersonName"
                 android:maxLines="1"/>
         </LinearLayout>
@@ -161,10 +175,10 @@
         <ImageView
             android:id="@+id/imgWrite"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:scaleType="fitCenter"
-            tools:srcCompat="@tools:sample/avatars"/>
+            tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -181,6 +195,7 @@
                 android:layout_weight="1"
                 android:layout_marginBottom="10dp"
                 android:text="사진찍기"
+                android:fontFamily="@font/kopubdotummedium"
                 android:textColor="#FFFFFF"
                 android:background="@color/SWUPURPLE"
                 android:textSize="15dp"/>
@@ -191,6 +206,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="사진선택"
+                android:fontFamily="@font/kopubdotummedium"
                 android:textColor="#FFFFFF"
                 android:background="@color/SWUPURPLE"
                 android:textSize="15dp"/>
@@ -211,6 +227,7 @@
             android:layout_weight="2"
             android:text="수리내용"
             android:textSize="15dp"
+            android:fontFamily="@font/kopubdotummedium"
             android:gravity="center|left"/>
 
         <EditText
@@ -218,11 +235,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
+            android:fontFamily="@font/kopubdotummedium"
             android:hint="구체적으로 적어주세요."
             android:inputType="textMultiLine"
             android:maxLines="3"
             android:text=""
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
     </LinearLayout>
 
@@ -239,6 +257,7 @@
             android:layout_weight="2"
             android:text="기사님
             코멘트"
+            android:fontFamily="@font/kopubdotummedium"
             android:textSize="15dp"
             android:gravity="center|left"/>
 
@@ -248,6 +267,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:textSize="15dp"
+            android:fontFamily="@font/kopubdotummedium"
             android:gravity="center|left"/>
 
         <LinearLayout
@@ -275,6 +295,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:text="좋아요"
+                android:fontFamily="@font/kopubdotummedium"
                 android:background="@color/PantoneCoolGray4C"/>
 
         </LinearLayout>
@@ -295,6 +316,7 @@
             android:layout_height="wrap_content"
             android:text="취소"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/kopubdotummedium"
             android:background="@color/SWUPURPLE"/>
 
         <Button
@@ -304,6 +326,7 @@
             android:layout_height="wrap_content"
             android:text="확인"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/kopubdotummedium"
             android:background="@color/SWUPURPLE"/>
 
     </LinearLayout>
