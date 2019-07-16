@@ -21,6 +21,7 @@ public class BoardAdapter extends BaseAdapter {
     private List<BoardBean> mBoardList;
     private String house;
 
+
     public BoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
         mBoardList = boardList;
@@ -57,7 +58,6 @@ public class BoardAdapter extends BaseAdapter {
 
         final BoardBean boardBean = mBoardList.get(i);
 
-        txtvNum.setText(boardBean.ApplyNum);
         txtvCondition.setText("상태: " + boardBean.condition);
         txtvContents.setText("수리 내용 : " + boardBean.content);
         if(boardBean.house == 0 ) {
