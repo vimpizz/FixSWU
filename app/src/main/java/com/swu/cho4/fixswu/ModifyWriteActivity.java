@@ -56,7 +56,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
     private ImageView mImgProfile;
     private EditText mEdtStuNum, mEdtName,mEdtRoomNum,mEdtDeskNum,mEdtContent;
     private Spinner mSpinner;
-    private int mintHouse=0; //기관
+    private int mintHouse = 0 ; //기관
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);
@@ -138,7 +138,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ModifyWriteActivity.this);
                 builder.setTitle("경고");
-                builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이나 삭제가 불가합니다.\n허위기재 시 불이익을 받으실 수 있습니다.");
+                builder.setMessage("허위기재 시 불이익을 받으실 수 있습니다.");
                 builder.setNegativeButton("뒤로가기",null);
                 builder.setPositiveButton("수정하기", new DialogInterface.OnClickListener() {
                     @Override
@@ -226,7 +226,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
                 mBoardBean.content=mEdtContent.getText().toString();
 
                 //수정된 날짜로
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   hh:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
                 mBoardBean.date = sdf.format(new Date());
 
                 String uuid = getUseridFromUUID(mBoardBean.userId);

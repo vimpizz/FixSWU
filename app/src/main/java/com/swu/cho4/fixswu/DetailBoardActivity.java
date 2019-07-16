@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.UUID;
 
 public class DetailBoardActivity extends AppCompatActivity {
@@ -30,7 +32,8 @@ public class DetailBoardActivity extends AppCompatActivity {
 
 
     private ImageView mImgProfile;
-    private TextView mTxtStuNum, mTxtName,mHouse,mTxtRoomNum,mTxtDeskNum,mTxtContent,mTxtComment;
+    private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtRoomNum,mTxtDeskNum,mTxtContent,mTxtComment;
+    private String house;
 
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
@@ -45,26 +48,12 @@ public class DetailBoardActivity extends AppCompatActivity {
         mImgProfile = findViewById(R.id.imgWriteAdmin);
         mTxtStuNum = findViewById(R.id.txtStuNumDetail);
         mTxtName = findViewById(R.id.txtNameDetail);
-        mHouse= findViewById(R.id.txtHouseDetail);
+        mTxtHouse= findViewById(R.id.txtHouseDetail);
         mTxtRoomNum = findViewById(R.id.txtRoomNumDetail);
         mTxtDeskNum = findViewById(R.id.txtDeskNumDetail);
         mTxtContent = findViewById(R.id.txtContentDetail);
         mTxtComment = findViewById(R.id.txtCommentDetail);
 
-
-        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
-
-        if(mBoardBean!=null) {
-            mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
-            if (mBoardBean.bmpTitle != null) {
-                mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
-            }
-            mTxtStuNum.setText(mBoardBean.stuNum);
-            mTxtName.setText(mBoardBean.name);
-            mTxtRoomNum.setText(mBoardBean.roomNum);
-            mTxtDeskNum.setText(mBoardBean.deskNum);
-            mTxtContent.setText(mBoardBean.content);
-        }
 
 
 
@@ -126,6 +115,7 @@ public class DetailBoardActivity extends AppCompatActivity {
                 }else{
                     Intent i = new Intent(getApplicationContext(), ModifyWriteActivity.class);
                     i.putExtra(BoardBean.class.getName(), mBoardBean);
+                    i.putExtra("titleBitmap",mBoardBean.bmpTitle);
                     startActivity(i);
                 }
             }
@@ -133,9 +123,43 @@ public class DetailBoardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
+
+
+        if(mBoardBean!=null) {
+            mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
+            if (mBoardBean.bmpTitle != null) {
+                mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
+            }
+            mTxtStuNum.setText(mBoardBean.stuNum);
+            mTxtName.setText(mBoardBean.name);
+            if(mBoardBean.house == 0 ) {
+                house = "샬롬하우스 A동";
+            } else if(mBoardBean.house == 1) {
+                house = "샬롬하우스 B동";
+            } else if(mBoardBean.house == 2) {
+                house ="국제생활관";
+            } else if(mBoardBean.house == 3 ) {
+                house = "바롬관 10층";
+            }
+            mTxtHouse.setText("기관: " +house);
+            mTxtRoomNum.setText(mBoardBean.roomNum);
+            mTxtDeskNum.setText(mBoardBean.deskNum);
+            mTxtContent.setText(mBoardBean.content);
+
+        }
+
+    }
+
+
     public static String getUseridFromUUID(String userEmail){
         long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits();
         return String.valueOf(val);
     }
+
 
 }
