@@ -32,7 +32,7 @@ public class DetailBoardActivity extends AppCompatActivity {
 
 
     private ImageView mImgProfile;
-    private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtRoomNum,mTxtDeskNum,mTxtContent,mTxtComment;
+    private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtRoomNum,mTxtDeskNum,mTxtDate,mTxtContent,mTxtComment;
     private String house;
 
 
@@ -52,6 +52,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         mTxtRoomNum = findViewById(R.id.txtRoomNumDetail);
         mTxtDeskNum = findViewById(R.id.txtDeskNumDetail);
         mTxtContent = findViewById(R.id.txtContentDetail);
+        mTxtDate = findViewById(R.id.txtDateDetail);
         mTxtComment = findViewById(R.id.txtCommentDetail);
 
 
@@ -149,7 +150,9 @@ public class DetailBoardActivity extends AppCompatActivity {
             mTxtHouse.setText("기관: " +house);
             mTxtRoomNum.setText(mBoardBean.roomNum);
             mTxtDeskNum.setText(mBoardBean.deskNum);
+            mTxtDate.setText(mBoardBean.date);
             mTxtContent.setText(mBoardBean.content);
+            //mTxtComment.setText(mBoardBean.comment);
 
         }
 
