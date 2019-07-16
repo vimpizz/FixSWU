@@ -14,7 +14,7 @@
         android:layout_weight="1"
         android:textStyle="bold"
         android:textSize="25dp"
-        android:text="영선 신청"
+        android:text="영선신청 수정하기"
         android:gravity="center|left"/>
 
     <LinearLayout
@@ -181,7 +181,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="사진찍기"
                 android:textColor="#FFFFFF"
-                android:background="@color/SWUPURPLE"
+                android:background="@drawable/button_background"
                 android:textSize="15dp"/>
 
             <Button
@@ -191,7 +191,7 @@
                 android:layout_weight="1"
                 android:text="사진선택"
                 android:textColor="#FFFFFF"
-                android:background="@color/SWUPURPLE"
+                android:background="@drawable/button_background"
                 android:textSize="15dp"/>
         </LinearLayout>
     </LinearLayout>
@@ -294,7 +294,7 @@
             android:layout_height="wrap_content"
             android:text="취소"
             android:textColor="#FFFFFF"
-            android:background="@color/SWUPURPLE"/>
+            android:background="@drawable/button_background"/>
 
         <Button
             android:id="@+id/btnStuSave"
@@ -303,7 +303,7 @@
             android:layout_height="wrap_content"
             android:text="확인"
             android:textColor="#FFFFFF"
-            android:background="@color/SWUPURPLE"/>
+            android:background="@drawable/button_background"/>
 
     </LinearLayout>
 </LinearLayout>
