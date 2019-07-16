@@ -183,6 +183,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
             tools:srcCompat="@drawable/picture_box"/>
+            android:src="@drawable/heart"/>
 
         <LinearLayout
             android:layout_width="0dp"

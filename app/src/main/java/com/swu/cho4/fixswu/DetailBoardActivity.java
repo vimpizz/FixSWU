@@ -45,7 +45,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_board);
 
-        mImgProfile = findViewById(R.id.imgWriteAdmin);
+        mImgProfile = findViewById(R.id.imgWriteDetail);
         mTxtStuNum = findViewById(R.id.txtStuNumDetail);
         mTxtName = findViewById(R.id.txtNameDetail);
         mTxtHouse= findViewById(R.id.txtHouseDetail);
@@ -54,8 +54,6 @@ public class DetailBoardActivity extends AppCompatActivity {
         mTxtContent = findViewById(R.id.txtContentDetail);
         mTxtDate = findViewById(R.id.txtDateDetail);
         mTxtComment = findViewById(R.id.txtCommentDetail);
-
-
 
 
         findViewById(R.id.btnCancelDetail).setOnClickListener(new View.OnClickListener() {
@@ -77,7 +75,6 @@ public class DetailBoardActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                         String uuid = DetailBoardActivity.getUseridFromUUID(email);
-
 
                         //DB에서 삭제처리
                         FirebaseDatabase.getInstance().getReference().child("board").child(uuid).child(mBoardBean.id).removeValue();
@@ -130,12 +127,13 @@ public class DetailBoardActivity extends AppCompatActivity {
 
         mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
 
-
         if(mBoardBean!=null) {
-            mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
-            if (mBoardBean.bmpTitle != null) {
-                mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
+            try {
+                new DownloadImgTask(this, mImgProfile, null, 0).execute(new URL(mBoardBean.imgUri));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
             mTxtStuNum.setText(mBoardBean.stuNum);
             mTxtName.setText(mBoardBean.name);
             if(mBoardBean.house == 0 ) {
@@ -153,7 +151,6 @@ public class DetailBoardActivity extends AppCompatActivity {
             mTxtDate.setText(mBoardBean.date);
             mTxtContent.setText(mBoardBean.content);
             //mTxtComment.setText(mBoardBean.comment);
-
         }
 
     }

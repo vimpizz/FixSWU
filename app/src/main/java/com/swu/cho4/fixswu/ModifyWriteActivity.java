@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -88,8 +89,10 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
         if(mBoardBean!=null) {
             mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
-            if (mBoardBean.bmpTitle != null) {
-                mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
+            try {
+                new DownloadImgTask(this, mImgProfile, null, 0).execute(new URL(mBoardBean.imgUri));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             mEdtStuNum.setText(mBoardBean.stuNum);
             mEdtName.setText(mBoardBean.name);
