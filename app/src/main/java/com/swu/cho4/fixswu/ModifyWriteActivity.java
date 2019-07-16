@@ -88,7 +88,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
         mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
 
         if(mBoardBean!=null) {
-            mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
+
             try {
                 new DownloadImgTask(this, mImgProfile, null, 0).execute(new URL(mBoardBean.imgUri));
             } catch (Exception e) {

@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                         ,Toast.LENGTH_SHORT).show();
                 goAdminMainActivity();
             } else {
-                Toast.makeText(getBaseContext(), "Main"
+                Toast.makeText(getBaseContext(), "Loading..."
                         , Toast.LENGTH_SHORT).show();
                 goMainActivity();
             }
@@ -110,8 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                                         ,Toast.LENGTH_SHORT).show();
                                 goAdminMainActivity();
                             } else {
-                                Toast.makeText(getBaseContext(), "Loading"
-                                        , Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(), "Loading...", Toast.LENGTH_SHORT).show();
                                 goMainActivity();
                             }
                         } else {
