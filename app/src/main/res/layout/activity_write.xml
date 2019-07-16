@@ -178,7 +178,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:scaleType="fitCenter"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/heart" />
 
         <LinearLayout
             android:layout_width="0dp"

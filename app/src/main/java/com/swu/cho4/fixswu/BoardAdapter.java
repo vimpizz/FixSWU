@@ -81,7 +81,7 @@ public class BoardAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent i = new Intent(mContext, DetailBoardActivity.class);
                 i.putExtra(BoardBean.class.getName(), boardBean);
-                i.putExtra("titleBitmap",boardBean.bmpTitle);
+                //i.putExtra("titleBitmap",boardBean.bmpTitle);
                 mContext.startActivity(i);}
         });
 
