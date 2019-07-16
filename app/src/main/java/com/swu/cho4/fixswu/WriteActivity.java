@@ -113,11 +113,11 @@ public class WriteActivity extends AppCompatActivity {
 
         findViewById(R.id.btnlike).setOnClickListener(new View.OnClickListener() {
 
-                                                          @Override
-                                                          public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
-                                                          }
-                                                      });
+            }
+        });
 
 
         findViewById(R.id.btnStuSave).setOnClickListener(new View.OnClickListener() {
@@ -242,6 +242,7 @@ public class WriteActivity extends AppCompatActivity {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
         boardBean.date=sdf.format(new Date());
+        boardBean.millisecond = System.currentTimeMillis();
 
         //고유번호를 생성한다
         String guid = getUseridFromUUID(boardBean.userId);
