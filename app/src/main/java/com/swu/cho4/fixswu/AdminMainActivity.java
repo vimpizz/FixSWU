@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AdminMainActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private AdminBoardAdapter mBoardAdapter;
 
     private TextView hearNum;
+    private int countHeartNum=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
         hearNum = findViewById(R.id.heartNum);
         //TODO 하트 수 표시
-        //hearNum.setText();
+        hearNum.setText(String.valueOf(countHeartNum));
 
         // 최초 데이터 셋팅
         mBoardAdapter = new AdminBoardAdapter(this, mBoardList);
@@ -57,6 +59,9 @@ public class AdminMainActivity extends AppCompatActivity {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     for(DataSnapshot ds2 : ds.getChildren()) {
                         BoardBean bean = ds2.getValue(BoardBean.class);
+                        if(bean.like == true) {
+                            countHeartNum ++;
+                        }
                         mBoardList.add(bean);
                     }
                 }
