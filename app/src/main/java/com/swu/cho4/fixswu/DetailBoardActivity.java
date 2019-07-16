@@ -11,10 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.UUID;
 
 public class DetailBoardActivity extends AppCompatActivity {
 
@@ -72,6 +75,38 @@ public class DetailBoardActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btnDel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailBoardActivity.this);
+                builder.setTitle("삭제");
+                builder.setMessage("삭제하시겠습니까?");
+                builder.setNegativeButton("아니오",null);
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                        String uuid = DetailBoardActivity.getUseridFromUUID(email);
+
+
+                        //DB에서 삭제처리
+                        FirebaseDatabase.getInstance().getReference().child("board").child(uuid).child(mBoardBean.id).removeValue();
+                        //storage에서 삭제처리
+                        if(mBoardBean.imgName!=null){
+                            try {
+                                FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
+                                Toast.makeText(DetailBoardActivity.this,"삭제되었습니다",Toast.LENGTH_SHORT).show();
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+                builder.create().show();
+            }
+        });
+
         findViewById(R.id.btnModify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,4 +132,10 @@ public class DetailBoardActivity extends AppCompatActivity {
         });
 
     }
+
+    public static String getUseridFromUUID(String userEmail){
+        long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits();
+        return String.valueOf(val);
+    }
+
 }
