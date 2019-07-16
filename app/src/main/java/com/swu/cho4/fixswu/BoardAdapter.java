@@ -96,6 +96,7 @@ public class BoardAdapter extends BaseAdapter {
                 mContext.startActivity(i);}
             }
         });
+
         return view;
     }
 }
