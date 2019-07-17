@@ -171,31 +171,30 @@
     </LinearLayout>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:orientation="horizontal"
         android:gravity="top|left"
+        android:orientation="horizontal"
         android:padding="20dp">
 
         <TextView
             android:id="@+id/textView28"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:fontFamily="@font/kopubdotummedium"
             android:text="상태"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
-        <Spinner
-            android:id="@+id/spinnerCondition"
+        <TextView
+            android:id="@+id/txtvStatus"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:entries="@array/상태"
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="TextView" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -213,21 +212,17 @@
         <TextView
             android:id="@+id/textView5"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="기사님
-            코멘트"/>
+            코멘트" />
 
-        <EditText
-            android:id="@+id/edtComment"
+        <TextView
+            android:id="@+id/txtvComment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="8"
-            android:ems="10"
-            android:hint="코멘트를 입력해주세요."
-            android:textSize="15dp"
-            android:inputType="textMultiLine"
-            android:maxLines="3" />
+            android:layout_weight="4"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -256,7 +251,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background"
-            android:text="저장"
+            android:text="수정"
             android:textColor="#FFFFFF"
             android:textSize="15dp" />
     </LinearLayout>
