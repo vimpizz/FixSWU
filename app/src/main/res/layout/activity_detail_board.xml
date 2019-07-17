@@ -241,7 +241,7 @@
             android:maxLines="3"
             android:textSize="15dp"
             android:gravity="center|left"
-            android:background="@drawable/picture_box"/>
+            android:background="@drawable/square_box"/>
 
     </LinearLayout>
 

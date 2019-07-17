@@ -234,7 +234,7 @@
             android:layout_weight="2"
             android:text="수리내용"
             android:textSize="15dp"
-            android:gravity="left"/>
+            android:gravity="center|left"/>
 
         <EditText
             android:id="@+id/edtContentModify"
@@ -247,7 +247,7 @@
             android:text=""
             android:textSize="15dp"
             android:gravity="center|left"
-            android:background="@drawable/picture_box"/>
+            android:background="@drawable/square_box"/>
 
     </LinearLayout>
 
