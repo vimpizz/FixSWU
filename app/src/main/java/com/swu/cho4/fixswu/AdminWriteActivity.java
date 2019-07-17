@@ -1,6 +1,5 @@
 package com.swu.cho4.fixswu;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,13 +9,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class AdminWriteActivity extends AppCompatActivity {
@@ -35,6 +39,8 @@ public class AdminWriteActivity extends AppCompatActivity {
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);
     private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
+    private List<BoardBean> mBoardList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,21 +57,17 @@ public class AdminWriteActivity extends AppCompatActivity {
         mTxtDate = findViewById(R.id.txtDate);
         mEdtComment=findViewById(R.id.edtComment);
 
-
-
         mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
 
-        mSpinner.setSelection(mBoardBean.intCondition);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mIntCondition=i;
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
-
+        mSpinner.setSelection(mBoardBean.intCondition);
 
         if(mBoardBean != null){
             mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
@@ -97,24 +99,28 @@ public class AdminWriteActivity extends AppCompatActivity {
 
     }
 
+
     public static String getUseridFromUUID(String userEmail){
         long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits();
         return String.valueOf(val);
     }
 
+    // 게시물 수정
     private void update(){
         mBoardBean.intCondition=mIntCondition;
         mBoardBean.intToCondition();
         mBoardBean.comment=mEdtComment.getText().toString();
 
-            //DB 업로드
-            DatabaseReference dbRef = mFirebaseDatabase.getReference();
-            String uuid = getUseridFromUUID(mBoardBean.userId);
-            dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
-            Toast.makeText(this,"저장되었습니다",Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+        //DB 업로드
+        DatabaseReference dbRef = mFirebaseDatabase.getReference();
+        String uuid = getUseridFromUUID(mBoardBean.userId);
 
+        // 동일 ID로 데이터 수정
+        dbRef.child("board").child(uuid).child(mBoardBean.id).child("comment").setValue(mBoardBean.comment);
+        dbRef.child("board").child(uuid).child(mBoardBean.id).child("intCondition").setValue(mBoardBean.intCondition);
 
+        Toast.makeText(this,"저장되었습니다",Toast.LENGTH_SHORT).show();
+        finish();
+        return;
+    }
 }

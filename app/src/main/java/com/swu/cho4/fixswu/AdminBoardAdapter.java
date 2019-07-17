@@ -16,8 +16,6 @@ public class AdminBoardAdapter extends BaseAdapter {
     private Context mContext;
     private List<BoardBean> mBoardList;
 
-
-
     public AdminBoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
         mBoardList =  Utils.getSortForDate(boardList);
@@ -25,13 +23,6 @@ public class AdminBoardAdapter extends BaseAdapter {
 
     public void setBoardList(List<BoardBean> boardList) {
         mBoardList =  Utils.getSortForDate(boardList);
-    }
-
-
-    public int getIndex(List<BoardBean> boardList, int i) {
-        mBoardList =  Utils.getSortForDate(boardList);
-        int index = mBoardList.indexOf(getItem(i));
-        return index;
     }
 
     @Override
@@ -64,7 +55,6 @@ public class AdminBoardAdapter extends BaseAdapter {
 
         final BoardBean boardBean = mBoardList.get(i);
 
-
         txtvCondition.setText(boardBean.condition);
         txtvContents.setText(boardBean.content);
         txtvHouse.setText(boardBean.house+" "+boardBean.roomNum+"호  "+boardBean.deskNum);
@@ -75,7 +65,7 @@ public class AdminBoardAdapter extends BaseAdapter {
         applyBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(mContext, AdminDetailActivity.class);
+                Intent i = new Intent(mContext, AdminWriteActivity.class);
                 i.putExtra(BoardBean.class.getName(), boardBean);
                 mContext.startActivity(i);
             }

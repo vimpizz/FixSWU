@@ -44,14 +44,14 @@
             app:srcCompat="@drawable/baseline_account_circle_white_18dp"
             android:padding="5dp"/>
 
-        <ImageButton
-            android:id="@+id/btnWrite"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/SWUPURPLE"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/baseline_add_white_18dp" />
+            <ImageButton
+                android:id="@+id/btnWrite"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/SWUPURPLE"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/outline_add_white_36dp" />
 
         </LinearLayout>
 

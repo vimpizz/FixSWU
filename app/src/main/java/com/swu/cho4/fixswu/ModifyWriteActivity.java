@@ -1,6 +1,5 @@
 package com.swu.cho4.fixswu;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -81,9 +80,6 @@ public class ModifyWriteActivity extends AppCompatActivity {
         mEdtRoomNum = findViewById(R.id.edtRoomNumModify);
         mEdtDeskNum = findViewById(R.id.edtDeskNumModify);
         mEdtContent = findViewById(R.id.edtContentModify);
-
-
-
 
         mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
 
@@ -205,6 +201,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
             mBoardBean.roomNum=mEdtRoomNum.getText().toString();
             mBoardBean.deskNum=mEdtDeskNum.getText().toString();
             mBoardBean.content=mEdtContent.getText().toString();
+            mBoardBean.millisecond = System.currentTimeMillis();
             //수정된 날짜로
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
             mBoardBean.date = sdf.format(new Date());
@@ -252,6 +249,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
                     mBoardBean.roomNum=mEdtRoomNum.getText().toString();
                     mBoardBean.deskNum=mEdtDeskNum.getText().toString();
                     mBoardBean.content=mEdtContent.getText().toString();
+                    mBoardBean.millisecond = System.currentTimeMillis();
 
                     //수정된 날짜로
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
@@ -298,6 +296,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
                     mBoardBean.roomNum=mEdtRoomNum.getText().toString();
                     mBoardBean.deskNum=mEdtDeskNum.getText().toString();
                     mBoardBean.content=mEdtContent.getText().toString();
+                    mBoardBean.millisecond = System.currentTimeMillis();
 
                     //수정된 날짜로
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
@@ -491,8 +490,4 @@ public class ModifyWriteActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
-
 }
