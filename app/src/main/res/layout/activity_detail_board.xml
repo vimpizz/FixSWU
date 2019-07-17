@@ -92,17 +92,26 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/kopubdotumbold"
+                android:gravity="center|left"
+                android:layout_weight="2"
+                android:text="기관"
+                android:textSize="15dp"/>
+
 
             <TextView
                 android:id="@+id/txtHouseDetail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:entries="@array/기관"
                 android:fontFamily="@font/kopubdotumbold"
                 android:gravity="center|left"/>
 
-            <TextView
+           <!-- <TextView
                 android:id="@+id/txtRoomNumDetail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -119,7 +128,7 @@
                 android:layout_weight="8"
                 android:ems="10"
                 android:maxLines="1"
-                android:gravity="center|left"/>
+                android:gravity="center|left"/>-->
 
         </LinearLayout>
 

@@ -31,7 +31,6 @@ public class DetailBoardActivity extends AppCompatActivity {
     private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtRoomNum,mTxtDeskNum,mTxtDate,mTxtCondition,mTxtContent,mTxtComment;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +41,6 @@ public class DetailBoardActivity extends AppCompatActivity {
         mTxtStuNum = findViewById(R.id.txtStuNumDetail);
         mTxtName = findViewById(R.id.txtNameDetail);
         mTxtHouse= findViewById(R.id.txtHouseDetail);
-        mTxtRoomNum = findViewById(R.id.txtRoomNumDetail);
-        mTxtDeskNum = findViewById(R.id.txtDeskNumDetail);
         mTxtContent = findViewById(R.id.txtContentDetail);
         mTxtDate = findViewById(R.id.txtDateDetail);
         mTxtCondition = findViewById(R.id.txtConditionDetail);
@@ -176,9 +173,7 @@ public class DetailBoardActivity extends AppCompatActivity {
                             mTxtStuNum.setText(mBoardBean.stuNum);
                             mTxtName.setText(mBoardBean.name);
                             mTxtCondition.setText(mBoardBean.condition);
-                            mTxtHouse.setText(mBoardBean.house);
-                            mTxtRoomNum.setText(mBoardBean.roomNum);
-                            mTxtDeskNum.setText(mBoardBean.deskNum);
+                            mTxtHouse.setText(mBoardBean.house+" "+mBoardBean.roomNum+"호  "+mBoardBean.deskNum);
                             mTxtDate.setText(mBoardBean.date);
                             mTxtContent.setText(mBoardBean.content);
                             mTxtComment.setText(mBoardBean.comment);

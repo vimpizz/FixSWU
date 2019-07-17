@@ -80,6 +80,7 @@ public class AdminDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), AdminWriteActivity.class);
+                i.putExtra(BoardBean.class.getName(), mBoardBean);
                 startActivity(i);
             }
         });

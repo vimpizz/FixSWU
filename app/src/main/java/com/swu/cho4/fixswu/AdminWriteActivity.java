@@ -78,6 +78,7 @@ public class AdminWriteActivity extends AppCompatActivity {
             mTxtDeskNum.setText(mBoardBean.deskNum);
             mTxtDate.setText(mBoardBean.date);
             mTxtContent.setText(mBoardBean.content);
+            mEdtComment.setText(mBoardBean.comment);
         }
 
         findViewById(R.id.btnCancelAdmin).setOnClickListener(new View.OnClickListener() {

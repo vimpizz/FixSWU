@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -52,8 +53,11 @@ public class ModifyWriteActivity extends AppCompatActivity {
     private BoardBean mBoardBean;
 
     private Uri mCaptureUri;
+    private Uri imgUri;
     public String mPhotoPath;
     public static final int REQUEST_IMAGE_CAPTURE = 200;
+    private final int GALLERY_CODE=1112;
+    private boolean gallery;
 
     private ImageView mImgProfile;
     private EditText mEdtStuNum, mEdtName,mEdtRoomNum,mEdtDeskNum,mEdtContent;
@@ -120,6 +124,10 @@ public class ModifyWriteActivity extends AppCompatActivity {
         findViewById(R.id.btnGalleryModify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALLERY_CODE);
             }
         });
 
@@ -213,49 +221,97 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
         //사진을 찍었을경우, 사진부터 업로드하고 DB만 업데이트한다
         StorageReference storageRef = mFirebaseStorage.getReference();
-        final StorageReference imagesRef = storageRef.child("image/"+mCaptureUri.getLastPathSegment());
-        UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
-        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if(!task.isSuccessful())
-                    throw  task.getException();
-                return imagesRef.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                //파일 업로드 완료 후 호출된다
-                //기존이미지 파일 삭제한다.
-                if(mBoardBean.imgName!=null) {
-                    try {
-                        mFirebaseStorage.getReference().child("image").child(mBoardBean.imgName).delete();
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
+        if(gallery == false){
+            final StorageReference imagesRef = storageRef.child("image/"+mCaptureUri.getLastPathSegment());
+            UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful())
+                        throw  task.getException();
+                    return imagesRef.getDownloadUrl();
                 }
-                mBoardBean.imgUri = task.getResult().toString();
-                mBoardBean.imgName = mCaptureUri.getLastPathSegment();
-                mBoardBean.intHouse=mintHouse;
-                mBoardBean.intToHouse();
-                mBoardBean.stuNum=mEdtStuNum.getText().toString();
-                mBoardBean.name=mEdtName.getText().toString();
-                mBoardBean.roomNum=mEdtRoomNum.getText().toString();
-                mBoardBean.deskNum=mEdtDeskNum.getText().toString();
-                mBoardBean.content=mEdtContent.getText().toString();
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    //파일 업로드 완료 후 호출된다
+                    //기존이미지 파일 삭제한다.
+                    if(mBoardBean.imgName!=null) {
+                        try {
+                            mFirebaseStorage.getReference().child("image").child(mBoardBean.imgName).delete();
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                    mBoardBean.imgUri = task.getResult().toString();
+                    mBoardBean.imgName = mCaptureUri.getLastPathSegment();
+                    mBoardBean.intHouse=mintHouse;
+                    mBoardBean.intToHouse();
+                    mBoardBean.stuNum=mEdtStuNum.getText().toString();
+                    mBoardBean.name=mEdtName.getText().toString();
+                    mBoardBean.roomNum=mEdtRoomNum.getText().toString();
+                    mBoardBean.deskNum=mEdtDeskNum.getText().toString();
+                    mBoardBean.content=mEdtContent.getText().toString();
 
-                //수정된 날짜로
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
-                mBoardBean.date = sdf.format(new Date());
+                    //수정된 날짜로
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
+                    mBoardBean.date = sdf.format(new Date());
 
-                String uuid = getUseridFromUUID(mBoardBean.userId);
-                mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
+                    String uuid = getUseridFromUUID(mBoardBean.userId);
+                    mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
 
-                Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
 
-                finish();
-            }
-        });
+                    finish();
+                }
+            });
+        } else{
+            Uri file = imgUri;
+            StorageReference imagesRef = storageRef.child("image/"+file.getLastPathSegment());
+            UploadTask uploadTask = imagesRef.putFile(file);
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return imagesRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    //파일 업로드 완료 후 호출된다
+                    //기존이미지 파일 삭제한다.
+                    if(mBoardBean.imgName!=null) {
+                        try {
+                            mFirebaseStorage.getReference().child("image").child(mBoardBean.imgName).delete();
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                    mBoardBean.imgUri = task.getResult().toString();
+                    mBoardBean.imgName = imgUri.getLastPathSegment();
+                    mBoardBean.intHouse=mintHouse;
+                    mBoardBean.intToHouse();
+                    mBoardBean.stuNum=mEdtStuNum.getText().toString();
+                    mBoardBean.name=mEdtName.getText().toString();
+                    mBoardBean.roomNum=mEdtRoomNum.getText().toString();
+                    mBoardBean.deskNum=mEdtDeskNum.getText().toString();
+                    mBoardBean.content=mEdtContent.getText().toString();
+
+                    //수정된 날짜로
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
+                    mBoardBean.date = sdf.format(new Date());
+
+                    String uuid = getUseridFromUUID(mBoardBean.userId);
+                    mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
+
+                    Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
+
+                    finish();
+                }
+            });
+        }
     }
 
     public static String getUseridFromUUID(String userEmail){
@@ -332,6 +388,35 @@ public class ModifyWriteActivity extends AppCompatActivity {
         //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
     }
 
+    private void getPictureFromGallery(){
+
+        gallery = true;
+        mPhotoPath = getRealPathFromURI(imgUri); // path 경로
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(mPhotoPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        int exifDegree = exifOrientToDegree(exifOrientation);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath);//경로를 통해 비트맵으로 전환
+        mImgProfile.setImageBitmap(roate(bitmap, exifDegree));//이미지 뷰에 비트맵 넣기
+
+        //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"mCaptureUri : "+ mCaptureUri, Toast.LENGTH_LONG).show();
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        int column_index=0;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if(cursor.moveToFirst()){
+            column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        } return cursor.getString(column_index);
+    }
+
     private void saveBitmapToFileCache(Bitmap bitmap, String strFilePath) {
 
         File fileCacheItem = new File(strFilePath);
@@ -395,10 +480,14 @@ public class ModifyWriteActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        imgUri = data.getData();
+
         //카메라로부터 오는 데이터를 취득한다.
         if(resultCode == RESULT_OK) {
             if(requestCode == REQUEST_IMAGE_CAPTURE) {
                 sendPicture();
+            }else if(requestCode == GALLERY_CODE){
+                getPictureFromGallery();
             }
         }
     }

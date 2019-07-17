@@ -252,11 +252,15 @@ public class WriteActivity extends AppCompatActivity {
 
         boardBean.id = id;
         boardBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
-        boardBean.condition = getString(R.string.condition1);
+        boardBean.intCondition = 0;
+        boardBean.intToCondition();
 
         boardBean.stuNum = mEdtStuNum.getText().toString();
         boardBean.name = mEdtName.getText().toString();
+
         boardBean.intHouse = mintHouse;
+        boardBean.intToHouse();
+
         boardBean.roomNum = mEdtRoomNum.getText().toString();
         boardBean.deskNum = mEdtDeskNum.getText().toString();
         boardBean.content = mEdtContent.getText().toString();
@@ -444,7 +448,7 @@ public class WriteActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        imgUri = data.getData();
+        if(imgUri!=null)imgUri = data.getData();
 
         //카메라로부터 오는 데이터를 취득한다.
         if(resultCode == RESULT_OK) {
