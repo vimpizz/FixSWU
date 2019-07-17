@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // 데이터를 받아와서 List에 저장
                         mBoardList.clear();
-
                         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             BoardBean bean = snapshot.getValue(BoardBean.class);
                             mBoardList.add(0,bean);
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                             mBoardAdapter.notifyDataSetChanged();
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) { }
                 }

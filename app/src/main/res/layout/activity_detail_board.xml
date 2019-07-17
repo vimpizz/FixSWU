@@ -4,29 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:orientation="vertical">
 
-    <TextView
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:text="상세보기"
-        android:gravity="center|left"/>
+        android:layout_height="50dp"
+        android:background="@color/SWUPURPLE">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:text="상세보기"
+            android:gravity="center|left"
+            android:textColor="#FFFFFF"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:weightSum="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -43,13 +52,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:ems="10" />
+                android:ems="10"
+                android:gravity="center|left"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -67,14 +77,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:ems="10"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:gravity="center|left"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
 
@@ -83,7 +94,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:entries="@array/기관" />
+                android:entries="@array/기관"
+                android:gravity="center|left"/>
 
             <TextView
                 android:id="@+id/txtRoomNumDetail"
@@ -93,30 +105,14 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:layout_weight="2"
-                android:text="번호"
-                android:textSize="15dp"/>
-
             <TextView
                 android:id="@+id/txtDeskNumDetail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:ems="10"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:gravity="center|left"/>
 
         </LinearLayout>
 
@@ -126,7 +122,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -145,7 +141,8 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:gravity="center|left"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -154,7 +151,8 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:padding="20dp">
 
         <ImageView
             android:id="@+id/imgWriteDetail"
@@ -172,7 +170,8 @@
         android:layout_weight="2"
         android:orientation="horizontal"
         android:gravity="center|top"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/textView2"
@@ -190,7 +189,8 @@
             android:layout_weight="8"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            android:gravity="center|left" />
 
     </LinearLayout>
 
@@ -199,7 +199,8 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/textView3"
@@ -256,7 +257,8 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:padding="10dp">
 
         <Button
             android:id="@+id/btnCancelDetail"
@@ -265,7 +267,7 @@
             android:layout_height="wrap_content"
             android:text="뒤로가기"
             android:textColor="#FFFFFF"
-            android:background="@color/SWUPURPLE"/>
+            android:background="@drawable/button_background"/>
 
         <Button
             android:id="@+id/btnDel"
@@ -274,7 +276,7 @@
             android:layout_height="wrap_content"
             android:text="삭제하기"
             android:textColor="#FFFFFF"
-            android:background="@color/SWUPURPLE"/>
+            android:background="@drawable/button_background"/>
 
         <Button
             android:id="@+id/btnModify"
@@ -283,7 +285,7 @@
             android:layout_height="wrap_content"
             android:text="수정하기"
             android:textColor="#FFFFFF"
-            android:background="@color/SWUPURPLE"/>
+            android:background="@drawable/button_background"/>
 
     </LinearLayout>
 </LinearLayout>

@@ -18,19 +18,15 @@ public class BoardAdapter extends BaseAdapter {
     private String house;
 
 
-
-
     public BoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
         mBoardList = boardList;
-        //Utils.getSortForDate(boardList);
-    }
-
-    public void setBoardList(List<BoardBean> boardList) {
         //mBoardList =  Utils.getSortForDate(boardList);
     }
 
-
+    public void setBoardList(List<BoardBean> boardList) {
+        mBoardList =  Utils.getSortForDate(boardList);
+    }
 
     @Override
     public int getCount() {
