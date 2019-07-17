@@ -17,6 +17,7 @@ public class AdminBoardAdapter extends BaseAdapter {
     private List<BoardBean> mBoardList;
     private String house;
 
+/*
     public AdminBoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
         mBoardList =  Utils.getSortForDate(boardList);
@@ -25,6 +26,7 @@ public class AdminBoardAdapter extends BaseAdapter {
     public void setBoardList(List<BoardBean> boardList) {
         mBoardList =  Utils.getSortForDate(boardList);
     }
+*/
 
     @Override
     public int getCount() {

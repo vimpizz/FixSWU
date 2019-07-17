@@ -18,14 +18,19 @@ public class BoardAdapter extends BaseAdapter {
     private String house;
 
 
+
+
     public BoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
-        mBoardList =  Utils.getSortForDate(boardList);
+        mBoardList = boardList;
+                //Utils.getSortForDate(boardList);
     }
 
     public void setBoardList(List<BoardBean> boardList) {
-        mBoardList =  Utils.getSortForDate(boardList);
+        //mBoardList =  Utils.getSortForDate(boardList);
     }
+
+
 
     @Override
     public int getCount() {
@@ -70,10 +75,10 @@ public class BoardAdapter extends BaseAdapter {
         } else if(boardBean.house == 3 ) {
             house = "바롬관 10층";
         }
-        txtvHouse.setText("기관: " +house);
-        txtvRoom.setText("방: " + boardBean.roomNum);
+        txtvHouse.setText(house);
+        txtvRoom.setText(boardBean.roomNum);
         txtvDesk.setText("번호 :"+ boardBean.deskNum);
-        txtvDate.setText("일자 :" +boardBean.date);
+        txtvDate.setText(boardBean.date);
 
         applyBox.setOnClickListener(new View.OnClickListener() {
             @Override

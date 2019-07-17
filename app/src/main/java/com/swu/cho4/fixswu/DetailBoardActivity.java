@@ -25,14 +25,9 @@ public class DetailBoardActivity extends AppCompatActivity {
 
     private BoardBean mBoardBean;
 
-    public String mPhotoPath;
-    public static final int REQUEST_IMAGE_CAPTURE = 200;
-
-
     private ImageView mImgProfile;
     private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtRoomNum,mTxtDeskNum,mTxtDate,mTxtContent,mTxtComment;
     private String house;
-
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);

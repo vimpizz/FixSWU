@@ -53,10 +53,10 @@ public class LoginActivity extends AppCompatActivity {
         if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
             //Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
-            if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
+            if(mFirebaseAuth.getCurrentUser().getEmail().equals("@gmail.com")) {
                 Toast.makeText(getBaseContext(), "AdminMain"
                         ,Toast.LENGTH_SHORT).show();
-                goAdminMainActivity();
+               // goAdminMainActivity();
             } else {
                 Toast.makeText(getBaseContext(), "Loading..."
                         , Toast.LENGTH_SHORT).show();
@@ -71,11 +71,11 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goAdminMainActivity(){
+/*   private void goAdminMainActivity(){
         Intent i = new Intent(this, AdminMainActivity.class);
         startActivity(i);
         finish();
-    }
+    }*/
 
     private View.OnClickListener mClicks = new View.OnClickListener() {
         @Override
@@ -105,10 +105,10 @@ public class LoginActivity extends AppCompatActivity {
                             //FireBase 로그인 성공
                             //Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             //메인화면으로 이동한다.
-                            if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
+                            if(mFirebaseAuth.getCurrentUser().getEmail().equals("@gmail.com")) {
                                 Toast.makeText(getBaseContext(), "AdminMain"
                                         ,Toast.LENGTH_SHORT).show();
-                                goAdminMainActivity();
+                              //  goAdminMainActivity();
                             } else {
                                 Toast.makeText(getBaseContext(), "Loading...", Toast.LENGTH_SHORT).show();
                                 goMainActivity();
