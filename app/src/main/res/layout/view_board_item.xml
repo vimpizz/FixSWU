@@ -31,13 +31,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtvCondition"
+                android:id="@+id/txtvDate"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="7"
                 android:fontFamily="@font/kopubdotumbold"
                 android:gravity="center|right"
-                android:text="상태"
+                android:text="신청날짜,시간"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -64,42 +64,24 @@
                 android:id="@+id/txtvHouse"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="7"
                 android:fontFamily="@font/kopubdotumbold"
                 android:gravity="center|left"
                 android:text="기관"
                 android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/txtvRoom"
+                android:id="@+id/txtvCondition"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:fontFamily="@font/kopubdotumbold"
-                android:gravity="center|left"
-                android:text="방"
+                android:gravity="center|right"
+                android:text="상태"
                 android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/txtvDesk"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/kopubdotumbold"
-                android:gravity="center|left"
-                android:text="번호"
-                android:textSize="15dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtvDate"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/kopubdotumbold"
-            android:gravity="center|left"
-            android:text="신청날짜,시간"
-            android:textSize="15dp" />
-
     </LinearLayout>
+
 </LinearLayout>
