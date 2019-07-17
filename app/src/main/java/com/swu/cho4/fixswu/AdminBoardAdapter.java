@@ -15,7 +15,7 @@ public class AdminBoardAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<BoardBean> mBoardList;
-    private String house;
+
 
 
     public AdminBoardAdapter(Context context, List<BoardBean> boardList) {
@@ -55,7 +55,6 @@ public class AdminBoardAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.view_board_item, null);
 
 
-
         TextView txtvNum = view.findViewById(R.id.txtvNum);
         TextView txtvCondition = view.findViewById(R.id.txtvCondition);
         TextView txtvContents = view.findViewById(R.id.txtvContents);
@@ -67,21 +66,13 @@ public class AdminBoardAdapter extends BaseAdapter {
 
         final BoardBean boardBean = mBoardList.get(i);
 
+
         txtvCondition.setText("상태: " + boardBean.condition);
         txtvContents.setText("수리 내용 : " + boardBean.content);
-        if(boardBean.house == 0 ) {
-            house = "샬롬하우스 A동";
-        } else if(boardBean.house == 1) {
-            house = "샬롬하우스 B동";
-        } else if(boardBean.house == 2) {
-            house ="국제생활관";
-        } else if(boardBean.house == 3 ) {
-            house = "바롬관 10층";
-        }
-        txtvHouse.setText("기관: " +house);
-        txtvRoom.setText("방: " + boardBean.roomNum);
+        txtvHouse.setText(boardBean.house);
+        txtvRoom.setText(boardBean.roomNum);
         txtvDesk.setText("번호 :"+ boardBean.deskNum);
-        txtvDate.setText("일자 :" +boardBean.date);
+        txtvDate.setText(boardBean.date);
 
         txtvDate.setText(boardBean.date);
 

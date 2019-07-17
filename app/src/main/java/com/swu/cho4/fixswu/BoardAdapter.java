@@ -15,7 +15,7 @@ public class BoardAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<BoardBean> mBoardList;
-    private String house;
+    private String condition,house;
 
 
     public BoardAdapter(Context context, List<BoardBean> boardList) {
@@ -62,16 +62,7 @@ public class BoardAdapter extends BaseAdapter {
 
         txtvCondition.setText("상태: " + boardBean.condition);
         txtvContents.setText("수리 내용 : " + boardBean.content);
-        if(boardBean.house == 0 ) {
-            house = "샬롬하우스 A동";
-        } else if(boardBean.house == 1) {
-            house = "샬롬하우스 B동";
-        } else if(boardBean.house == 2) {
-            house ="국제생활관";
-        } else if(boardBean.house == 3 ) {
-            house = "바롬관 10층";
-        }
-        txtvHouse.setText(house);
+        txtvHouse.setText(boardBean.house);
         txtvRoom.setText(boardBean.roomNum);
         txtvDesk.setText("번호 :"+ boardBean.deskNum);
         txtvDate.setText(boardBean.date);

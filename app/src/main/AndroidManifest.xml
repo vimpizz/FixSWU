@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailBoardActivity"></activity>
+        <activity android:name=".DetailBoardActivity" />
         <activity android:name=".ModifyWriteActivity" />
         <activity android:name=".AdminWriteActivity" />
         <activity android:name=".AdminMainActivity" />

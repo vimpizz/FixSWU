@@ -29,7 +29,7 @@ public class AdminWriteActivity extends AppCompatActivity {
     private TextView mTxtApplyNum,mTxtStuNum, mTxtName,mTxtRoomNum,mTxtDeskNum,mTxtContent,mTxtDate;
     private EditText mEdtComment;
     private Spinner mSpinner;
-    private int intCondition=0; //보드 상태
+    private int mIntCondition; //보드 상태
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);
@@ -51,17 +51,22 @@ public class AdminWriteActivity extends AppCompatActivity {
         mTxtDate = findViewById(R.id.txtDate);
         mEdtComment=findViewById(R.id.edtComment);
 
+
+
+        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
+
+        mSpinner.setSelection(mBoardBean.intCondition);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                intCondition=i;
+                mIntCondition=i;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
-        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
+
         if(mBoardBean != null){
             mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
             if(mBoardBean.bmpTitle != null){
@@ -69,7 +74,6 @@ public class AdminWriteActivity extends AppCompatActivity {
             }
             mTxtApplyNum.setText(mBoardBean.ApplyNum);
             mTxtName.setText(mBoardBean.name);
-
             mTxtRoomNum.setText(mBoardBean.roomNum);
             mTxtDeskNum.setText(mBoardBean.deskNum);
             mTxtDate.setText(mBoardBean.date);
@@ -98,17 +102,9 @@ public class AdminWriteActivity extends AppCompatActivity {
     }
 
     private void update(){
-         String condition="";
-
-         if(intCondition == 0 ) {
-              condition = getString(R.string.condition1);
-         } else if(mBoardBean.house == 1) {
-              condition = condition = getString(R.string.condition2);
-         } else if(mBoardBean.house == 2) {
-              condition =condition = getString(R.string.condition3);
-        }
-         mBoardBean.condition = condition;
-         mBoardBean.comment=mEdtComment.getText().toString();
+        mBoardBean.intCondition=mIntCondition;
+        mBoardBean.intToCondition();
+        mBoardBean.comment=mEdtComment.getText().toString();
 
             //DB 업로드
             DatabaseReference dbRef = mFirebaseDatabase.getReference();
