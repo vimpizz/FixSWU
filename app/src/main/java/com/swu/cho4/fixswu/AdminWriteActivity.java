@@ -25,10 +25,6 @@ public class AdminWriteActivity extends AppCompatActivity {
 
     private BoardBean mBoardBean;
 
-    private Uri mCaptureUri;
-    public String mPhotoPath;
-    public static final int REQUEST_IMAGE_CAPTURE = 200;
-
     private ImageView mImgProfile;
     private TextView mTxtApplyNum,mTxtStuNum, mTxtName,mTxtRoomNum,mTxtDeskNum,mTxtContent,mTxtDate;
     private EditText mEdtComment;
@@ -74,7 +70,6 @@ public class AdminWriteActivity extends AppCompatActivity {
             mTxtApplyNum.setText(mBoardBean.ApplyNum);
             mTxtName.setText(mBoardBean.name);
 
-
             mTxtRoomNum.setText(mBoardBean.roomNum);
             mTxtDeskNum.setText(mBoardBean.deskNum);
             mTxtDate.setText(mBoardBean.date);
@@ -103,8 +98,17 @@ public class AdminWriteActivity extends AppCompatActivity {
     }
 
     private void update(){
-            //mBoardBean.condition = mE;
-            mBoardBean.comment=mEdtComment.getText().toString();
+         String condition="";
+
+         if(intCondition == 0 ) {
+              condition = getString(R.string.condition1);
+         } else if(mBoardBean.house == 1) {
+              condition = condition = getString(R.string.condition2);
+         } else if(mBoardBean.house == 2) {
+              condition =condition = getString(R.string.condition3);
+        }
+         mBoardBean.condition = condition;
+         mBoardBean.comment=mEdtComment.getText().toString();
 
             //DB 업로드
             DatabaseReference dbRef = mFirebaseDatabase.getReference();

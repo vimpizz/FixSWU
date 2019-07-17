@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="상태">
+        <item>확인전</item>
         <item>읽음</item>
         <item>수리완료</item>
     </string-array>

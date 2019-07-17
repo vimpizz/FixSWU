@@ -60,7 +60,6 @@ public class BoardAdapter extends BaseAdapter {
 
         final BoardBean boardBean = mBoardList.get(i);
 
-
         txtvCondition.setText("상태: " + boardBean.condition);
         txtvContents.setText("수리 내용 : " + boardBean.content);
         if(boardBean.house == 0 ) {
@@ -72,10 +71,10 @@ public class BoardAdapter extends BaseAdapter {
         } else if(boardBean.house == 3 ) {
             house = "바롬관 10층";
         }
-        txtvHouse.setText("기관: " +house);
-        txtvRoom.setText("방: " + boardBean.roomNum);
+        txtvHouse.setText(house);
+        txtvRoom.setText(boardBean.roomNum);
         txtvDesk.setText("번호 :"+ boardBean.deskNum);
-        txtvDate.setText("일자 :" +boardBean.date);
+        txtvDate.setText(boardBean.date);
 
         applyBox.setOnClickListener(new View.OnClickListener() {
             @Override

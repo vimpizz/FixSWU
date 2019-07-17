@@ -1,5 +1,6 @@
 package com.swu.cho4.fixswu;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -68,6 +69,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_write);
 
+
         mImgProfile = findViewById(R.id.imgWriteModify);
         mEdtStuNum = findViewById(R.id.edtStuNumModify);
         mEdtName = findViewById(R.id.edtNameModify);
@@ -76,15 +78,16 @@ public class ModifyWriteActivity extends AppCompatActivity {
         mEdtDeskNum = findViewById(R.id.edtDeskNumModify);
         mEdtContent = findViewById(R.id.edtContentModify);
 
+
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mintHouse=i;
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
+
         mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
 
         if(mBoardBean!=null) {
@@ -99,6 +102,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
             mEdtRoomNum.setText(mBoardBean.roomNum);
             mEdtDeskNum.setText(mBoardBean.deskNum);
             mEdtContent.setText(mBoardBean.content);
+            mSpinner.setSelection(mBoardBean.house);
         }
 
         findViewById(R.id.btnCameraModify).setOnClickListener(new View.OnClickListener() {
@@ -186,12 +190,16 @@ public class ModifyWriteActivity extends AppCompatActivity {
             mBoardBean.roomNum=mEdtRoomNum.getText().toString();
             mBoardBean.deskNum=mEdtDeskNum.getText().toString();
             mBoardBean.content=mEdtContent.getText().toString();
+            //수정된 날짜로
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
+            mBoardBean.date = sdf.format(new Date());
 
             //DB 업로드
             DatabaseReference dbRef = mFirebaseDatabase.getReference();
             String uuid = getUseridFromUUID(mBoardBean.userId);
             dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
             Toast.makeText(this,"수정 되었습니다",Toast.LENGTH_SHORT).show();
+
             finish();
             return;
         }
@@ -236,6 +244,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
                 mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
 
                 Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         });

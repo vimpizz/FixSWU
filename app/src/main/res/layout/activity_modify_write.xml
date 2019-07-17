@@ -234,7 +234,7 @@
             android:layout_weight="2"
             android:text="수리내용"
             android:textSize="15dp"
-            android:gravity="center|left"/>
+            android:gravity="left"/>
 
         <EditText
             android:id="@+id/edtContentModify"
