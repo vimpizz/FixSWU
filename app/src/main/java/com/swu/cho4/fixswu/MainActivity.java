@@ -51,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
         String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
         String uuid = WriteActivity.getUseridFromUUID(userEmail);
 
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference usersRef = rootRef.child("board");
-
         mFirebaseDB.getReference().child("board").child(uuid).addValueEventListener(
                 new ValueEventListener() {
                     @Override
@@ -66,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         // 바뀐 데이터로 새로고침
                         if(mBoardAdapter != null) {
-                            mBoardAdapter.setBoardList(mBoardList);
                             mBoardAdapter.notifyDataSetChanged();
                         }
                     }

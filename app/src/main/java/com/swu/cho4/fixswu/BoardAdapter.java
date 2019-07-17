@@ -20,7 +20,8 @@ public class BoardAdapter extends BaseAdapter {
 
     public BoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
-        mBoardList =  Utils.getSortForDate(boardList);
+        mBoardList = boardList;
+        //mBoardList =  Utils.getSortForDate(boardList);
     }
 
     public void setBoardList(List<BoardBean> boardList) {
