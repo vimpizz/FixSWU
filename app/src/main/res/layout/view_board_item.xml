@@ -8,8 +8,9 @@
         android:id="@+id/applyBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/picture_box"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <LinearLayout
@@ -23,21 +24,21 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:fontFamily="@font/kopubdotumbold"
                 android:gravity="center|left"
                 android:text="번호"
-                android:textStyle="bold"
-                android:fontFamily="@font/kopubdotumbold"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtvCondition"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="7"
+                android:fontFamily="@font/kopubdotumbold"
                 android:gravity="center|right"
                 android:text="상태"
-                android:fontFamily="@font/kopubdotumbold"
-                android:textSize="15dp"/>
+                android:textSize="15dp" />
         </LinearLayout>
 
         <TextView
@@ -46,12 +47,12 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:ellipsize="end"
+            android:fontFamily="@font/kopubdotumbold"
             android:gravity="center|left"
             android:lines="2"
             android:maxLines="2"
             android:text="내용"
-            android:fontFamily="@font/kopubdotumbold"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,21 +74,21 @@
                 android:id="@+id/txtvRoom"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/kopubdotumbold"
                 android:gravity="center|left"
-                android:layout_weight="1"
-                android:textSize="15dp"
-                android:text="방" />
+                android:text="방"
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txtvDesk"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:fontFamily="@font/kopubdotumbold"
                 android:gravity="center|left"
-                android:layout_weight="1"
-                android:textSize="15dp"
-                android:text="번호" />
+                android:text="번호"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <TextView
@@ -95,10 +96,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center|left"
             android:fontFamily="@font/kopubdotumbold"
+            android:gravity="center|left"
             android:text="신청날짜,시간"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
 
     </LinearLayout>
 </LinearLayout>
