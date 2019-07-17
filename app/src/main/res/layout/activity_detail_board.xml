@@ -30,7 +30,7 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +52,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:ems="10" />
+                android:ems="10"
+                android:gravity="center|left"/>
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +77,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:ems="10"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:gravity="center|left"/>
 
         </LinearLayout>
 
@@ -92,7 +94,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:entries="@array/기관" />
+                android:entries="@array/기관"
+                android:gravity="center|left"/>
 
             <TextView
                 android:id="@+id/txtRoomNumDetail"
@@ -108,7 +111,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:ems="10"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:gravity="center|left"/>
 
         </LinearLayout>
 
@@ -137,7 +141,8 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:gravity="center|left"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -147,7 +152,7 @@
         android:layout_weight="3"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:padding="10dp">
+        android:padding="20dp">
 
         <ImageView
             android:id="@+id/imgWriteDetail"
@@ -166,7 +171,7 @@
         android:orientation="horizontal"
         android:gravity="center|top"
         android:layout_marginTop="10dp"
-        android:padding="10dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/textView2"
@@ -184,7 +189,8 @@
             android:layout_weight="8"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            android:gravity="center|left" />
 
     </LinearLayout>
 
@@ -194,7 +200,7 @@
         android:layout_weight="2"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:padding="10dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/textView3"

@@ -52,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:fontFamily="@font/kopubdotummedium"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:gravity="center|left"/>
     </LinearLayout>
 
     <LinearLayout

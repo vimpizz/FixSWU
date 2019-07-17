@@ -61,7 +61,8 @@
                 android:ems="10"
                 android:fontFamily="@font/kopubdotummedium"
                 android:hint="학번"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:gravity="center|left"/>
         </LinearLayout>
 
         <LinearLayout
@@ -89,7 +90,8 @@
                 android:fontFamily="@font/kopubdotummedium"
                 android:hint="이름"
                 android:maxLines="1"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:gravity="center|left"/>
         </LinearLayout>
 
         <LinearLayout
@@ -113,7 +115,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:entries="@array/기관" />
+                android:entries="@array/기관"
+                android:gravity="center|left"/>
 
         </LinearLayout>
 
@@ -143,7 +146,8 @@
                 android:hint="호수"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:gravity="center|left"/>
         </LinearLayout>
 
         <LinearLayout
@@ -172,7 +176,8 @@
                 android:hint="번호"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:gravity="center|left"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -252,7 +257,8 @@
             android:inputType="textMultiLine"
             android:maxLines="3"
             android:text=""
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:gravity="center|left"/>
 
     </LinearLayout>
 
