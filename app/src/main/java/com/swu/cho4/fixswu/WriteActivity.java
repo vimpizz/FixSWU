@@ -448,7 +448,7 @@ public class WriteActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        imgUri = data.getData();
+        if(imgUri!=null)imgUri = data.getData();
 
         //카메라로부터 오는 데이터를 취득한다.
         if(resultCode == RESULT_OK) {
