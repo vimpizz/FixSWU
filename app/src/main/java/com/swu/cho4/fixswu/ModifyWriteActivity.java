@@ -79,6 +79,11 @@ public class ModifyWriteActivity extends AppCompatActivity {
         mEdtContent = findViewById(R.id.edtContentModify);
 
 
+
+
+        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
+
+        mSpinner.setSelection(mBoardBean.intHouse);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -88,8 +93,6 @@ public class ModifyWriteActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
-        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
-
         if(mBoardBean!=null) {
 
             try {
@@ -97,12 +100,14 @@ public class ModifyWriteActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             mEdtStuNum.setText(mBoardBean.stuNum);
             mEdtName.setText(mBoardBean.name);
             mEdtRoomNum.setText(mBoardBean.roomNum);
             mEdtDeskNum.setText(mBoardBean.deskNum);
             mEdtContent.setText(mBoardBean.content);
-            mSpinner.setSelection(mBoardBean.house);
+
+
         }
 
         findViewById(R.id.btnCameraModify).setOnClickListener(new View.OnClickListener() {
@@ -187,6 +192,8 @@ public class ModifyWriteActivity extends AppCompatActivity {
         if(mPhotoPath==null){
             mBoardBean.stuNum=mEdtStuNum.getText().toString();
             mBoardBean.name=mEdtName.getText().toString();
+            mBoardBean.intHouse=mintHouse;
+            mBoardBean.intToHouse();
             mBoardBean.roomNum=mEdtRoomNum.getText().toString();
             mBoardBean.deskNum=mEdtDeskNum.getText().toString();
             mBoardBean.content=mEdtContent.getText().toString();
@@ -229,7 +236,8 @@ public class ModifyWriteActivity extends AppCompatActivity {
                 }
                 mBoardBean.imgUri = task.getResult().toString();
                 mBoardBean.imgName = mCaptureUri.getLastPathSegment();
-
+                mBoardBean.intHouse=mintHouse;
+                mBoardBean.intToHouse();
                 mBoardBean.stuNum=mEdtStuNum.getText().toString();
                 mBoardBean.name=mEdtName.getText().toString();
                 mBoardBean.roomNum=mEdtRoomNum.getText().toString();

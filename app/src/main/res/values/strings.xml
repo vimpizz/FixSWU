@@ -5,7 +5,12 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string name="condition1">확인전</string>
-    <string name="condition2">읽음</string>
-    <string name="condition3">수리완료</string>
+    <string name="house0">샬롬하우스 A동</string>
+    <string name="house1">샬롬하우스 B동</string>
+    <string name="house2">국제생활관</string>
+    <string name="house3">바롬관 10층</string>
+
+    <string name="condition0">확인전</string>
+    <string name="condition1">읽음</string>
+    <string name="condition2">수리완료</string>
 </resources>

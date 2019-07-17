@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -30,8 +29,6 @@ import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +41,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.channels.GatheringByteChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -56,11 +52,8 @@ public class WriteActivity extends AppCompatActivity {
     private BoardBean mBoardBean;
 
     private Uri mCaptureUri;
-    private Uri imgUri;
     public String mPhotoPath;
     public static final int REQUEST_IMAGE_CAPTURE = 200;
-    private final int GALLERY_CODE=1112;
-    private boolean gallery;
 
     private ImageView mImgProfile;
     private EditText mEdtStuNum, mEdtName,mEdtRoomNum,mEdtDeskNum,mEdtContent;
@@ -77,7 +70,7 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
-        
+
         //카메라를 사용하기 위한 퍼미션을 요청한다.
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -115,13 +108,6 @@ public class WriteActivity extends AppCompatActivity {
         findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("image/*");
-                startActivityForResult(intent, GALLERY_CODE);
-
-
             }
         });
 
@@ -196,49 +182,31 @@ public class WriteActivity extends AppCompatActivity {
             return;
         }
 
+        //사진부터 storage에 업로드한다
         StorageReference storageRef = mFirebaseStorage.getReference();
-        if(gallery == false) {
-            //사진부터 storage에 업로드한다
-            final StorageReference imagesRef = storageRef.child("image/" + mCaptureUri.getLastPathSegment());
+        final StorageReference imagesRef = storageRef.child("image/"+mCaptureUri.getLastPathSegment());
 
-            UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
-            //파일 업로드 실패에 따른 콜백 처리를 한다
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-                    return imagesRef.getDownloadUrl();
+        UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
+        //파일 업로드 실패에 따른 콜백 처리를 한다
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if(!task.isSuccessful()){
+                    throw task.getException();
                 }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    //데이터 베이스 업로드를 호출한다
-                    uploadDB(task.getResult().toString(), mCaptureUri.getLastPathSegment());
-                }
-            });
-        } else{
-            Uri file = imgUri;
-            StorageReference imagesRef = storageRef.child("image/"+file.getLastPathSegment());
-            UploadTask uploadTask = imagesRef.putFile(file);
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-                    return imagesRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    //데이터 베이스 업로드를 호출한다
-                    uploadDB(task.getResult().toString(), file.getLastPathSegment());
-                }
-            });
-        }
+                return imagesRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                //데이터 베이스 업로드를 호출한다
+                uploadDB(task.getResult().toString(), mCaptureUri.getLastPathSegment());
+            }
+        });
     }
+
+
+
 
 
 
@@ -252,11 +220,15 @@ public class WriteActivity extends AppCompatActivity {
 
         boardBean.id = id;
         boardBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
-        boardBean.condition = getString(R.string.condition1);
+        boardBean.intCondition = 0;
+        boardBean.intToCondition();
 
         boardBean.stuNum = mEdtStuNum.getText().toString();
         boardBean.name = mEdtName.getText().toString();
-        boardBean.house = mintHouse;
+
+        boardBean.intHouse = mintHouse;
+        boardBean.intToHouse();
+
         boardBean.roomNum = mEdtRoomNum.getText().toString();
         boardBean.deskNum = mEdtDeskNum.getText().toString();
         boardBean.content = mEdtContent.getText().toString();
@@ -283,7 +255,6 @@ public class WriteActivity extends AppCompatActivity {
 
     private void takePicture() {
 
-        gallery = false;
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -348,37 +319,7 @@ public class WriteActivity extends AppCompatActivity {
 
         saveBitmapToFileCache(resizedBmp, mPhotoPath);
 
-        //Toast.makeText(this,"mCaptureUri : "+ mCaptureUri, Toast.LENGTH_LONG).show();
         //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
-    }
-
-    private void getPictureFromGallery(){
-
-        gallery = true;
-        mPhotoPath = getRealPathFromURI(imgUri); // path 경로
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(mPhotoPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-        int exifDegree = exifOrientToDegree(exifOrientation);
-
-        Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath);//경로를 통해 비트맵으로 전환
-        mImgProfile.setImageBitmap(roate(bitmap, exifDegree));//이미지 뷰에 비트맵 넣기
-
-        //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this,"mCaptureUri : "+ mCaptureUri, Toast.LENGTH_LONG).show();
-    }
-
-    private String getRealPathFromURI(Uri contentUri) {
-        int column_index=0;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if(cursor.moveToFirst()){
-            column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        } return cursor.getString(column_index);
     }
 
     private void saveBitmapToFileCache(Bitmap bitmap, String strFilePath) {
@@ -444,14 +385,10 @@ public class WriteActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        imgUri = data.getData();
-
         //카메라로부터 오는 데이터를 취득한다.
         if(resultCode == RESULT_OK) {
             if(requestCode == REQUEST_IMAGE_CAPTURE) {
                 sendPicture();
-            } else if(requestCode == GALLERY_CODE){
-                getPictureFromGallery();
             }
         }
     }
