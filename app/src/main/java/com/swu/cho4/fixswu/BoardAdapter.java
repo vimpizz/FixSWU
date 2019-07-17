@@ -53,18 +53,16 @@ public class BoardAdapter extends BaseAdapter {
         TextView txtvCondition = view.findViewById(R.id.txtvCondition);
         TextView txtvContents = view.findViewById(R.id.txtvContents);
         TextView txtvHouse = view.findViewById(R.id.txtvHouse);
-        TextView txtvRoom = view.findViewById(R.id.txtvRoom);
-        TextView txtvDesk = view.findViewById(R.id.txtvDesk);
         TextView txtvDate = view.findViewById(R.id.txtvDate);
         LinearLayout applyBox = view.findViewById(R.id.applyBox);
 
         final BoardBean boardBean = mBoardList.get(i);
 
-        txtvCondition.setText("상태: " + boardBean.condition);
-        txtvContents.setText("수리 내용 : " + boardBean.content);
-        txtvHouse.setText(boardBean.house);
-        txtvRoom.setText(boardBean.roomNum);
-        txtvDesk.setText("번호 :"+ boardBean.deskNum);
+        txtvCondition.setText(boardBean.condition);
+        txtvContents.setText(boardBean.content);
+        txtvHouse.setText(boardBean.house+" "+boardBean.roomNum+"호  "+boardBean.deskNum);
+       /* txtvRoom.setText(boardBean.roomNum);
+        txtvDesk.setText("번호 :"+ boardBean.deskNum);*/
         txtvDate.setText(boardBean.date);
 
         applyBox.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +70,6 @@ public class BoardAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent i = new Intent(mContext, DetailBoardActivity.class);
                 i.putExtra(BoardBean.class.getName(), boardBean);
-                //i.putExtra("titleBitmap",boardBean.bmpTitle);
                 mContext.startActivity(i);}
         });
         return view;
