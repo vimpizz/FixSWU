@@ -159,6 +159,7 @@ public class WriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(mBoardBean==null){
+                            Toast.makeText(getApplicationContext(),"Loading...", Toast.LENGTH_SHORT).show();
                             upload();
                         }
                     }
@@ -191,52 +192,83 @@ public class WriteActivity extends AppCompatActivity {
 
     private void upload(){
 
+        //사진을 안 찍었으면 사진 제외하고 업로드한다
         if(mPhotoPath == null){
-            Toast.makeText(this,"사진을 찍어주세요",Toast.LENGTH_SHORT).show();
-            return;
-        }
+            //Firebase 데이터베이스에 메모를 등록한다.
+            DatabaseReference dbRef = mFirebaseDatabase.getReference();
+            String id = dbRef.push().getKey();
 
-        StorageReference storageRef = mFirebaseStorage.getReference();
-        if(gallery == false) {
-            //사진부터 storage에 업로드한다
-            final StorageReference imagesRef = storageRef.child("image/" + mCaptureUri.getLastPathSegment());
+            //데이터베이스에 저장한다.
+            BoardBean boardBean = new BoardBean();
 
-            UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
-            //파일 업로드 실패에 따른 콜백 처리를 한다
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
+            boardBean.id = id;
+            boardBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
+            boardBean.intCondition = 0;
+            boardBean.intToCondition();
+
+            boardBean.stuNum = mEdtStuNum.getText().toString();
+            boardBean.name = mEdtName.getText().toString();
+
+            boardBean.intHouse = mintHouse;
+            boardBean.intToHouse();
+
+            boardBean.roomNum = mEdtRoomNum.getText().toString();
+            boardBean.deskNum = mEdtDeskNum.getText().toString();
+            boardBean.content = mEdtContent.getText().toString();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
+            boardBean.date=sdf.format(new Date());
+
+            //고유번호를 생성한다
+            String guid = getUseridFromUUID(boardBean.userId);
+            dbRef.child("board").child(guid).child(boardBean.id).setValue(boardBean);
+            Toast.makeText(this,"게시물이 등록되었습니다",Toast.LENGTH_SHORT).show();
+            finish();
+
+        }else {
+
+            StorageReference storageRef = mFirebaseStorage.getReference();
+            if (gallery == false) {
+                //사진부터 storage에 업로드한다
+                final StorageReference imagesRef = storageRef.child("image/" + mCaptureUri.getLastPathSegment());
+
+                UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
+                //파일 업로드 실패에 따른 콜백 처리를 한다
+                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+                        return imagesRef.getDownloadUrl();
                     }
-                    return imagesRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    //데이터 베이스 업로드를 호출한다
-                    uploadDB(task.getResult().toString(), mCaptureUri.getLastPathSegment());
-                }
-            });
-        } else{
-            Uri file = imgUri;
-            StorageReference imagesRef = storageRef.child("image/"+file.getLastPathSegment());
-            UploadTask uploadTask = imagesRef.putFile(file);
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        //데이터 베이스 업로드를 호출한다
+                        uploadDB(task.getResult().toString(), mCaptureUri.getLastPathSegment());
                     }
-                    return imagesRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    //데이터 베이스 업로드를 호출한다
-                    uploadDB(task.getResult().toString(), file.getLastPathSegment());
-                }
-            });
+                });
+            } else {
+                Uri file = imgUri;
+                StorageReference imagesRef = storageRef.child("image/" + file.getLastPathSegment());
+                UploadTask uploadTask = imagesRef.putFile(file);
+                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+                        return imagesRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        //데이터 베이스 업로드를 호출한다
+                        uploadDB(task.getResult().toString(), file.getLastPathSegment());
+                    }
+                });
+            }
         }
     }
 

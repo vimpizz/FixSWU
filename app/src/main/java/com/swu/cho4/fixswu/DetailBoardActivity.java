@@ -74,8 +74,8 @@ public class DetailBoardActivity extends AppCompatActivity {
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailBoardActivity.this);
                     builder.setTitle("알림");
                     builder.setMessage("삭제하시겠습니까?");
-                    builder.setNegativeButton("아니오", null);
-                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("아니오", null);
+                    builder.setNegativeButton("예", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -83,16 +83,19 @@ public class DetailBoardActivity extends AppCompatActivity {
 
                             //DB에서 삭제처리
                             FirebaseDatabase.getInstance().getReference().child("board").child(uuid).child(mBoardBean.id).removeValue();
+
+                            if(mBoardBean.imgName!=null){
                             //storage에서 삭제처리
                             if (mBoardBean.imgName != null) {
                                 try {
                                     FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
-                                    Toast.makeText(DetailBoardActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
-                                    finish();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
+                            }
+                            Toast.makeText(DetailBoardActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     });
                     builder.create().show();
