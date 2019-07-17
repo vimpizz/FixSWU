@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -233,26 +232,23 @@
             android:layout_weight="6"
             android:fontFamily="@font/kopubdotumbold"
             android:textSize="15dp"
-            android:gravity="center|left"/>
+            android:gravity="center|left"
+            android:background="@drawable/picture_box"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
 
-            <FrameLayout
+            <ImageView
+                android:id="@+id/imgLike"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="7">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/heart" />
-            </FrameLayout>
+                android:layout_weight="7"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/heart" />
 
             <Button
                 android:id="@+id/btnLike"

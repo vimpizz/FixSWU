@@ -51,8 +51,7 @@
             android:layout_weight="1"
             android:background="@color/SWUPURPLE"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/plus"
-            android:layout_margin="5dp"/>
+            app:srcCompat="@drawable/baseline_add_white_18dp" />
 
         </LinearLayout>
 
