@@ -79,7 +79,7 @@ public class AdminBoardAdapter extends BaseAdapter {
         applyBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(mContext, AdminWriteActivity.class);
+                Intent i = new Intent(mContext, AdminDetailActivity.class);
                 i.putExtra(BoardBean.class.getName(), boardBean);
                 mContext.startActivity(i);
             }
