@@ -5,25 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AdminWriteActivity"
-    android:padding="20dp">
+    tools:context=".AdminWriteActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:fontFamily="@font/kopubdotumbold"
-        android:text="영선신청 상세보기"
-        android:gravity="center|left"/>
+        android:layout_height="50dp"
+        android:background="@color/SWUPURPLE">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:fontFamily="@font/kopubdotumbold"
+            android:textColor="#FFFFFF"
+            android:text="영선신청 상세보기"
+            android:gravity="center|left"/>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="20dp">
 
         <ImageView
             android:id="@+id/imgWriteAdmin"
@@ -136,14 +147,16 @@
         android:layout_weight="3"
         android:hint="수리 요청 내용"
         android:fontFamily="@font/kopubdotummedium"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        android:padding="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="horizontal"
-        android:gravity="top|left">
+        android:gravity="top|left"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/textView28"
@@ -170,7 +183,8 @@
         android:hint="기사님 코멘트:"
         android:fontFamily="@font/kopubdotummedium"
         android:textSize="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="20dp">
 
 
         <TextView
@@ -201,7 +215,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <Button
             android:id="@+id/btnCancelAdmin"

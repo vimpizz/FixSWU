@@ -59,6 +59,7 @@ public class BoardAdapter extends BaseAdapter {
 
         final BoardBean boardBean = mBoardList.get(i);
 
+
         txtvCondition.setText("상태: " + boardBean.condition);
         txtvContents.setText("수리 내용 : " + boardBean.content);
         if(boardBean.house == 0 ) {

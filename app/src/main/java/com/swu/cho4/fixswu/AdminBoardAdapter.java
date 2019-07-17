@@ -26,6 +26,12 @@ public class AdminBoardAdapter extends BaseAdapter {
         mBoardList =  Utils.getSortForDate(boardList);
     }
 
+    public int getIndex(List<BoardBean> boardList, int i) {
+        mBoardList =  Utils.getSortForDate(boardList);
+        int index = mBoardList.indexOf(getItem(i));
+        return index;
+    }
+
     @Override
     public int getCount() {
         return mBoardList.size();
@@ -46,6 +52,8 @@ public class AdminBoardAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.view_board_item, null);
 
+
+
         TextView txtvNum = view.findViewById(R.id.txtvNum);
         TextView txtvCondition = view.findViewById(R.id.txtvCondition);
         TextView txtvContents = view.findViewById(R.id.txtvContents);
@@ -57,7 +65,6 @@ public class AdminBoardAdapter extends BaseAdapter {
 
         final BoardBean boardBean = mBoardList.get(i);
 
-        txtvNum.setText(boardBean.ApplyNum);
         txtvCondition.setText("상태: " + boardBean.condition);
         txtvContents.setText("수리 내용 : " + boardBean.content);
         if(boardBean.house == 0 ) {

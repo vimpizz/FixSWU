@@ -12,5 +12,4 @@ public class Utils {
                 .sorted(Comparator.comparing(BoardBean::getMillisecond))
                 .collect(Collectors.toList());
     }
-
 }

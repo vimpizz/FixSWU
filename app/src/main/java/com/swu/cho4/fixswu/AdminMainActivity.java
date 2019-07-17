@@ -38,7 +38,6 @@ public class AdminMainActivity extends AppCompatActivity {
         hearNum = findViewById(R.id.heartNum);
         //TODO 하트 수 표시
 
-
         // 최초 데이터 셋팅
         mBoardAdapter = new AdminBoardAdapter(this, mBoardList);
         mListView.setAdapter(mBoardAdapter);

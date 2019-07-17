@@ -4,25 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserInfoActivity"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/uerInfoTitle"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="회원정보"
-        android:fontFamily="@font/kopubdotumbold"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_weight="1"
-        android:gravity="center|left"/>
+        android:layout_height="50dp"
+        android:background="@color/SWUPURPLE">
+
+        <TextView
+            android:id="@+id/uerInfoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="회원정보"
+            android:fontFamily="@font/kopubdotumbold"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center|left"/>
+
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_weight="8">
+        android:layout_weight="8"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/txtEmailTitle"
@@ -48,7 +60,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <Button
             android:id="@+id/btnCancel"
