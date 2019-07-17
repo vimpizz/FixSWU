@@ -1,5 +1,6 @@
 package com.swu.cho4.fixswu;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import java.net.URL;
 import java.util.UUID;
 
 public class DetailBoardActivity extends AppCompatActivity {
+    public static Activity _Detail_Board_Activity;
 
     public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com";
 
@@ -59,31 +61,46 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnDel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailBoardActivity.this);
-                builder.setTitle("알림");
-                builder.setMessage("삭제하시겠습니까?");
-                builder.setNegativeButton("아니오",null);
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                        String uuid = DetailBoardActivity.getUseridFromUUID(email);
+                if (!TextUtils.equals(mBoardBean.condition, getString(R.string.condition1))) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DetailBoardActivity.this);
+                    builder.setTitle("알림창");
+                    builder.setMessage("게시글 확인 후에는 삭제가 불가능합니다.");
+                    builder.setNegativeButton("뒤로가기", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
+                    builder.setPositiveButton("", null);
+                    builder.create().show();
 
-                        //DB에서 삭제처리
-                        FirebaseDatabase.getInstance().getReference().child("board").child(uuid).child(mBoardBean.id).removeValue();
-                        //storage에서 삭제처리
-                        if(mBoardBean.imgName!=null){
-                            try {
-                                FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
-                                Toast.makeText(DetailBoardActivity.this,"삭제되었습니다",Toast.LENGTH_SHORT).show();
-                                finish();
-                            }catch (Exception e){
-                                e.printStackTrace();
+                } else {
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailBoardActivity.this);
+                    builder.setTitle("알림");
+                    builder.setMessage("삭제하시겠습니까?");
+                    builder.setNegativeButton("아니오", null);
+                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            String uuid = DetailBoardActivity.getUseridFromUUID(email);
+
+                            //DB에서 삭제처리
+                            FirebaseDatabase.getInstance().getReference().child("board").child(uuid).child(mBoardBean.id).removeValue();
+                            //storage에서 삭제처리
+                            if (mBoardBean.imgName != null) {
+                                try {
+                                    FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
+                                    Toast.makeText(DetailBoardActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
-                    }
-                });
-                builder.create().show();
+                    });
+                    builder.create().show();
+                }
             }
         });
 

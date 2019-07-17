@@ -1,5 +1,6 @@
 package com.swu.cho4.fixswu;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -68,6 +69,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_write);
 
+
         mImgProfile = findViewById(R.id.imgWriteModify);
         mEdtStuNum = findViewById(R.id.edtStuNumModify);
         mEdtName = findViewById(R.id.edtNameModify);
@@ -75,6 +77,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
         mEdtRoomNum = findViewById(R.id.edtRoomNumModify);
         mEdtDeskNum = findViewById(R.id.edtDeskNumModify);
         mEdtContent = findViewById(R.id.edtContentModify);
+
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -99,6 +102,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
             mEdtRoomNum.setText(mBoardBean.roomNum);
             mEdtDeskNum.setText(mBoardBean.deskNum);
             mEdtContent.setText(mBoardBean.content);
+            mSpinner.setSelection(mBoardBean.house);
         }
 
         findViewById(R.id.btnCameraModify).setOnClickListener(new View.OnClickListener() {
@@ -240,6 +244,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
                 mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
 
                 Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         });
