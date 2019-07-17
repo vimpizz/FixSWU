@@ -190,7 +190,8 @@
             android:inputType="textMultiLine"
             android:maxLines="3"
             android:textSize="15dp"
-            android:gravity="center|left" />
+            android:gravity="center|left"
+            android:background="@drawable/picture_box"/>
 
     </LinearLayout>
 
