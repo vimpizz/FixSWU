@@ -27,8 +27,8 @@ public class DetailBoardActivity extends AppCompatActivity {
 
     private BoardBean mBoardBean;
 
-    private ImageView mImgProfile;
-    private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtDate,mTxtCondition,mTxtContent,mTxtComment;
+    private ImageView mImgProfile, mImgLlike;
+    private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtRoomNum,mTxtDeskNum,mTxtDate,mTxtCondition,mTxtContent,mTxtComment;
 
 
     @Override
@@ -36,6 +36,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_board);
 
+        mImgLlike = findViewById(R.id.imgLike);
         mImgProfile = findViewById(R.id.imgWriteDetail);
         mTxtStuNum = findViewById(R.id.txtStuNumDetail);
         mTxtName = findViewById(R.id.txtNameDetail);
@@ -140,6 +141,13 @@ public class DetailBoardActivity extends AppCompatActivity {
 
 
                 }
+            }
+        });
+
+        findViewById(R.id.btnLike).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mImgLlike.setImageResource(R.drawable.heart_on);
             }
         });
 

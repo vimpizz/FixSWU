@@ -37,22 +37,21 @@
         <ImageButton
             android:id="@+id/btnUserInfo"
             android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/SWUPURPLE"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/female"
-            android:layout_margin="5dp"/>
-
-        <ImageButton
-            android:id="@+id/btnWrite"
-            android:layout_width="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/SWUPURPLE"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/plus"
-            android:layout_margin="5dp"/>
+            app:srcCompat="@drawable/baseline_account_circle_white_18dp"
+            android:padding="5dp"/>
+
+            <ImageButton
+                android:id="@+id/btnWrite"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/SWUPURPLE"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/outline_add_white_36dp" />
 
         </LinearLayout>
 
