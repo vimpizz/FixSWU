@@ -259,9 +259,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
                     String uuid = getUseridFromUUID(mBoardBean.userId);
                     mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
-
                     Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
-
                     finish();
                 }
             });

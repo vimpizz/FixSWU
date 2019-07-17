@@ -175,6 +175,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
+                android:fontFamily="@font/kopubdotumbold"
                 android:layout_weight="2"
                 android:text="상태"
                 android:textSize="15dp"/>
@@ -184,6 +185,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
+                android:fontFamily="@font/kopubdotumbold"
                 android:ems="10"
                 android:maxLines="1"
                 android:gravity="center|left"/>
