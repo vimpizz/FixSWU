@@ -162,7 +162,7 @@
                 android:layout_weight="8"
                 android:layout_height="match_parent"
                 android:ems="10"
-                android:hint="번호"
+                android:hint="번호(선택사항)"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:gravity="center|left"
@@ -181,11 +181,11 @@
         <ImageView
             android:id="@+id/imgWriteModify"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:contextClickable="false"
             android:scaleType="fitCenter"
-            android:src="@drawable/picture_box"
-            />
+            android:src="@drawable/picture_box" />
 
 
         <LinearLayout

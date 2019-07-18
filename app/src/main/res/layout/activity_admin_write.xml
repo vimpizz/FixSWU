@@ -229,7 +229,8 @@
             android:hint="코멘트를 입력해주세요."
             android:textSize="15dp"
             android:inputType="textMultiLine"
-            android:maxLines="3" />
+            android:maxLines="3"
+            android:paddingLeft="10dp"/>
 
     </LinearLayout>
 
