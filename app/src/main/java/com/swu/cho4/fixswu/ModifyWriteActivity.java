@@ -386,9 +386,10 @@ public class ModifyWriteActivity extends AppCompatActivity {
         //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
     }
 
-    private void getPictureFromGallery(){
+    private void getPictureFromGallery(Uri imgUri){
 
         gallery = true;
+        this.imgUri = imgUri;
         mPhotoPath = getRealPathFromURI(imgUri); // path 경로
         ExifInterface exif = null;
         try {
@@ -485,7 +486,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
                     break;
 
                 case GALLERY_CODE:
-                    getPictureFromGallery();
+                    getPictureFromGallery(data.getData());
                     break;
                 default:
                     break;

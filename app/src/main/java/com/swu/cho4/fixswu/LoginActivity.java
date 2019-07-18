@@ -45,6 +45,15 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+        Button btnAdminLogin = findViewById(R.id.btnAdminLogin);
+        btnAdminLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getBaseContext(), AdminMainActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
