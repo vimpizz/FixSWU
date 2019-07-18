@@ -5,4 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="SWUPURPLE">#9E1A20</color>
     <color name="PantoneCoolGray4C">#C2C4C6</color>
+
+    <color name="draft">#FF8E8E93</color>
+    <color name="checked">#FFFF3B30</color>
+    <color name="fixed">#FF4CD964</color>
 </resources>

@@ -1,7 +1,9 @@
-package com.swu.cho4.fixswu;
+package com.swu.cho4.fixswu.admin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +11,17 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.swu.cho4.fixswu.bean.BoardBean;
+import com.swu.cho4.fixswu.R;
+import com.swu.cho4.fixswu.bean.Utils;
+
 import java.util.List;
 
 public class AdminBoardAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<BoardBean> mBoardList;
+
 
     public AdminBoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
@@ -45,8 +52,6 @@ public class AdminBoardAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.view_board_item, null);
 
-
-        TextView txtvNum = view.findViewById(R.id.txtvNum);
         TextView txtvCondition = view.findViewById(R.id.txtvCondition);
         TextView txtvContents = view.findViewById(R.id.txtvContents);
         TextView txtvHouse = view.findViewById(R.id.txtvHouse);
@@ -56,6 +61,15 @@ public class AdminBoardAdapter extends BaseAdapter {
         final BoardBean boardBean = mBoardList.get(i);
 
         txtvCondition.setText(boardBean.intToCondition());
+        txtvCondition.setTextColor(Color.parseColor("#FFFFFF"));
+        if (boardBean.intToCondition() == "확인전") {
+            txtvCondition.setBackgroundColor(Color.parseColor("#8a8d8f"));
+        } else if ( boardBean.intToCondition() == "읽음") {
+            txtvCondition.setBackgroundColor(Color.parseColor("#89734c"));
+        } else if(boardBean.intToCondition() == "수리완료") {
+            txtvCondition.setBackgroundColor(Color.parseColor("#143E8D"));
+        }
+
         txtvContents.setText(boardBean.content);
         txtvHouse.setText(boardBean.house+" "+boardBean.roomNum+"호  "+boardBean.deskNum);
         txtvDate.setText(boardBean.date);

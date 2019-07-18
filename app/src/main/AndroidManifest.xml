@@ -14,11 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AdminDetailActivity"></activity>
-        <activity android:name=".DetailBoardActivity" />
-        <activity android:name=".ModifyWriteActivity" />
-        <activity android:name=".AdminWriteActivity" />
-        <activity android:name=".AdminMainActivity" />
-        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".user.DetailBoardActivity" />
+        <activity android:name=".user.ModifyWriteActivity" />
+        <activity android:name=".admin.AdminWriteActivity" />
+        <activity android:name=".admin.AdminMainActivity" />
+        <activity android:name=".user.UserInfoActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -30,16 +30,16 @@
         </provider>
 
         <activity
-            android:name=".WriteActivity"
+            android:name=".user.WriteActivity"
             android:label="@string/title_activity_write" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".user.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".user.MainActivity" />
     </application>
 
 </manifest>
