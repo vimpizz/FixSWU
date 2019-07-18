@@ -42,7 +42,7 @@ public class BoardBean implements Serializable {
     }
 
 
-    public void intToCondition(){
+    public String intToCondition(){
 
         if(this.intCondition == 0 ) {
             this.condition = "확인전";
@@ -51,11 +51,10 @@ public class BoardBean implements Serializable {
         } else if(this.intCondition== 2) {
             this.condition = "수리완료";
         }
-
+        return this.condition;
     }
 
     public void intToHouse(){
-
         if(this.intHouse == 0 ) {
             this.house = "샬롬하우스 A동";
         } else if(this.intHouse == 1) {
@@ -66,6 +65,4 @@ public class BoardBean implements Serializable {
             this.house = "바롬관 10층";
         }
     }
-
-
 }

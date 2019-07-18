@@ -108,16 +108,21 @@ public class AdminWriteActivity extends AppCompatActivity {
     // 게시물 수정
     private void update(){
         mBoardBean.intCondition=mIntCondition;
-        mBoardBean.intToCondition();
+        mBoardBean.condition = mBoardBean.intToCondition();
         mBoardBean.comment=mEdtComment.getText().toString();
 
         //DB 업로드
         DatabaseReference dbRef = mFirebaseDatabase.getReference();
         String uuid = getUseridFromUUID(mBoardBean.userId);
+        dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
+
+/*        //DB 업로드
+        DatabaseReference dbRef = mFirebaseDatabase.getReference();
+        String uuid = getUseridFromUUID(mBoardBean.userId);
 
         // 동일 ID로 데이터 수정
         dbRef.child("board").child(uuid).child(mBoardBean.id).child("comment").setValue(mBoardBean.comment);
-        dbRef.child("board").child(uuid).child(mBoardBean.id).child("intCondition").setValue(mBoardBean.intCondition);
+        dbRef.child("board").child(uuid).child(mBoardBean.id).child("intCondition").setValue(mBoardBean.intCondition);*/
 
         Toast.makeText(this,"저장되었습니다",Toast.LENGTH_SHORT).show();
         finish();
