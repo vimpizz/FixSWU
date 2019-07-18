@@ -66,6 +66,8 @@ public class AdminMainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        List<BoardBean> newBoardList = new ArrayList<>();
+
         // 전체 회원의 데이터 취득
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference usersRef = rootRef.child("board");
@@ -79,13 +81,14 @@ public class AdminMainActivity extends AppCompatActivity {
                         if(bean.like == true) {
                             countHeartNum ++;
                         }
-                        mBoardList.add(bean);
+                        newBoardList.add(bean);
                     }
                 }
 
                 hearNum.setText(String.valueOf(countHeartNum));
                 //리스트 갱신
-                mBoardAdapter.setBoardList(mBoardList);
+
+                mBoardAdapter.setBoardList(newBoardList);
                 mBoardAdapter.notifyDataSetChanged();
             }
 

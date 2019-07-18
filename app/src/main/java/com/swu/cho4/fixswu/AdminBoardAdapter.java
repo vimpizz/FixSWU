@@ -55,7 +55,7 @@ public class AdminBoardAdapter extends BaseAdapter {
 
         final BoardBean boardBean = mBoardList.get(i);
 
-        txtvCondition.setText(boardBean.condition);
+        txtvCondition.setText(boardBean.intToCondition());
         txtvContents.setText(boardBean.content);
         txtvHouse.setText(boardBean.house+" "+boardBean.roomNum+"호  "+boardBean.deskNum);
         txtvDate.setText(boardBean.date);
