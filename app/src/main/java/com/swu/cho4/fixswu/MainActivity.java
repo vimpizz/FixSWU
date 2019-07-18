@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private BoardAdapter mBoardAdapter;
     private long backPressedAt;
 
+    // 데이터 취득
+    String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
+    String uuid = WriteActivity.getUseridFromUUID(userEmail);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        // 데이터 취득
-        String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
-        String uuid = WriteActivity.getUseridFromUUID(userEmail);
 
         mFirebaseDB.getReference().child("board").child(uuid).addValueEventListener(
                 new ValueEventListener() {
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btnUserInfo:
                     Intent i = new Intent(getApplication(), UserInfoActivity.class);
                     i.putExtra("userEmail", mFirebaseAuth.getCurrentUser().getEmail());
-                    startActivity(i);
+                    startActivityForResult(i, 2000);
                     break;
                 case R.id.btnWrite:
                     Intent i2= new Intent(getApplication(), WriteActivity.class);
@@ -105,6 +106,17 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 super.onBackPressed();
             }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 2000 && resultCode == RESULT_OK) {
+            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish(); //로그아웃
         }
     }
 }

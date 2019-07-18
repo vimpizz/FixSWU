@@ -55,7 +55,7 @@ public class UserInfoActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signOut();
+                logout();
             }
         });
 
@@ -63,7 +63,7 @@ public class UserInfoActivity extends AppCompatActivity {
         txtvEmail.setText(user.getEmail());
     } // end onCreate()
 
-    private void signOut() {
+/*    private void signOut() {
         mAuth.signOut();
 
         mGoogleSignInClient.signOut().addOnCompleteListener(this,
@@ -73,7 +73,20 @@ public class UserInfoActivity extends AppCompatActivity {
                         Toast.makeText(getBaseContext(), "로그아웃 되었습니다",Toast.LENGTH_SHORT).show();
                     }
                 });
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
+*//*        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(i);*//*
+
+    }*/
+
+    private void logout(){
+        try{
+            mGoogleSignInClient.signOut();
+            Toast.makeText(this, "로그아웃 되었습니다", Toast.LENGTH_SHORT).show();
+            setResult(RESULT_OK);
+            finish();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
 }

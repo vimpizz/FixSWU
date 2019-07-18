@@ -1,5 +1,6 @@
 package com.swu.cho4.fixswu;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginActivity extends AppCompatActivity {
 
     //구글 로그인 클라이언트 제어자
@@ -30,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     //FireBase 인증객체
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = mFirebaseAuth.getCurrentUser();
+    private long backPressedAt;
 
     private int btnNum = -1;
 
@@ -47,6 +51,22 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedAt + TimeUnit.SECONDS.toMillis(2) > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        }
+        else {
+            if(this instanceof LoginActivity) {
+                Toast.makeText(this, "한번 더 뒤로가기 클릭시 앱을 종료 합니다.", Toast.LENGTH_LONG).show();
+                backPressedAt = System.currentTimeMillis();
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 
     @Override

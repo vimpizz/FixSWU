@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AdminMainActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private ListView mListView;
     private List<BoardBean> mBoardList = new ArrayList<>();
     private AdminBoardAdapter mBoardAdapter;
+    private long backPressedAt;
 
     private TextView hearNum;
 
@@ -89,6 +92,22 @@ public class AdminMainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedAt + TimeUnit.SECONDS.toMillis(2) > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        }
+        else {
+            if(this instanceof AdminMainActivity) {
+                Toast.makeText(this, "한번 더 뒤로가기 클릭시 앱을 종료 합니다.", Toast.LENGTH_LONG).show();
+                backPressedAt = System.currentTimeMillis();
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 
 
