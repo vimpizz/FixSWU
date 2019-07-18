@@ -173,11 +173,11 @@
                 android:layout_weight="8"
                 android:ems="10"
                 android:fontFamily="@font/kopubdotummedium"
-                android:hint="2번"
+                android:gravity="center|left"
+                android:hint="2번(선택사항)"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:textSize="15dp"
-                android:gravity="center|left"/>
+                android:textSize="15dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -194,8 +194,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/picture_box"
-            tools:srcCompat="@drawable/picture_box"
+            android:src="@drawable/picture_box"
             android:layout_marginLeft="10dp"/>
 
         <LinearLayout

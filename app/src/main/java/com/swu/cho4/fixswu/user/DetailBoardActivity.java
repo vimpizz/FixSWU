@@ -80,7 +80,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnDel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mBoardBean.intCondition==0) {
+                if (mBoardBean.intCondition == 0) {
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailBoardActivity.this);
                     builder.setTitle("알림");
                     builder.setMessage("삭제하시겠습니까?");
@@ -94,15 +94,15 @@ public class DetailBoardActivity extends AppCompatActivity {
                             //DB에서 삭제처리
                             FirebaseDatabase.getInstance().getReference().child("board").child(uuid).child(mBoardBean.id).removeValue();
 
-                            if(mBoardBean.imgName!=null){
-                            //storage에서 삭제처리
                             if (mBoardBean.imgName != null) {
-                                try {
-                                    FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                //storage에서 삭제처리
+                                if (mBoardBean.imgName != null) {
+                                    try {
+                                        FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
                             }
                             Toast.makeText(DetailBoardActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
                             finish();
@@ -132,11 +132,11 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnModify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mBoardBean.intCondition==0) {
+                if (mBoardBean.intCondition == 0) {
                     Intent i = new Intent(getApplicationContext(), ModifyWriteActivity.class);
                     i.putExtra(BoardBean.class.getName(), mBoardBean);
                     startActivity(i);
-                }else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(DetailBoardActivity.this);
                     builder.setTitle("알림창");
                     builder.setMessage("게시글 확인 후에는 수정이 불가능합니다.");
@@ -163,7 +163,6 @@ public class DetailBoardActivity extends AppCompatActivity {
                     uploadLike();
             }
         });
-
     }
 
     private void setmImgLlike() {
@@ -176,6 +175,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         DatabaseReference dbRef = mFirebaseDatabase.getReference();
         String uuid = getUseridFromUUID(mBoardBean.userId);
         dbRef.child("board").child(uuid).child(mBoardBean.id).child("like").setValue(mBoardBean.like);
+        //dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
     }
 
     @Override
@@ -191,7 +191,7 @@ public class DetailBoardActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         mBoardBean = dataSnapshot.getValue(BoardBean.class);
 
-                        if(mBoardBean!=null) {
+                        if (mBoardBean != null) {
                             try {
                                 new DownloadImgTask(DetailBoardActivity.this, mImgProfile, null, 0).execute(new URL(mBoardBean.imgUri));
                             } catch (Exception e) {

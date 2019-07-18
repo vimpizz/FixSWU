@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="7"
                 android:fontFamily="@font/kopubdotumbold"
-                android:gravity="center|right"
+                android:gravity="center|left"
                 android:text="신청날짜,시간"
                 android:textSize="15dp" />
         </LinearLayout>
