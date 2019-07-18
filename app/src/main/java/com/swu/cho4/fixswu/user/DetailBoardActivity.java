@@ -157,7 +157,15 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnLike).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mBoardBean.like==false)
+                if(mBoardBean.comment == null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DetailBoardActivity.this);
+                    builder.setTitle("알림창");
+                    builder.setMessage("기사님께서 코멘트를 남기시지 않으셨습니다.");
+                    builder.setNegativeButton("확인",null);
+                    builder.create().show();
+                }
+
+                if(mBoardBean.comment != null && mBoardBean.like==false)
                     mBoardBean.like = true;
                     setmImgLlike();
                     uploadLike();
