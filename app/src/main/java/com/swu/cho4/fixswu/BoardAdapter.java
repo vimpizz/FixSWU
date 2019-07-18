@@ -17,7 +17,6 @@ public class BoardAdapter extends BaseAdapter {
     private List<BoardBean> mBoardList;
     private String condition,house;
 
-
     public BoardAdapter(Context context, List<BoardBean> boardList) {
         mContext = context;
         mBoardList = boardList;
@@ -47,7 +46,6 @@ public class BoardAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.view_board_item, null);
-
 
         TextView txtvNum = view.findViewById(R.id.txtvNum);
         TextView txtvCondition = view.findViewById(R.id.txtvCondition);
