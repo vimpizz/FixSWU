@@ -157,18 +157,21 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnLike).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mBoardBean.like==false) {
-                    mImgLlike.setImageResource(R.drawable.heart_on);
+                if(mBoardBean.like==false)
                     mBoardBean.like = true;
-                } else {
-                    mImgLlike.setImageResource(R.drawable.heart);
-                    mBoardBean.like = false;
-                }
-                uploadLike();
+                    setmImgLlike();
+                    uploadLike();
             }
         });
+
     }
 
+    private void setmImgLlike() {
+        if(mBoardBean.like==true)
+            mImgLlike.setImageResource(R.drawable.heart_on);
+        else if (mBoardBean.like==false)
+            mImgLlike.setImageResource(R.drawable.heart);
+    }
     private void uploadLike() {
         DatabaseReference dbRef = mFirebaseDatabase.getReference();
         String uuid = getUseridFromUUID(mBoardBean.userId);
@@ -195,6 +198,7 @@ public class DetailBoardActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
+                            setmImgLlike();
                             mTxtStuNum.setText(mBoardBean.stuNum);
                             mTxtName.setText(mBoardBean.name);
                             mTxtCondition.setText(mBoardBean.condition);

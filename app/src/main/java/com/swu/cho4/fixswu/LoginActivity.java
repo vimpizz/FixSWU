@@ -23,7 +23,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.admin.AdminMainActivity;
 import com.swu.cho4.fixswu.user.MainActivity;
 
