@@ -15,8 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.swu.cho4.fixswu.bean.BoardBean;
 import com.swu.cho4.fixswu.R;
+import com.swu.cho4.fixswu.bean.BoardBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class AdminWriteActivity extends AppCompatActivity {
     private BoardBean mBoardBean;
 
     private ImageView mImgProfile;
-    private TextView mTxtApplyNum,mTxtStuNum, mTxtName,mTxtRoomNum,mTxtDeskNum,mTxtContent,mTxtDate;
+    private TextView mTxtApplyNum,mTxtStuNum, mTxtName,mTxtHouse,mTxtContent,mTxtDate;
     private EditText mEdtComment;
     private Spinner mSpinner;
     private int mIntCondition; //보드 상태
@@ -49,14 +49,14 @@ public class AdminWriteActivity extends AppCompatActivity {
         mTxtApplyNum = findViewById(R.id.txtApplyNum);
        // mTxtStuNum = findViewById(R.id.edtStuNum);
         mTxtName = findViewById(R.id.txtName);
-        mTxtRoomNum = findViewById(R.id.txtRoomNum);
-        mTxtDeskNum = findViewById(R.id.txtDeskNum);
+        mTxtHouse = findViewById(R.id.txtHouse);
         mTxtContent = findViewById(R.id.txtContent);
         mSpinner=findViewById(R.id.spinnerCondition);
         mTxtDate = findViewById(R.id.txtDate);
         mEdtComment=findViewById(R.id.edtComment);
 
         mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
+        String uuid = getUseridFromUUID(mBoardBean.userId);
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -68,19 +68,33 @@ public class AdminWriteActivity extends AppCompatActivity {
         });
         mSpinner.setSelection(mBoardBean.intCondition);
 
-        if(mBoardBean != null){
-            mBoardBean.bmpTitle = getIntent().getParcelableExtra("titleBitmap");
-            if(mBoardBean.bmpTitle != null){
-                mImgProfile.setImageBitmap(mBoardBean.bmpTitle);
-            }
-            mTxtApplyNum.setText(mBoardBean.ApplyNum);
-            mTxtName.setText(mBoardBean.name);
-            mTxtRoomNum.setText(mBoardBean.roomNum);
-            mTxtDeskNum.setText(mBoardBean.deskNum);
-            mTxtDate.setText(mBoardBean.date);
-            mTxtContent.setText(mBoardBean.content);
-            mEdtComment.setText(mBoardBean.comment);
-        }
+        FirebaseDatabase.getInstance().getReference().child("board").child(uuid).child(mBoardBean.id).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        mBoardBean = dataSnapshot.getValue(BoardBean.class);
+
+                        if(mBoardBean!=null) {
+                            try {
+                                new DownloadImgTask(AdminWriteActivity.this, mImgProfile, null, 0).execute(new URL(mBoardBean.imgUri));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            mTxtApplyNum.setText(mBoardBean.ApplyNum);
+                            mTxtName.setText(mBoardBean.name);
+                            mTxtHouse.setText(mBoardBean.house+" "+mBoardBean.roomNum+"호  "+mBoardBean.deskNum);
+                            mTxtDate.setText(mBoardBean.date);
+                            mTxtContent.setText(mBoardBean.content);
+                            mEdtComment.setText(mBoardBean.comment);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                }
+        );
+
+
 
         findViewById(R.id.btnCancelAdmin).setOnClickListener(new View.OnClickListener() {
             @Override

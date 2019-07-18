@@ -43,6 +43,7 @@ import com.swu.cho4.fixswu.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -77,12 +78,12 @@ public class WriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write);
 
 
-        //카메라를 사용하기 위한 퍼미션을 요청한다.
+        /*//카메라를 사용하기 위한 퍼미션을 요청한다.
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA
-        }, 0);
+        }, 0);*/
 
 
         mImgProfile = findViewById(R.id.imgWrite);
@@ -114,13 +115,10 @@ public class WriteActivity extends AppCompatActivity {
         findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, GALLERY_CODE);
-
-
             }
         });
 
@@ -140,10 +138,10 @@ public class WriteActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"호수를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
+               /* else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
                     Toast.makeText(getApplicationContext(),"번호를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
                 else if(TextUtils.isEmpty(mEdtContent.getText().toString())){
                     Toast.makeText(getApplicationContext(),"수리내용을 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
@@ -391,9 +389,10 @@ public class WriteActivity extends AppCompatActivity {
         //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
     }
 
-    private void getPictureFromGallery(){
+    private void getPictureFromGallery(Uri imgUri){
 
         gallery = true;
+        this.imgUri = imgUri;
         mPhotoPath = getRealPathFromURI(imgUri); // path 경로
         ExifInterface exif = null;
         try {
@@ -483,16 +482,21 @@ public class WriteActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(imgUri!=null)imgUri = data.getData();
+        //if(imgUri!=null)imgUri = data.getData();
 
         //카메라로부터 오는 데이터를 취득한다.
         if(resultCode == RESULT_OK) {
-            if(requestCode == REQUEST_IMAGE_CAPTURE) {
-                sendPicture();
-            } else if(requestCode == GALLERY_CODE){
-                getPictureFromGallery();
+            switch(requestCode) {
+                case REQUEST_IMAGE_CAPTURE:
+                    sendPicture();
+                    break;
+
+                case GALLERY_CODE:
+                    getPictureFromGallery(data.getData());
+                    break;
+                default:
+                    break;
             }
         }
     }
-
 }

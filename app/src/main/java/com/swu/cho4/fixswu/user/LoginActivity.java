@@ -46,6 +46,15 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+        Button btnAdminLogin = findViewById(R.id.btnAdminLogin);
+        btnAdminLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getBaseContext(), AdminMainActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -55,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
             //Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
-            if(mFirebaseAuth.getCurrentUser().getEmail().equals("flzl03077u@gmail.com")) {
+            if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
                 Toast.makeText(getBaseContext(), "AdminMain"
                         ,Toast.LENGTH_SHORT).show();
                goAdminMainActivity();
@@ -107,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                             //FireBase 로그인 성공
                             //Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             //메인화면으로 이동한다.
-                            if(mFirebaseAuth.getCurrentUser().getEmail().equals("flzl03077@gmail.com")) {
+                            if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
                                 Toast.makeText(getBaseContext(), "AdminMain"
                                         ,Toast.LENGTH_SHORT).show();
                                 goAdminMainActivity();

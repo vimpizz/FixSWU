@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -27,6 +28,11 @@ import java.net.URL;
 import java.util.UUID;
 
 public class DetailBoardActivity extends AppCompatActivity {
+
+    public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com";
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);
+    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
     private BoardBean mBoardBean;
 
@@ -54,10 +60,11 @@ public class DetailBoardActivity extends AppCompatActivity {
         mImgProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Dialog dialog = new Dialog(DetailBoardActivity.this);
+                ImageView imgDetail =findViewById(R.id.imgDetail);
+                //imgDetail.setImageURI();
+
                 dialog.setContentView(R.layout.view_image);
                 dialog.setTitle("");
-                ImageView imgDetail =findViewById(R.id.imgDetail);
-                //imgDetail.setImageResource(R.drawable.heart);
                 dialog.show();
             }
         });
@@ -150,10 +157,22 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnLike).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mImgLlike.setImageResource(R.drawable.heart_on);
+                if(mBoardBean.like==false) {
+                    mImgLlike.setImageResource(R.drawable.heart_on);
+                    mBoardBean.like = true;
+                } else {
+                    mImgLlike.setImageResource(R.drawable.heart);
+                    mBoardBean.like = false;
+                }
+                uploadLike();
             }
         });
+    }
 
+    private void uploadLike() {
+        DatabaseReference dbRef = mFirebaseDatabase.getReference();
+        String uuid = getUseridFromUUID(mBoardBean.userId);
+        dbRef.child("board").child(uuid).child(mBoardBean.id).child("like").setValue(mBoardBean.like);
     }
 
     @Override
