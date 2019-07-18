@@ -19,9 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.swu.cho4.fixswu.LoginActivity;
+import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.UserInfoActivity;
 import com.swu.cho4.fixswu.bean.BoardBean;
-import com.swu.cho4.fixswu.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == 2000 && resultCode == RESULT_OK) {
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            i.putExtra("logout",1);
             startActivity(i);
             finish(); //로그아웃
         }

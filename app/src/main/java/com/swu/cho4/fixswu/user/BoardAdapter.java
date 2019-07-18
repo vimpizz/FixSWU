@@ -74,8 +74,6 @@ public class BoardAdapter extends BaseAdapter {
 
         txtvContents.setText(boardBean.content);
         txtvHouse.setText(boardBean.house+" "+boardBean.roomNum+"호  "+boardBean.deskNum);
-       /* txtvRoom.setText(boardBean.roomNum);
-        txtvDesk.setText("번호 :"+ boardBean.deskNum);*/
         txtvDate.setText(boardBean.date);
 
         applyBox.setOnClickListener(new View.OnClickListener() {

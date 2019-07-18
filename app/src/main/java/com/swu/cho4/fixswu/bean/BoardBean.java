@@ -7,8 +7,6 @@ import java.io.Serializable;
 
 public class BoardBean implements Serializable {
 
-    public String ApplyNum;
-
     public int intCondition;
     public String condition;
 
@@ -37,7 +35,6 @@ public class BoardBean implements Serializable {
     public long getMillisecond() {
         return millisecond;
     }
-
 
     public String intToCondition(){
         if(this.intCondition == 0 ) {

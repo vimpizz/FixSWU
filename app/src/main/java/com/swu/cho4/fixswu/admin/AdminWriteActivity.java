@@ -1,6 +1,7 @@
 package com.swu.cho4.fixswu.admin;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -52,7 +53,6 @@ public class AdminWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_write);
 
         mImgProfile = findViewById(R.id.imgWriteAdmin);
-        mTxtApplyNum = findViewById(R.id.txtApplyNum);
        // mTxtStuNum = findViewById(R.id.edtStuNum);
         mTxtName = findViewById(R.id.txtName);
         mTxtHouse = findViewById(R.id.txtHouse);
@@ -86,8 +86,6 @@ public class AdminWriteActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
-                            mTxtApplyNum.setText(mBoardBean.ApplyNum);
                             mTxtName.setText(mBoardBean.name);
                             mTxtHouse.setText(mBoardBean.house+" "+mBoardBean.roomNum+"호  "+mBoardBean.deskNum);
                             mTxtDate.setText(mBoardBean.date);
@@ -126,8 +124,19 @@ public class AdminWriteActivity extends AppCompatActivity {
 
     // 게시물 수정
     private void update(){
-        mBoardBean.intCondition=mIntCondition;
-        mBoardBean.condition = mBoardBean.intToCondition();
+        if(
+                (mBoardBean.intCondition==mIntCondition) |
+                (mBoardBean.intCondition==0 && mIntCondition==1) |
+                        (mBoardBean.intCondition==1 && mIntCondition==2) |
+                        (mBoardBean.intCondition==0 && mIntCondition==2)
+        ) {
+            mBoardBean.intCondition=mIntCondition;
+            mBoardBean.condition = mBoardBean.intToCondition();
+
+        }else{
+            Toast.makeText(this,"상태를 되돌리는 것은 불가능합니다",Toast.LENGTH_SHORT).show();
+            return;
+        }
         mBoardBean.comment=mEdtComment.getText().toString();
 
         //DB 업로드

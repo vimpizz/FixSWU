@@ -35,9 +35,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.swu.cho4.fixswu.bean.BoardBean;
 import com.swu.cho4.fixswu.DownloadImgTask;
 import com.swu.cho4.fixswu.R;
+import com.swu.cho4.fixswu.bean.BoardBean;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -145,10 +145,10 @@ public class ModifyWriteActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"호수를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
+/*                else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
                     Toast.makeText(getApplicationContext(),"번호를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
                 else if(TextUtils.isEmpty(mEdtContent.getText().toString())){
                     Toast.makeText(getApplicationContext(),"수리내용을 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
@@ -163,6 +163,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(mBoardBean!=null){
+                            Toast.makeText(getApplicationContext(),"Loading...", Toast.LENGTH_SHORT).show();
                             update();
                         }
                     }

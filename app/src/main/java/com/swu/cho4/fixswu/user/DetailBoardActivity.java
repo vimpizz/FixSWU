@@ -195,15 +195,6 @@ public class DetailBoardActivity extends AppCompatActivity {
         //dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
     }
 
-    private String getRealPathFromURI(Uri contentUri) {
-        int column_index=0;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if(cursor.moveToFirst()){
-            column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        } return cursor.getString(column_index);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
