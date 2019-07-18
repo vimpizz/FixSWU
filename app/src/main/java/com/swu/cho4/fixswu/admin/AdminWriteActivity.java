@@ -124,12 +124,18 @@ public class AdminWriteActivity extends AppCompatActivity {
 
     // 게시물 수정
     private void update(){
-        if(mBoardBean.intCondition==1){
+        if(
+                (mBoardBean.intCondition==1 && mIntCondition==2) |
+                        (mBoardBean.intCondition==2 && mIntCondition==3) |
+                        (mBoardBean.intCondition==1 && mIntCondition==3)
+        ) {
+            mBoardBean.intCondition=mIntCondition;
+            mBoardBean.condition = mBoardBean.intToCondition();
 
-        }else
-
-        mBoardBean.intCondition=mIntCondition;
-        mBoardBean.condition = mBoardBean.intToCondition();
+        }else{
+            Toast.makeText(this,"상태를 되돌리는 것은 불가능합니다",Toast.LENGTH_SHORT).show();
+            return;
+        }
         mBoardBean.comment=mEdtComment.getText().toString();
 
         //DB 업로드
