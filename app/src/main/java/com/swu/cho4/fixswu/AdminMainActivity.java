@@ -15,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class AdminMainActivity extends AppCompatActivity {
@@ -53,7 +52,6 @@ public class AdminMainActivity extends AppCompatActivity {
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 int countHeartNum=0;
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     for(DataSnapshot ds2 : ds.getChildren()) {

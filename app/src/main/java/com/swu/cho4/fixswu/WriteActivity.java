@@ -216,6 +216,8 @@ public class WriteActivity extends AppCompatActivity {
             boardBean.deskNum = mEdtDeskNum.getText().toString();
             boardBean.content = mEdtContent.getText().toString();
 
+            boardBean.millisecond = System.currentTimeMillis();
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
             boardBean.date=sdf.format(new Date());
 
@@ -299,6 +301,8 @@ public class WriteActivity extends AppCompatActivity {
 
         boardBean.imgUri=imgUri;
         boardBean.imgName=imgName;
+
+        boardBean.millisecond = System.currentTimeMillis();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
         boardBean.date=sdf.format(new Date());
