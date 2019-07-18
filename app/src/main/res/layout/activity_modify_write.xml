@@ -55,9 +55,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:ems="10"
-                android:hint="학번"
                 android:gravity="center|left"
-                android:textSize="15dp"/>
+                android:hint="2012111222"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -81,10 +81,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:ems="10"
-                android:hint="이름"
-                android:maxLines="1"
                 android:gravity="center|left"
-                android:textSize="15dp"/>
+                android:hint="김샬롬"
+                android:maxLines="1"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -134,11 +134,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="호수"
-                android:maxLines="1"
                 android:gravity="center|left"
-                android:textSize="15dp"/>
+                android:hint="303"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -159,14 +159,14 @@
             <EditText
                 android:id="@+id/edtDeskNumModify"
                 android:layout_width="0dp"
-                android:layout_weight="8"
                 android:layout_height="match_parent"
+                android:layout_weight="8"
                 android:ems="10"
-                android:hint="번호(선택사항)"
+                android:gravity="center|left"
+                android:hint="2번(선택사항)"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:gravity="center|left"
-                android:textSize="15dp"/>
+                android:textSize="15dp" />
         </LinearLayout>
     </LinearLayout>
 
