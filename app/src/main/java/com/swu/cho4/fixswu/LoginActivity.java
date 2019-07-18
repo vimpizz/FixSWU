@@ -1,4 +1,4 @@
-package com.swu.cho4.fixswu.user;
+package com.swu.cho4.fixswu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.admin.AdminMainActivity;
+import com.swu.cho4.fixswu.user.MainActivity;
 
 import java.util.concurrent.TimeUnit;
 

@@ -18,7 +18,7 @@
         <activity android:name=".user.ModifyWriteActivity" />
         <activity android:name=".admin.AdminWriteActivity" />
         <activity android:name=".admin.AdminMainActivity" />
-        <activity android:name=".user.UserInfoActivity" />
+        <activity android:name=".UserInfoActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -32,7 +32,7 @@
         <activity
             android:name=".user.WriteActivity"
             android:label="@string/title_activity_write" />
-        <activity android:name=".user.LoginActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

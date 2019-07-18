@@ -18,6 +18,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.swu.cho4.fixswu.LoginActivity;
+import com.swu.cho4.fixswu.UserInfoActivity;
 import com.swu.cho4.fixswu.bean.BoardBean;
 import com.swu.cho4.fixswu.R;
 

@@ -1,4 +1,4 @@
-package com.swu.cho4.fixswu.user;
+package com.swu.cho4.fixswu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.swu.cho4.fixswu.LoginActivity;
 import com.swu.cho4.fixswu.R;
 
 public class UserInfoActivity extends AppCompatActivity {
