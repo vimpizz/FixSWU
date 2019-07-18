@@ -188,6 +188,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         else if (mBoardBean.like==false)
             mImgLlike.setImageResource(R.drawable.heart);
     }
+
     private void uploadLike() {
         DatabaseReference dbRef = mFirebaseDatabase.getReference();
         String uuid = getUseridFromUUID(mBoardBean.userId);

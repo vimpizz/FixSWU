@@ -1,13 +1,18 @@
 package com.swu.cho4.fixswu;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -31,6 +36,7 @@ import com.swu.cho4.fixswu.bean.AdminBean;
 import com.swu.cho4.fixswu.bean.BoardBean;
 import com.swu.cho4.fixswu.user.DetailBoardActivity;
 import com.swu.cho4.fixswu.user.MainActivity;
+import com.swu.cho4.fixswu.user.ModifyWriteActivity;
 
 import java.net.URL;
 import java.util.UUID;
@@ -46,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     private long backPressedAt;
 
     private int btnNum = -1;
+    private long btnPressTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
         findViewById(R.id.btnGoogleSignIn).setOnClickListener(mClicks);
         findViewById(R.id.btnGoogleSignInAdmin).setOnClickListener(mClicks);
+        findViewById(R.id.appTitle).setOnClickListener(mClicks);
 
         //구글 로그인 객체선언
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -100,8 +108,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-
     //게시판 메인 화면으로 이동한다.
     private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
@@ -126,6 +132,13 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.btnGoogleSignInAdmin:
                     btnNum=2;
                     googleSignIn();
+                    break;
+                case R.id.appTitle:
+                    btnPressTime++;
+                    if(btnPressTime>=5){
+                        findViewById(R.id.btnGoogleSignInAdmin).setVisibility(view.getVisibility());
+                        findViewById(R.id.btnGoogleSignIn).setVisibility(view.GONE);
+                    }
                     break;
             }
         }
