@@ -78,13 +78,13 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent =getIntent();
         int i = intent.getIntExtra("logout",0);
         if(i==1){
+            //mFirebaseAuth.getCurrentUser() = null;
             mGoogleSignInClient.signOut();
             return;
         }
 
         if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
-
             long val = UUID.nameUUIDFromBytes(mFirebaseAuth.getCurrentUser().getEmail().getBytes()).getMostSignificantBits();
             String uuid = String.valueOf(val);
 
