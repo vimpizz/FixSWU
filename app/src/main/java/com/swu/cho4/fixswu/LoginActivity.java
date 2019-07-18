@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,9 +22,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.swu.cho4.fixswu.admin.AdminMainActivity;
+import com.swu.cho4.fixswu.bean.AdminBean;
+import com.swu.cho4.fixswu.bean.BoardBean;
+import com.swu.cho4.fixswu.user.DetailBoardActivity;
 import com.swu.cho4.fixswu.user.MainActivity;
 
+import java.net.URL;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends AppCompatActivity {
@@ -59,21 +67,35 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-/*        if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
+        if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
             //Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
-            if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
-                Toast.makeText(getBaseContext(), "AdminMain"
-                        ,Toast.LENGTH_SHORT).show();
-               goAdminMainActivity();
-            } else {
-                Toast.makeText(getBaseContext(), "Loading..."
-                        , Toast.LENGTH_SHORT).show();
-                goMainActivity();
-            }
-        }*/
-}
+            //AdminBean adminBean = new AdminBean();
+            long val = UUID.nameUUIDFromBytes(mFirebaseAuth.getCurrentUser().getEmail().getBytes()).getMostSignificantBits();
+            String uuid = String.valueOf(val);
+
+            FirebaseDatabase.getInstance().getReference().child("admin").child(uuid).addValueEventListener(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            AdminBean adminBean = dataSnapshot.getValue(AdminBean.class);
+                            if(adminBean!=null){
+                                Toast.makeText(getBaseContext(), "관리자 목록으로 이동합니다",Toast.LENGTH_SHORT).show();
+                            goAdminMainActivity();
+                        } else {
+                            Toast.makeText(getBaseContext(), "Loading...", Toast.LENGTH_SHORT).show();
+                            goMainActivity();
+                        }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    }
+            );
+
+        }
+
+    }
+
 
     //게시판 메인 화면으로 이동한다.
     private void goMainActivity() {

@@ -17,16 +17,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.swu.cho4.fixswu.LoginActivity;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.UserInfoActivity;
+import com.swu.cho4.fixswu.bean.AdminBean;
 import com.swu.cho4.fixswu.bean.BoardBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class AdminMainActivity extends AppCompatActivity {
+    public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com";
+    private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);
+
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase mFirebaseDB = FirebaseDatabase.getInstance();
@@ -52,7 +58,26 @@ public class AdminMainActivity extends AppCompatActivity {
         // 최초 데이터 셋팅
         mBoardAdapter = new AdminBoardAdapter(this, mBoardList);
         mListView.setAdapter(mBoardAdapter);
+
+
+        //Firebase 데이터베이스에 관리자를 등록한다
+        DatabaseReference dbRef = mFirebaseDB.getReference();
+        String id = dbRef.push().getKey();
+        //데이터베이스에 저장한다.
+        AdminBean adminBean = new AdminBean();
+        adminBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
+        adminBean.admin = true;
+        //고유번호를 생성한다
+        String guid = getUseridFromUUID(adminBean.userId);
+        dbRef.child("admin").child(guid).setValue(adminBean);
+
     } // onCreate() 끝
+
+    public static String getUseridFromUUID(String userEmail){
+        long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits();
+        return String.valueOf(val);
+    }
+
 
     private View.OnClickListener mBtnClick = new View.OnClickListener() {
         @Override
