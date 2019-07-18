@@ -1,4 +1,4 @@
-package com.swu.cho4.fixswu.bean;
+package com.swu.cho4.fixswu;
 
 import android.content.Context;
 import android.graphics.Bitmap;
