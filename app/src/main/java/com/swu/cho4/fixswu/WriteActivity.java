@@ -139,10 +139,10 @@ public class WriteActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"호수를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
+               /* else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
                     Toast.makeText(getApplicationContext(),"번호를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
                 else if(TextUtils.isEmpty(mEdtContent.getText().toString())){
                     Toast.makeText(getApplicationContext(),"수리내용을 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
