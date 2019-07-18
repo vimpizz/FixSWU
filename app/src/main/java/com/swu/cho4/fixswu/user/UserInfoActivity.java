@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,8 +48,7 @@ public class UserInfoActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signOut();
-                //logout();
+                logout();
             }
         });
 
@@ -56,22 +56,8 @@ public class UserInfoActivity extends AppCompatActivity {
         txtvEmail.setText(user.getEmail());
     } // end onCreate()
 
-   private void signOut() {
-        mAuth.signOut();
 
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getBaseContext(), "로그아웃 되었습니다",Toast.LENGTH_SHORT).show();
-                    }
-                });
-       Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
-
-    }
-
-    /*private void logout(){
+    private void logout(){
         try{
             mGoogleSignInClient.signOut();
             Toast.makeText(this, "로그아웃 되었습니다", Toast.LENGTH_SHORT).show();
@@ -80,6 +66,6 @@ public class UserInfoActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }*/
+    }
 
 }

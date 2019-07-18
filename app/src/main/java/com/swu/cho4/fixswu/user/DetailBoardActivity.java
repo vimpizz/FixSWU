@@ -25,6 +25,8 @@ import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.bean.BoardBean;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class DetailBoardActivity extends AppCompatActivity {
@@ -37,7 +39,7 @@ public class DetailBoardActivity extends AppCompatActivity {
     private BoardBean mBoardBean;
 
     private ImageView mImgProfile, mImgLlike;
-    private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtRoomNum,mTxtDeskNum,mTxtDate,mTxtCondition,mTxtContent,mTxtComment;
+    private TextView mTxtStuNum, mTxtName, mTxtHouse, mTxtRoomNum, mTxtDeskNum, mTxtDate, mTxtCondition, mTxtContent, mTxtComment;
 
 
     @Override
@@ -49,7 +51,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         mImgProfile = findViewById(R.id.imgWriteDetail);
         mTxtStuNum = findViewById(R.id.txtStuNumDetail);
         mTxtName = findViewById(R.id.txtNameDetail);
-        mTxtHouse= findViewById(R.id.txtHouseDetail);
+        mTxtHouse = findViewById(R.id.txtHouseDetail);
         mTxtContent = findViewById(R.id.txtContentDetail);
         mTxtDate = findViewById(R.id.txtDateDetail);
         mTxtCondition = findViewById(R.id.txtConditionDetail);
@@ -60,7 +62,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         mImgProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Dialog dialog = new Dialog(DetailBoardActivity.this);
-                ImageView imgDetail =findViewById(R.id.imgDetail);
+                ImageView imgDetail = findViewById(R.id.imgDetail);
                 //imgDetail.setImageURI();
 
                 dialog.setContentView(R.layout.view_image);
@@ -80,7 +82,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnDel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mBoardBean.intCondition==0) {
+                if (mBoardBean.intCondition == 0) {
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailBoardActivity.this);
                     builder.setTitle("알림");
                     builder.setMessage("삭제하시겠습니까?");
@@ -94,15 +96,15 @@ public class DetailBoardActivity extends AppCompatActivity {
                             //DB에서 삭제처리
                             FirebaseDatabase.getInstance().getReference().child("board").child(uuid).child(mBoardBean.id).removeValue();
 
-                            if(mBoardBean.imgName!=null){
-                            //storage에서 삭제처리
                             if (mBoardBean.imgName != null) {
-                                try {
-                                    FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                //storage에서 삭제처리
+                                if (mBoardBean.imgName != null) {
+                                    try {
+                                        FirebaseStorage.getInstance().getReference().child("Image").child(mBoardBean.imgName).delete();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
                             }
                             Toast.makeText(DetailBoardActivity.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
                             finish();
@@ -132,11 +134,11 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnModify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mBoardBean.intCondition==0) {
+                if (mBoardBean.intCondition == 0) {
                     Intent i = new Intent(getApplicationContext(), ModifyWriteActivity.class);
                     i.putExtra(BoardBean.class.getName(), mBoardBean);
                     startActivity(i);
-                }else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(DetailBoardActivity.this);
                     builder.setTitle("알림창");
                     builder.setMessage("게시글 확인 후에는 수정이 불가능합니다.");
@@ -157,7 +159,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         findViewById(R.id.btnLike).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mBoardBean.like==false) {
+                if (mBoardBean.like == false) {
                     mImgLlike.setImageResource(R.drawable.heart_on);
                     mBoardBean.like = true;
                 } else {
@@ -173,7 +175,9 @@ public class DetailBoardActivity extends AppCompatActivity {
         DatabaseReference dbRef = mFirebaseDatabase.getReference();
         String uuid = getUseridFromUUID(mBoardBean.userId);
         dbRef.child("board").child(uuid).child(mBoardBean.id).child("like").setValue(mBoardBean.like);
+        //dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
     }
+
 
     @Override
     protected void onResume() {
@@ -188,7 +192,7 @@ public class DetailBoardActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         mBoardBean = dataSnapshot.getValue(BoardBean.class);
 
-                        if(mBoardBean!=null) {
+                        if (mBoardBean != null) {
                             try {
                                 new DownloadImgTask(DetailBoardActivity.this, mImgProfile, null, 0).execute(new URL(mBoardBean.imgUri));
                             } catch (Exception e) {
@@ -198,21 +202,23 @@ public class DetailBoardActivity extends AppCompatActivity {
                             mTxtStuNum.setText(mBoardBean.stuNum);
                             mTxtName.setText(mBoardBean.name);
                             mTxtCondition.setText(mBoardBean.condition);
-                            mTxtHouse.setText(mBoardBean.house+" "+mBoardBean.roomNum+"호  "+mBoardBean.deskNum);
+                            mTxtHouse.setText(mBoardBean.house + " " + mBoardBean.roomNum + "호  " + mBoardBean.deskNum);
                             mTxtDate.setText(mBoardBean.date);
                             mTxtContent.setText(mBoardBean.content);
                             mTxtComment.setText(mBoardBean.comment);
                         }
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
                 }
         );
 
     }
 
 
-    public static String getUseridFromUUID(String userEmail){
+    public static String getUseridFromUUID(String userEmail) {
         long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits();
         return String.valueOf(val);
     }

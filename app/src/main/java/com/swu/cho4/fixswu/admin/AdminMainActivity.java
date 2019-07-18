@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.swu.cho4.fixswu.bean.BoardBean;
 import com.swu.cho4.fixswu.R;
+import com.swu.cho4.fixswu.user.LoginActivity;
+import com.swu.cho4.fixswu.user.MainActivity;
+import com.swu.cho4.fixswu.user.UserInfoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +62,7 @@ public class AdminMainActivity extends AppCompatActivity {
                 case R.id.btnUserInfoAdmin:
                     Intent i = new Intent(getApplication(), UserInfoActivity.class);
                     i.putExtra("userEmail", mFirebaseAuth.getCurrentUser().getEmail());
-                    startActivity(i);
+                    startActivityForResult(i, 2000);
                     break;
             }
         }
@@ -112,6 +116,17 @@ public class AdminMainActivity extends AppCompatActivity {
             } else {
                 super.onBackPressed();
             }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 2000 && resultCode == RESULT_OK) {
+            Intent i = new Intent(AdminMainActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish(); //로그아웃
         }
     }
 

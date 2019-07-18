@@ -26,6 +26,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.admin.AdminMainActivity;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginActivity extends AppCompatActivity {
 
     //구글 로그인 클라이언트 제어자
@@ -33,6 +35,9 @@ public class LoginActivity extends AppCompatActivity {
     //FireBase 인증객체
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = mFirebaseAuth.getCurrentUser();
+    private long backPressedAt;
+
+    private int btnNum = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         findViewById(R.id.btnGoogleSignIn).setOnClickListener(mClicks);
+        findViewById(R.id.btnGoogleSignInAdmin).setOnClickListener(mClicks);
 
         //구글 로그인 객체선언
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -48,21 +54,13 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        Button btnAdminLogin = findViewById(R.id.btnAdminLogin);
-        btnAdminLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), AdminMainActivity.class);
-                startActivity(i);
-            }
-        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
+/*        if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
             //Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
             if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
@@ -74,8 +72,9 @@ public class LoginActivity extends AppCompatActivity {
                         , Toast.LENGTH_SHORT).show();
                 goMainActivity();
             }
-        }
+        }*/
 }
+
     //게시판 메인 화면으로 이동한다.
     private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
@@ -94,6 +93,11 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btnGoogleSignIn:
+                    btnNum=1;
+                    googleSignIn();
+                    break;
+                case R.id.btnGoogleSignInAdmin:
+                    btnNum=2;
                     googleSignIn();
                     break;
             }
@@ -115,16 +119,11 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             //FireBase 로그인 성공
-                            //Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
+
                             //메인화면으로 이동한다.
-                            if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
-                                Toast.makeText(getBaseContext(), "AdminMain"
-                                        ,Toast.LENGTH_SHORT).show();
-                                goAdminMainActivity();
-                            } else {
                                 Toast.makeText(getBaseContext(), "Loading...", Toast.LENGTH_SHORT).show();
                                 goMainActivity();
-                            }
+
                         } else {
                             //로그인 실패
                             Toast.makeText(getBaseContext(), "Firebase 로그인 실패", Toast.LENGTH_LONG).show();
@@ -147,10 +146,56 @@ public class LoginActivity extends AppCompatActivity {
                 //Toast.makeText(getBaseContext(), "구글 로그인에 성공 하였습니다.", Toast.LENGTH_LONG).show();
 
                 //FireBase 인증하러 가기
-                firebaseAuthWithGoogle(account);
+                if(btnNum==1)
+                    firebaseAuthWithGoogle(account);
+                else if(btnNum==2)
+                    firebaseAuthWithGoogleAdmin(account);
             } catch (ApiException e) {
                 e.printStackTrace();
             }
         }
     }//end
+
+
+
+
+
+    private void firebaseAuthWithGoogleAdmin(GoogleSignInAccount account) {
+        //FireBase 인증
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            //FireBase 로그인 성공
+
+                            //메인화면으로 이동한다.
+                            Toast.makeText(getBaseContext(), "관리자 목록으로 이동합니다"
+                                    ,Toast.LENGTH_SHORT).show();
+                            goAdminMainActivity();
+                        } else {
+                            //로그인 실패
+                            Toast.makeText(getBaseContext(), "Firebase 로그인 실패", Toast.LENGTH_LONG).show();
+                            Log.w("TEST", "인증실패: " + task.getException());
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedAt + TimeUnit.SECONDS.toMillis(2) > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        }
+        else {
+            if(this instanceof LoginActivity) {
+                Toast.makeText(this, "한번 더 뒤로가기 클릭시 앱을 종료 합니다.", Toast.LENGTH_LONG).show();
+                backPressedAt = System.currentTimeMillis();
+            } else {
+                super.onBackPressed();
+            }
+        }
+    }
 }

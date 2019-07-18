@@ -26,12 +26,9 @@
         android:gravity="center"
         android:layout_gravity="center">
 
-        <Button
-            android:id="@+id/btnAdminLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="관리자(테스트)" />
+
+
+
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btnGoogleSignIn"
@@ -49,6 +46,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:srcCompat="@drawable/logo"/>
+        app:srcCompat="@drawable/logo" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogleSignInAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
