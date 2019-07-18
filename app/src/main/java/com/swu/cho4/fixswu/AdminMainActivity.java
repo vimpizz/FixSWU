@@ -1,8 +1,11 @@
 package com.swu.cho4.fixswu;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AdminMainActivity extends AppCompatActivity {
 
@@ -24,6 +28,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private ListView mListView;
     private List<BoardBean> mBoardList = new ArrayList<>();
     private AdminBoardAdapter mBoardAdapter;
+    private long backPressedAt;
 
     private TextView hearNum;
 
@@ -34,6 +39,8 @@ public class AdminMainActivity extends AppCompatActivity {
 
         mListView = findViewById(R.id.lstBoard);
 
+        findViewById(R.id.btnUserInfoAdmin).setOnClickListener(mBtnClick);
+
         hearNum = findViewById(R.id.heartNum);
         //TODO 하트 수 표시
 
@@ -42,9 +49,24 @@ public class AdminMainActivity extends AppCompatActivity {
         mListView.setAdapter(mBoardAdapter);
     } // onCreate() 끝
 
+    private View.OnClickListener mBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch(view.getId()) {
+                case R.id.btnUserInfoAdmin:
+                    Intent i = new Intent(getApplication(), UserInfoActivity.class);
+                    i.putExtra("userEmail", mFirebaseAuth.getCurrentUser().getEmail());
+                    startActivity(i);
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onResume() {
         super.onResume();
+
+        List<BoardBean> newBoardList = new ArrayList<>();
 
         // 전체 회원의 데이터 취득
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -59,19 +81,36 @@ public class AdminMainActivity extends AppCompatActivity {
                         if(bean.like == true) {
                             countHeartNum ++;
                         }
-                        mBoardList.add(bean);
+                        newBoardList.add(bean);
                     }
                 }
 
                 hearNum.setText(String.valueOf(countHeartNum));
                 //리스트 갱신
-                mBoardAdapter.setBoardList(mBoardList);
+
+                mBoardAdapter.setBoardList(newBoardList);
                 mBoardAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedAt + TimeUnit.SECONDS.toMillis(2) > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        }
+        else {
+            if(this instanceof AdminMainActivity) {
+                Toast.makeText(this, "한번 더 뒤로가기 클릭시 앱을 종료 합니다.", Toast.LENGTH_LONG).show();
+                backPressedAt = System.currentTimeMillis();
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 
 
