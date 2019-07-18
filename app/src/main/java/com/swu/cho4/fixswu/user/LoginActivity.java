@@ -1,4 +1,4 @@
-package com.swu.cho4.fixswu;
+package com.swu.cho4.fixswu.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +23,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.swu.cho4.fixswu.R;
+import com.swu.cho4.fixswu.admin.AdminMainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
             //Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
-            if(mFirebaseAuth.getCurrentUser().getEmail().equals("ckhe115@gmail.com")) {
+            if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
                 Toast.makeText(getBaseContext(), "AdminMain"
                         ,Toast.LENGTH_SHORT).show();
                goAdminMainActivity();
@@ -115,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                             //FireBase 로그인 성공
                             //Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             //메인화면으로 이동한다.
-                            if(mFirebaseAuth.getCurrentUser().getEmail().equals("ckhe125@gmail.com")) {
+                            if(mFirebaseAuth.getCurrentUser().getEmail().equals("gwanlijaswu@gmail.com")) {
                                 Toast.makeText(getBaseContext(), "AdminMain"
                                         ,Toast.LENGTH_SHORT).show();
                                 goAdminMainActivity();

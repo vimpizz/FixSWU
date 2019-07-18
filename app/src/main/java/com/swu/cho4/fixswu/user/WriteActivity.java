@@ -1,5 +1,6 @@
-package com.swu.cho4.fixswu;
+package com.swu.cho4.fixswu.user;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.Continuation;
@@ -35,17 +37,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.swu.cho4.fixswu.bean.BoardBean;
+import com.swu.cho4.fixswu.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-public class ModifyWriteActivity extends AppCompatActivity {
+public class WriteActivity extends AppCompatActivity {
 
     public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com";
 
@@ -61,63 +65,54 @@ public class ModifyWriteActivity extends AppCompatActivity {
     private ImageView mImgProfile;
     private EditText mEdtStuNum, mEdtName,mEdtRoomNum,mEdtDeskNum,mEdtContent;
     private Spinner mSpinner;
-    private int mintHouse = 0 ; //기관
+    private int mintHouse=0; //기관
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);
     private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify_write);
+        setContentView(R.layout.activity_write);
 
 
-        mImgProfile = findViewById(R.id.imgWriteModify);
-        mEdtStuNum = findViewById(R.id.edtStuNumModify);
-        mEdtName = findViewById(R.id.edtNameModify);
-        mSpinner=findViewById(R.id.spinnerHouseModify);
-        mEdtRoomNum = findViewById(R.id.edtRoomNumModify);
-        mEdtDeskNum = findViewById(R.id.edtDeskNumModify);
-        mEdtContent = findViewById(R.id.edtContentModify);
+        /*//카메라를 사용하기 위한 퍼미션을 요청한다.
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
+        }, 0);*/
 
-        mBoardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
 
-        mSpinner.setSelection(mBoardBean.intHouse);
+        mImgProfile = findViewById(R.id.imgWrite);
+        mEdtStuNum = findViewById(R.id.edtStuNum);
+        mEdtName = findViewById(R.id.edtName);
+        mSpinner=findViewById(R.id.spinnerHouse);
+        mEdtRoomNum = findViewById(R.id.edtRoomNum);
+        mEdtDeskNum = findViewById(R.id.edtDeskNum);
+        mEdtContent = findViewById(R.id.edtContent);
+
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mintHouse=i;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
-        if(mBoardBean!=null) {
 
-            try {
-                new DownloadImgTask(this, mImgProfile, null, 0).execute(new URL(mBoardBean.imgUri));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            mEdtStuNum.setText(mBoardBean.stuNum);
-            mEdtName.setText(mBoardBean.name);
-            mEdtRoomNum.setText(mBoardBean.roomNum);
-            mEdtDeskNum.setText(mBoardBean.deskNum);
-            mEdtContent.setText(mBoardBean.content);
-
-
-        }
-
-        findViewById(R.id.btnCameraModify).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 takePicture();
             }
         });
 
-        findViewById(R.id.btnGalleryModify).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
@@ -127,7 +122,8 @@ public class ModifyWriteActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btnStuSaveModify).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.btnStuSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(TextUtils.isEmpty(mEdtStuNum.getText().toString())){
@@ -142,7 +138,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"호수를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
                 }
-/*                else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
+               /* else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
                     Toast.makeText(getApplicationContext(),"번호를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
                 }*/
@@ -152,16 +148,16 @@ public class ModifyWriteActivity extends AppCompatActivity {
                 }
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ModifyWriteActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
                 builder.setTitle("경고");
-                builder.setMessage("허위기재 시 불이익을 받으실 수 있습니다.");
+                builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이나 삭제가 불가합니다.\n허위기재 시 불이익을 받으실 수 있습니다.");
                 builder.setNegativeButton("뒤로가기",null);
-                builder.setPositiveButton("수정하기", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("게시물 등록", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(mBoardBean!=null){
+                        if(mBoardBean==null){
                             Toast.makeText(getApplicationContext(),"Loading...", Toast.LENGTH_SHORT).show();
-                            update();
+                            upload();
                         }
                     }
                 });
@@ -169,12 +165,12 @@ public class ModifyWriteActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btnStuCancelModify).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnStuCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ModifyWriteActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
                 builder.setTitle("알림창");
-                builder.setMessage("게시글 수정을 취소하고 뒤로 가시겠습니까?");
+                builder.setMessage("게시글 작성을 취소하고 뒤로 가시겠습니까?");
                 builder.setNegativeButton("아니오",null);
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
@@ -190,127 +186,132 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
     }
 
-    //게시물 수정
-    private void update(){
 
-        // 안찍었을 경우 DB만 업데이트 시켜준다
-        if(mPhotoPath==null){
-            mBoardBean.stuNum=mEdtStuNum.getText().toString();
-            mBoardBean.name=mEdtName.getText().toString();
-            mBoardBean.intHouse=mintHouse;
-            mBoardBean.intToHouse();
-            mBoardBean.roomNum=mEdtRoomNum.getText().toString();
-            mBoardBean.deskNum=mEdtDeskNum.getText().toString();
-            mBoardBean.content=mEdtContent.getText().toString();
-            mBoardBean.millisecond = System.currentTimeMillis();
-            //수정된 날짜로
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
-            mBoardBean.date = sdf.format(new Date());
+    private void upload(){
 
-            //DB 업로드
+        //사진을 안 찍었으면 사진 제외하고 업로드한다
+        if(mPhotoPath == null){
+            //Firebase 데이터베이스에 메모를 등록한다.
             DatabaseReference dbRef = mFirebaseDatabase.getReference();
-            String uuid = getUseridFromUUID(mBoardBean.userId);
-            dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
-            Toast.makeText(this,"수정 되었습니다",Toast.LENGTH_SHORT).show();
+            String id = dbRef.push().getKey();
 
+            //데이터베이스에 저장한다.
+            BoardBean boardBean = new BoardBean();
+
+            boardBean.id = id;
+            boardBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
+            boardBean.intCondition = 0;
+            boardBean.intToCondition();
+
+            boardBean.stuNum = mEdtStuNum.getText().toString();
+            boardBean.name = mEdtName.getText().toString();
+
+            boardBean.intHouse = mintHouse;
+            boardBean.intToHouse();
+
+            boardBean.roomNum = mEdtRoomNum.getText().toString();
+            boardBean.deskNum = mEdtDeskNum.getText().toString();
+            boardBean.content = mEdtContent.getText().toString();
+
+            boardBean.millisecond = System.currentTimeMillis();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
+            boardBean.date=sdf.format(new Date());
+
+            //고유번호를 생성한다
+            String guid = getUseridFromUUID(boardBean.userId);
+            dbRef.child("board").child(guid).child(boardBean.id).setValue(boardBean);
+            Toast.makeText(this,"게시물이 등록되었습니다",Toast.LENGTH_SHORT).show();
             finish();
-            return;
-        }
 
-        //사진을 찍었을경우, 사진부터 업로드하고 DB만 업데이트한다
-        StorageReference storageRef = mFirebaseStorage.getReference();
-        if(gallery == false){
-            final StorageReference imagesRef = storageRef.child("image/"+mCaptureUri.getLastPathSegment());
-            UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if(!task.isSuccessful())
-                        throw  task.getException();
-                    return imagesRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    //파일 업로드 완료 후 호출된다
-                    //기존이미지 파일 삭제한다.
-                    if(mBoardBean.imgName!=null) {
-                        try {
-                            mFirebaseStorage.getReference().child("image").child(mBoardBean.imgName).delete();
-                        } catch (Exception e){
-                            e.printStackTrace();
+        }else {
+
+            StorageReference storageRef = mFirebaseStorage.getReference();
+            if (gallery == false) {
+                //사진부터 storage에 업로드한다
+                final StorageReference imagesRef = storageRef.child("image/" + mCaptureUri.getLastPathSegment());
+
+                UploadTask uploadTask = imagesRef.putFile(mCaptureUri);
+                //파일 업로드 실패에 따른 콜백 처리를 한다
+                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
                         }
+                        return imagesRef.getDownloadUrl();
                     }
-                    mBoardBean.imgUri = task.getResult().toString();
-                    mBoardBean.imgName = mCaptureUri.getLastPathSegment();
-                    mBoardBean.intHouse=mintHouse;
-                    mBoardBean.intToHouse();
-                    mBoardBean.stuNum=mEdtStuNum.getText().toString();
-                    mBoardBean.name=mEdtName.getText().toString();
-                    mBoardBean.roomNum=mEdtRoomNum.getText().toString();
-                    mBoardBean.deskNum=mEdtDeskNum.getText().toString();
-                    mBoardBean.content=mEdtContent.getText().toString();
-                    mBoardBean.millisecond = System.currentTimeMillis();
-
-                    //수정된 날짜로
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
-                    mBoardBean.date = sdf.format(new Date());
-
-                    String uuid = getUseridFromUUID(mBoardBean.userId);
-                    mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
-                    Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            });
-        } else{
-            Uri file = imgUri;
-            StorageReference imagesRef = storageRef.child("image/"+file.getLastPathSegment());
-            UploadTask uploadTask = imagesRef.putFile(file);
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        //데이터 베이스 업로드를 호출한다
+                        uploadDB(task.getResult().toString(), mCaptureUri.getLastPathSegment());
                     }
-                    return imagesRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    //파일 업로드 완료 후 호출된다
-                    //기존이미지 파일 삭제한다.
-                    if(mBoardBean.imgName!=null) {
-                        try {
-                            mFirebaseStorage.getReference().child("image").child(mBoardBean.imgName).delete();
-                        } catch (Exception e){
-                            e.printStackTrace();
+                });
+            } else {
+                Uri file = imgUri;
+                StorageReference imagesRef = storageRef.child("image/" + file.getLastPathSegment());
+                UploadTask uploadTask = imagesRef.putFile(file);
+                uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
                         }
+                        return imagesRef.getDownloadUrl();
                     }
-                    mBoardBean.imgUri = task.getResult().toString();
-                    mBoardBean.imgName = imgUri.getLastPathSegment();
-                    mBoardBean.intHouse=mintHouse;
-                    mBoardBean.intToHouse();
-                    mBoardBean.stuNum=mEdtStuNum.getText().toString();
-                    mBoardBean.name=mEdtName.getText().toString();
-                    mBoardBean.roomNum=mEdtRoomNum.getText().toString();
-                    mBoardBean.deskNum=mEdtDeskNum.getText().toString();
-                    mBoardBean.content=mEdtContent.getText().toString();
-                    mBoardBean.millisecond = System.currentTimeMillis();
-
-                    //수정된 날짜로
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
-                    mBoardBean.date = sdf.format(new Date());
-
-                    String uuid = getUseridFromUUID(mBoardBean.userId);
-                    mFirebaseDatabase.getReference().child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
-
-                    Toast.makeText(getBaseContext(),"수정되었습니다",Toast.LENGTH_SHORT).show();
-
-                    finish();
-                }
-            });
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        //데이터 베이스 업로드를 호출한다
+                        uploadDB(task.getResult().toString(), file.getLastPathSegment());
+                    }
+                });
+            }
         }
     }
+
+
+
+    private void uploadDB(String imgUri,String imgName){
+        //Firebase 데이터베이스에 메모를 등록한다.
+        DatabaseReference dbRef = mFirebaseDatabase.getReference();
+        String id = dbRef.push().getKey();
+
+        //데이터베이스에 저장한다.
+        BoardBean boardBean = new BoardBean();
+
+        boardBean.id = id;
+        boardBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
+        boardBean.intCondition = 0;
+        boardBean.intToCondition();
+
+        boardBean.stuNum = mEdtStuNum.getText().toString();
+        boardBean.name = mEdtName.getText().toString();
+
+        boardBean.intHouse = mintHouse;
+        boardBean.intToHouse();
+
+        boardBean.roomNum = mEdtRoomNum.getText().toString();
+        boardBean.deskNum = mEdtDeskNum.getText().toString();
+        boardBean.content = mEdtContent.getText().toString();
+
+        boardBean.imgUri=imgUri;
+        boardBean.imgName=imgName;
+
+        boardBean.millisecond = System.currentTimeMillis();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd   HH:mm");
+        boardBean.date=sdf.format(new Date());
+
+        //고유번호를 생성한다
+        String guid = getUseridFromUUID(boardBean.userId);
+        dbRef.child("board").child(guid).child(boardBean.id).setValue(boardBean);
+        Toast.makeText(this,"게시물이 등록되었습니다",Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+
 
     public static String getUseridFromUUID(String userEmail){
         long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits();
@@ -319,6 +320,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
     private void takePicture() {
 
+        gallery = false;
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -383,6 +385,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
         saveBitmapToFileCache(resizedBmp, mPhotoPath);
 
+        //Toast.makeText(this,"mCaptureUri : "+ mCaptureUri, Toast.LENGTH_LONG).show();
         //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
     }
 
@@ -479,6 +482,9 @@ public class ModifyWriteActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //if(imgUri!=null)imgUri = data.getData();
+
+        //카메라로부터 오는 데이터를 취득한다.
         if(resultCode == RESULT_OK) {
             switch(requestCode) {
                 case REQUEST_IMAGE_CAPTURE:

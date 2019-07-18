@@ -20,17 +20,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/txtvNum"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:fontFamily="@font/kopubdotumbold"
-                android:gravity="center|left"
-                android:text="번호"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/txtvDate"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -76,7 +65,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:fontFamily="@font/kopubdotumbold"
-                android:gravity="center|right"
+                android:gravity="center"
                 android:text="상태"
                 android:textSize="15dp" />
 

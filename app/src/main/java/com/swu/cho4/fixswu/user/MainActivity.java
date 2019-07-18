@@ -1,4 +1,4 @@
-package com.swu.cho4.fixswu;
+package com.swu.cho4.fixswu.user;
 
 
 import android.Manifest;
@@ -18,6 +18,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.swu.cho4.fixswu.bean.BoardBean;
+import com.swu.cho4.fixswu.R;
 
 import java.util.ArrayList;
 import java.util.List;

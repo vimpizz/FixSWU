@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.swu.cho4.fixswu.bean.BoardBean;
+
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.URL;

@@ -1,15 +1,12 @@
-package com.swu.cho4.fixswu;
+package com.swu.cho4.fixswu.bean;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 
-import static android.provider.Settings.Secure.getString;
-
-
 public class BoardBean implements Serializable {
+
     public String ApplyNum;
 
     public int intCondition;
@@ -43,7 +40,6 @@ public class BoardBean implements Serializable {
 
 
     public String intToCondition(){
-
         if(this.intCondition == 0 ) {
             this.condition = "확인전";
         } else if(this.intCondition == 1) {
