@@ -70,7 +70,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-
+                        Toast.makeText(getBaseContext(), "로그아웃 되었습니다",Toast.LENGTH_SHORT).show();
                     }
                 });
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);

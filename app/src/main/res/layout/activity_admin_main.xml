@@ -29,6 +29,16 @@
                 android:layout_weight="7"
                 android:textColor="#FFFFFF"/>
 
+            <ImageButton
+                android:id="@+id/btnUserInfoAdmin"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/SWUPURPLE"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/baseline_account_circle_white_18dp"
+                android:padding="5dp"/>
+
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -46,14 +56,14 @@
 
                 <TextView
                     android:id="@+id/heartNum"
-                    android:layout_width="match_parent"
+                    android:layout_width="129dp"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/kopubdotummedium"
                     android:layout_weight="1"
-                    android:text="N"
-                    android:textSize="20dp"
+                    android:fontFamily="@font/kopubdotummedium"
                     android:gravity="center"
-                    android:textColor="#FFFFFF"/>
+                    android:text="N"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp" />
             </FrameLayout>
 
         </LinearLayout>
