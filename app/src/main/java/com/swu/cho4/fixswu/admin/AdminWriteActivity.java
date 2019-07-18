@@ -125,6 +125,7 @@ public class AdminWriteActivity extends AppCompatActivity {
     // 게시물 수정
     private void update(){
         if(
+                (mBoardBean.intCondition==mIntCondition) |
                 (mBoardBean.intCondition==0 && mIntCondition==1) |
                         (mBoardBean.intCondition==1 && mIntCondition==2) |
                         (mBoardBean.intCondition==0 && mIntCondition==2)
