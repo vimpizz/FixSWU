@@ -36,7 +36,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.swu.cho4.fixswu.bean.BoardBean;
-import com.swu.cho4.fixswu.bean.DownloadImgTask;
+import com.swu.cho4.fixswu.DownloadImgTask;
 import com.swu.cho4.fixswu.R;
 
 import java.io.File;

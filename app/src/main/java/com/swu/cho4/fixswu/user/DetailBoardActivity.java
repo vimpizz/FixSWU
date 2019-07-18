@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.swu.cho4.fixswu.bean.DownloadImgTask;
+import com.swu.cho4.fixswu.DownloadImgTask;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.bean.BoardBean;
 
