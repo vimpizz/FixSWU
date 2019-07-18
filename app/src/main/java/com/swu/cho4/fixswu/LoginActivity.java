@@ -67,10 +67,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Intent intent =getIntent();
+        int i = intent.getIntExtra("logout",0);
+        if(i==1){
+            mGoogleSignInClient.signOut();
+            return;
+        }
+
         if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null) {
             //이미 로그인 되어 있다. 따라서 메인화면으로 바로 이동한다.
-            //Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
-            //AdminBean adminBean = new AdminBean();
+
             long val = UUID.nameUUIDFromBytes(mFirebaseAuth.getCurrentUser().getEmail().getBytes()).getMostSignificantBits();
             String uuid = String.valueOf(val);
 
@@ -91,10 +97,9 @@ public class LoginActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError databaseError) { }
                     }
             );
-
         }
-
     }
+
 
 
     //게시판 메인 화면으로 이동한다.
@@ -175,10 +180,11 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 e.printStackTrace();
             }
+        }else if(requestCode==3000&& requestCode==RESULT_OK){
+            mGoogleSignInClient.signOut();
         }
+
     }//end
-
-
 
 
 

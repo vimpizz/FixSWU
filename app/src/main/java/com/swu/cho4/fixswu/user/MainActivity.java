@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == 2000 && resultCode == RESULT_OK) {
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            i.putExtra("logout",1);
             startActivity(i);
             finish(); //로그아웃
         }
