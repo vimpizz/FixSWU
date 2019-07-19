@@ -36,18 +36,9 @@
         android:orientation="horizontal"
         android:padding="20dp">
 
-        <ImageView
-            android:id="@+id/imgWriteAdmin"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            app:srcCompat="@drawable/picturedefault2"
-            android:scaleType="fitCenter"/>
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:layout_weight="6"
             android:orientation="vertical">
 
@@ -142,6 +133,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:fontFamily="@font/kopubdotummedium"
+            android:gravity="center|left"
+            android:text="사진"
+            android:textSize="15dp" />
+
+
+        <ImageView
+            android:id="@+id/imgWriteAdmin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            app:srcCompat="@drawable/picturedefault2"
+            android:scaleType="fitStart"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="3"
         android:orientation="horizontal"
         android:padding="20dp">
@@ -213,8 +232,9 @@
         <TextView
             android:id="@+id/textView5"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
+            android:gravity="center|left"
             android:text="기사님
             코멘트"/>
 
