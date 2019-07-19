@@ -49,14 +49,16 @@ public class PopupActivity extends Activity implements View.OnClickListener{
 
     } // end onCreate()
 
-    @Override
+    //바깥 레이어 클릭시 닫힘 안 이루어져서 주석처리함
+/*    @Override
     public boolean onTouchEvent(MotionEvent event) {
         // 바깥 레이어 클릭시 닫히게
         if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+            finish();
             return true;
         }
         return false;
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
