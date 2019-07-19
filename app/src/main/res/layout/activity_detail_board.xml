@@ -201,10 +201,20 @@
         android:layout_marginTop="10dp"
         android:padding="20dp">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="사진"
+            android:textSize="15dp"
+            android:fontFamily="@font/kopubdotumbold"
+            android:gravity="center|left"
+            />
+
         <ImageView
             android:id="@+id/imgWriteDetail"
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="8"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
             android:src="@drawable/heart"/>
