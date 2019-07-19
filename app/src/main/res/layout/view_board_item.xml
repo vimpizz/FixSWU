@@ -38,8 +38,8 @@
             android:ellipsize="end"
             android:fontFamily="@font/kopubdotumbold"
             android:gravity="center|left"
-            android:lines="2"
-            android:maxLines="2"
+            android:lines="1"
+            android:maxLines="1"
             android:text="내용"
             android:textSize="15dp" />
 
