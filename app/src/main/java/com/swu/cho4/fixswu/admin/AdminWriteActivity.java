@@ -1,5 +1,6 @@
 package com.swu.cho4.fixswu.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,8 +22,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.swu.cho4.fixswu.DownloadImgTask;
+import com.swu.cho4.fixswu.PopupActivity;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.bean.BoardBean;
+import com.swu.cho4.fixswu.user.DetailBoardActivity;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -46,6 +49,8 @@ public class AdminWriteActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
     private List<BoardBean> mBoardList = new ArrayList<>();
+
+    private String strImgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +102,18 @@ public class AdminWriteActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) { }
                 }
         );
+
+        //이미지 클릭시 팝업창으로 이미지 띄움
+        mImgProfile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                BoardBean boardBean = (BoardBean) getIntent().getSerializableExtra(BoardBean.class.getName());
+                strImgUri = boardBean.imgUri;
+
+                Intent i = new Intent(AdminWriteActivity.this, PopupActivity.class);
+                i.putExtra("imgUri", strImgUri);
+                startActivity(i);
+            }
+        });
 
 
 

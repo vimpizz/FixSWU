@@ -78,7 +78,7 @@ public class AdminMainActivity extends AppCompatActivity {
         conditionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(conditionSpinner.getSelectedItem().equals("모두")) {
+                if(conditionSpinner.getSelectedItem().equals("전체")) {
                     conditionspinner = 0;
                     onResume();
                 } else if(conditionSpinner.getSelectedItem().equals("확인전")) {
@@ -107,7 +107,7 @@ public class AdminMainActivity extends AppCompatActivity {
         houseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(houseSpinner.getSelectedItem().equals("모두")) {
+                if(houseSpinner.getSelectedItem().equals("전체")) {
                     housespinner = 0;
                     onResume();
                 } else if(houseSpinner.getSelectedItem().equals("샬롬하우스 A동")) {
