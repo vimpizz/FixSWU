@@ -75,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //누른 횟수 초기화
+        btnPressTime=0;
+
         Intent intent =getIntent();
         int i = intent.getIntExtra("logout",0);
         if(i==1){
@@ -94,10 +97,10 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             AdminBean adminBean = dataSnapshot.getValue(AdminBean.class);
                             if(adminBean!=null){
-                                Toast.makeText(getBaseContext(), "관리자 목록으로 이동합니다",Toast.LENGTH_SHORT).show();
-                            goAdminMainActivity();
+                                if(adminBean.admin){
+                                goAdminMainActivity();
+                                }
                         } else {
-                            Toast.makeText(getBaseContext(), "Loading...", Toast.LENGTH_SHORT).show();
                             goMainActivity();
                         }
                         }
@@ -193,9 +196,9 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 e.printStackTrace();
             }
-        }else if(requestCode==3000&& requestCode==RESULT_OK){
+        }/*else if(requestCode==3000&& requestCode==RESULT_OK){
             mGoogleSignInClient.signOut();
-        }
+        }*/
 
     }//end
 
@@ -212,8 +215,7 @@ public class LoginActivity extends AppCompatActivity {
                             //FireBase 로그인 성공
 
                             //메인화면으로 이동한다.
-                            Toast.makeText(getBaseContext(), "관리자 목록으로 이동합니다"
-                                    ,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "관리자 목록으로 이동합니다",Toast.LENGTH_SHORT).show();
                             goAdminMainActivity();
                         } else {
                             //로그인 실패

@@ -18,12 +18,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.swu.cho4.fixswu.DownloadImgTask;
 import com.swu.cho4.fixswu.LoginActivity;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.UserInfoActivity;
 import com.swu.cho4.fixswu.bean.AdminBean;
 import com.swu.cho4.fixswu.bean.BoardBean;
+import com.swu.cho4.fixswu.user.DetailBoardActivity;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -40,6 +43,7 @@ public class AdminMainActivity extends AppCompatActivity {
     private List<BoardBean> mBoardList = new ArrayList<>();
     private AdminBoardAdapter mBoardAdapter;
     private long backPressedAt;
+    private String adminEmail;
 
     private TextView hearNum;
 
@@ -69,6 +73,7 @@ public class AdminMainActivity extends AppCompatActivity {
         adminBean.admin = true;
         //고유번호를 생성한다
         String guid = getUseridFromUUID(adminBean.userId);
+        adminEmail=guid;
         dbRef.child("admin").child(guid).setValue(adminBean);
 
     } // onCreate() 끝
@@ -148,9 +153,29 @@ public class AdminMainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 2000 && resultCode == RESULT_OK) {
+
+            /*String uuid = adminEmail;
+
+            FirebaseDatabase.getInstance().getReference().child("admin").child(uuid).addValueEventListener(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            AdminBean adminBean = dataSnapshot.getValue(AdminBean.class);
+                            adminBean.admin = false;
+                            DatabaseReference dbRef = mFirebaseDB.getReference();
+                            dbRef.child("admin").child(uuid).setValue(adminBean);
+                            }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    }
+            );*/
             Intent i = new Intent(AdminMainActivity.this, LoginActivity.class);
             startActivity(i);
             finish(); //로그아웃
+
+
         }
     }
 
