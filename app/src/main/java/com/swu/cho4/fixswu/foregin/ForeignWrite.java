@@ -141,35 +141,35 @@ public class ForeignWrite extends AppCompatActivity {
              @Override
              public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                  if (exampleSpinner.getSelectedItem().equals("1. Replacement of lights(Room)")) {
-                     contents = "방 전등 교체";
+                     contents = "방 전등 교체\n(Replacement of lights(Room))";
                  } else if (exampleSpinner.getSelectedItem().equals("2. Replacement of lights(Desk)")) {
-                     contents = "책상 전등 교체";
+                     contents = "책상 전등 교체\n(Replacement of lights(Desk))";
                  } else if (exampleSpinner.getSelectedItem().equals("3. Refrigerator malfunction") ) {
-                     contents = "냉장고 오작동";
+                     contents = "냉장고 오작동\n(Refrigerator malfunction)";
                  } else if (exampleSpinner.getSelectedItem().equals("4. Power plug/socket problem") ) {
-                     contents = "전원 플러그/소켓 문제";
+                     contents = "전원 플러그/소켓 문제\n(Power plug/socket problem)";
                  } else if ( exampleSpinner.getSelectedItem().equals("5. Problems with drawers in the closet")) {
-                     contents = "벽장 서랍 문제";
+                     contents = "벽장 서랍 문제\n(Problems with drawers in the closet)";
                  } else if (exampleSpinner.getSelectedItem().equals("6. Problems with bed drawers" )) {
-                     contents = "침대 서랍 문제";
+                     contents = "침대 서랍 문제\n(Problems with bed drawers)";
                  } else if ( exampleSpinner.getSelectedItem().equals("7. Problems with chairs")) {
-                     contents = "의자의 문제";
+                     contents = "의자의 문제\n(Problems with chairs)";
                  } else if ( exampleSpinner.getSelectedItem().equals("8. A fallen mirror") ){
-                     contents = "떨어진 거울";
+                     contents = "떨어진 거울\n(A fallen mirror)";
                  } else if ( exampleSpinner.getSelectedItem().equals("9. Problems with insect screen")) {
-                     contents = "방충망 문제";
+                     contents = "방충망 문제\n(Problems with insect screen)";
                  } else if ( exampleSpinner.getSelectedItem().equals("10. Problems with WIFI")) {
-                     contents = "WIFI 문제";
+                     contents = "WIFI 문제\n(Problems with WIFI)";
                  } else if ( exampleSpinner.getSelectedItem().equals("11. Problems with an insect")) {
-                     contents = "곤충 문제";
+                     contents = "곤충 문제\n(Problems with an insect)";
                  }else if ( exampleSpinner.getSelectedItem().equals("12. Water dropping from the Air Conditioner")) {
-                     contents = "에어컨에서 떨어지는 물";
+                     contents = "에어컨에서 떨어지는 물\n(Water dropping from the Air Conditioner)";
                  } else if ( exampleSpinner.getSelectedItem().equals("13. Cell phone dropped between the beds")) {
-                     contents = "침대 사이에 휴대전화가 떨어졌어요.";
+                     contents = "침대 사이에 휴대전화가 떨어졌어요\n(Cell phone dropped between the beds)";
                  } else if ( exampleSpinner.getSelectedItem().equals("14. A fallen acrylic plate")) {
-                     contents = "떨어진 아크릴판";
+                     contents = "떨어진 아크릴판\n(A fallen acrylic plate)";
                  } else if ( exampleSpinner.getSelectedItem().equals("15. Other")) {
-                     contents = "그 외 문제";
+                     contents = "그 외 문제\n(Other)";
                  }
              }
              @Override
@@ -222,7 +222,7 @@ public class ForeignWrite extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ForeignWrite.this);
                 builder.setTitle("Warning");
-                builder.setMessage("After the driver has checked the post, it cannot be modified or deleted.");
+                builder.setMessage("After the driver has checked the post, It cannot be modified or deleted.");
                 builder.setNegativeButton("Backward",null);
                 builder.setPositiveButton("Register post", new DialogInterface.OnClickListener() {
                     @Override
@@ -243,7 +243,7 @@ public class ForeignWrite extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ForeignWrite.this);
                 builder.setTitle("Notification");
-                builder.setMessage("Are you sure you want to cancel the posting and go back");
+                builder.setMessage("Are you sure you want to cancel the posting and go back?");
                 builder.setNegativeButton("No",null);
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override

@@ -243,12 +243,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
+            android:ellipsize="end"
             android:ems="10"
             android:hint="코멘트를 입력해주세요."
-            android:textSize="15dp"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp"
+            android:textSize="15dp" />
 
     </LinearLayout>
 
