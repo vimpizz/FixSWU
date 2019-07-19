@@ -353,7 +353,7 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
     private void sendPicture() {
         Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath);
-        Bitmap resizedBmp = getResizedBitmap(bitmap, 3, 100, 100);
+        Bitmap resizedBmp = getResizedBitmap(bitmap, 3, 300, 600);
 
         bitmap.recycle();
 

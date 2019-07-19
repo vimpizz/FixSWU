@@ -53,7 +53,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/nheart" />
+                    app:srcCompat="@drawable/heartnum"
+                    android:layout_margin="3dp"/>
 
                 <TextView
                     android:id="@+id/heartNum"
@@ -64,7 +65,7 @@
                     android:gravity="center"
                     android:text="N"
                     android:textColor="#FFFFFF"
-                    android:textSize="20dp" />
+                    android:textSize="11dp" />
             </FrameLayout>
 
         </LinearLayout>
