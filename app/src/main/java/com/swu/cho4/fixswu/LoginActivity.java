@@ -4,9 +4,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -56,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     private int btnNum = -1;
     private long btnPressTime = 0;
     private boolean mAdmin=false;
+    private String pw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,10 +114,6 @@ public class LoginActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError databaseError) { }
                     }
             );
-
-
-
-
         }
     }
 
@@ -140,8 +139,39 @@ public class LoginActivity extends AppCompatActivity {
                     googleSignIn();
                     break;
                 case R.id.btnGoogleSignInAdmin:
-                    btnNum=2;
-                    googleSignIn();
+                    AlertDialog.Builder ad = new AlertDialog.Builder(LoginActivity.this);
+                    ad.setTitle("관리자 로그인");       // 제목 설정
+                    ad.setMessage("비밀번호를 입력하세요");   // 내용 설정
+
+                    final EditText et = new EditText(LoginActivity.this);
+                    ad.setView(et);
+
+                    // 확인 버튼 설정
+                    ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            pw = et.getText().toString();
+                            if(TextUtils.equals(pw,"11")) {
+                                dialog.dismiss();
+                                btnNum=2;
+                                googleSignIn();
+                            }else {
+                                btnPressTime=0;
+                                dialog.dismiss();
+                                Toast.makeText(getBaseContext(), "비밀번호가 다릅니다", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+                    ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
+
+
                     break;
                 case R.id.appTitle:
                     btnPressTime++;
@@ -193,7 +223,6 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 //구글 로그인 성공
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                //Toast.makeText(getBaseContext(), "구글 로그인에 성공 하였습니다.", Toast.LENGTH_LONG).show();
 
                 //FireBase 인증하러 가기
                 if(btnNum==1)
@@ -203,9 +232,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 e.printStackTrace();
             }
-        }/*else if(requestCode==3000&& requestCode==RESULT_OK){
-            mGoogleSignInClient.signOut();
-        }*/
+        }
 
     }//end
 
@@ -218,9 +245,8 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        //FireBase 로그인 성공
                         if(task.isSuccessful()) {
-                            //FireBase 로그인 성공
-
                             //Firebase 데이터베이스에 관리자를 등록한다
                             DatabaseReference dbRef = mFirebaseDatabase.getReference();
                             //데이터베이스에 저장한다.

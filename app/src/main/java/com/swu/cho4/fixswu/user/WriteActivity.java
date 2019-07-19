@@ -147,7 +147,7 @@ public class WriteActivity extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
                 builder.setTitle("경고");
-                builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이나 삭제가 불가합니다.\n허위기재 시 불이익을 받으실 수 있습니다.");
+                builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이나 삭제가 불가합니다.");
                 builder.setNegativeButton("뒤로가기",null);
                 builder.setPositiveButton("게시물 등록", new DialogInterface.OnClickListener() {
                     @Override
@@ -216,6 +216,7 @@ public class WriteActivity extends AppCompatActivity {
             boardBean.date=sdf.format(new Date());
 
             //고유번호를 생성한다
+
             String guid = getUseridFromUUID(boardBean.userId);
             dbRef.child("board").child(guid).child(boardBean.id).setValue(boardBean);
             Toast.makeText(this,"게시물이 등록되었습니다",Toast.LENGTH_SHORT).show();
@@ -381,9 +382,6 @@ public class WriteActivity extends AppCompatActivity {
         mImgProfile.setImageBitmap( rotatedBmp );
 
         saveBitmapToFileCache(resizedBmp, mPhotoPath);
-
-        //Toast.makeText(this,"mCaptureUri : "+ mCaptureUri, Toast.LENGTH_LONG).show();
-        //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
     }
 
     private void getPictureFromGallery(Uri imgUri){

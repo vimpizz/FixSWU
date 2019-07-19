@@ -139,17 +139,6 @@ public class AdminMainActivity extends AppCompatActivity {
         mBoardAdapter = new AdminBoardAdapter(this, mBoardList);
         mListView.setAdapter(mBoardAdapter);
 
-
-/*        //Firebase 데이터베이스에 관리자를 등록한다
-        DatabaseReference dbRef = mFirebaseDB.getReference();
-        //데이터베이스에 저장한다.
-        AdminBean adminBean = new AdminBean();
-        adminBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
-        adminBean.admin = true;
-        //고유번호를 생성한다
-        String guid = getUseridFromUUID(adminBean.userId);
-        dbRef.child("admin").child(guid).setValue(adminBean);*/
-
     } // onCreate() 끝
 
     public static String getUseridFromUUID(String userEmail){
@@ -184,8 +173,6 @@ public class AdminMainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int countHeartNum=0;
-
-
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     for(DataSnapshot ds2 : ds.getChildren()) {
@@ -252,31 +239,10 @@ public class AdminMainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 2000 && resultCode == RESULT_OK) {
-
-            /*String uuid = adminEmail;
-
-            FirebaseDatabase.getInstance().getReference().child("admin").child(uuid).addValueEventListener(
-                    new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            AdminBean adminBean = dataSnapshot.getValue(AdminBean.class);
-                            adminBean.admin = false;
-                            DatabaseReference dbRef = mFirebaseDB.getReference();
-                            dbRef.child("admin").child(uuid).setValue(adminBean);
-                            }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                        }
-                    }
-            );*/
             Intent i = new Intent(AdminMainActivity.this, LoginActivity.class);
             startActivity(i);
             finish(); //로그아웃
-
-
         }
     }
-
 
 }
