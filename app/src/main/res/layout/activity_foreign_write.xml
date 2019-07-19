@@ -223,7 +223,8 @@
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/kopubdotummedium"
                 android:text="Take pictures"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"/>
 
             <Button
                 android:id="@+id/btnGallery"
@@ -233,7 +234,8 @@
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/kopubdotummedium"
                 android:text="Select photo"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"/>
         </LinearLayout>
     </LinearLayout>
 
