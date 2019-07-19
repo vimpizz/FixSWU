@@ -223,8 +223,7 @@
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/kopubdotummedium"
                 android:text="Take pictures"
-                android:textColor="#FFFFFF"
-                android:textSize="15dp" />
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/btnGallery"
@@ -234,8 +233,7 @@
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/kopubdotummedium"
                 android:text="Select photo"
-                android:textColor="#FFFFFF"
-                android:textSize="15dp" />
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>
 
@@ -254,8 +252,8 @@
             android:layout_weight="2"
             android:fontFamily="@font/kopubdotummedium"
             android:gravity="center|left"
-            android:text="Description of repair"
-            android:textSize="15dp" />
+            android:text="Contents"
+            android:textSize="15dp"/>
 
         <LinearLayout
             android:layout_width="0dp"

@@ -28,9 +28,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="8"
-        android:gravity="center"
+        android:layout_gravity="center|top"
+        android:layout_weight="4"
+        android:gravity="center|top"
         android:orientation="horizontal">
 
 
@@ -38,8 +38,9 @@
             android:id="@+id/btnGoogleSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="center|top" />
 
 
         <com.google.android.gms.common.SignInButton
@@ -54,6 +55,7 @@
     </LinearLayout>
 
 
+
     <ImageView
         android:id="@+id/account"
         android:layout_width="wrap_content"
@@ -61,5 +63,14 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:src="@drawable/account" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:text="※위를 클릭하시면 기숙사 영선신청 관련 안내를 보실 수 있습니다."
+        android:textSize="12dp"
+        android:gravity="center"/>
+
 
 </LinearLayout>

@@ -36,7 +36,7 @@
                 android:layout_weight="2"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/eng"
+                android:src="@drawable/engversion"
                 android:background="@color/SWUPURPLE"/>
         </LinearLayout>
 
