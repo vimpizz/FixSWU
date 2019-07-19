@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".user.WriteActivity">
+    tools:context=".foregin.ForeignWrite">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:entries="@array/기관"
+                android:entries="@array/houseForeigner"
                 android:gravity="center|left"/>
 
         </LinearLayout>
@@ -257,20 +257,46 @@
             android:text="Description of repair"
             android:textSize="15dp" />
 
-        <EditText
-            android:id="@+id/edtContent"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
-            android:background="@drawable/square_box"
-            android:fontFamily="@font/kopubdotummedium"
-            android:gravity="center|left"
-            android:hint="The second drawer in room A is not open.\n(Please specify.)"
-            android:inputType="textMultiLine"
-            android:maxLines="3"
-            android:text=""
-            android:textSize="15dp"
-            android:paddingLeft="10dp"/>
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:orientation="horizontal">
+
+
+                <Spinner
+                    android:id="@+id/spinnerClass"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:entries="@array/exampleClass"/>
+
+                <Spinner
+                    android:id="@+id/spinnerExample"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:inputType="textMultiLine"
+                android:text="You can apply by visiting the Shalomhouse A-dong in person."/>
+
+
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

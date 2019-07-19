@@ -11,17 +11,36 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/SWUPURPLE">
-
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="25dp"
-            android:text="영선신청하기"
-            android:fontFamily="@font/kopubdotummedium"
-            android:gravity="center|left"/>
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:text="영선신청하기"
+                android:fontFamily="@font/kopubdotummedium"
+                android:gravity="center|left"/>
+
+            <ImageButton
+                android:id="@+id/engVersion"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/eng"
+                android:background="@color/SWUPURPLE"/>
+        </LinearLayout>
+
+
 
 
 

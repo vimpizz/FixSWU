@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PopupActivity" android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
+        <activity android:name=".foregin.ForeignWrite"></activity>
+        <activity
+            android:name=".PopupActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity android:name=".user.DetailBoardActivity" />
         <activity android:name=".user.ModifyWriteActivity" />
         <activity android:name=".admin.AdminWriteActivity" />
@@ -40,9 +43,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".user.MainActivity" />
-        <activity android:name=".Pop"
-            android:theme="@style/AppTheme.Pop"></activity>
-
+        <activity
+            android:name=".Pop"
+            android:theme="@style/AppTheme.Pop" />
     </application>
 
 </manifest>

@@ -1,4 +1,9 @@
-package com.swu.cho4.fixswu.user;
+package com.swu.cho4.fixswu.foregin;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,15 +21,11 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +38,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.bean.BoardBean;
-import com.swu.cho4.fixswu.foregin.ForeignWrite;
+import com.swu.cho4.fixswu.user.WriteActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -47,7 +48,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-public class WriteActivity extends AppCompatActivity {
+public class ForeignWrite extends AppCompatActivity {
 
     public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com";
 
@@ -64,50 +65,119 @@ public class WriteActivity extends AppCompatActivity {
     private EditText mEdtStuNum, mEdtName,mEdtRoomNum,mEdtDeskNum,mEdtContent;
     private Spinner mSpinner;
     private int mintHouse=0; //기관
+    private String contents = "";
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URI);
     private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
 
+    private ArrayAdapter houseAdapter;
+    private Spinner houseSpinner;
+    private int housespinner;
+
+    private ArrayAdapter classAdapter;
+    private Spinner classSpinner;
+    private int classpinner;
+
+
+    private ArrayAdapter exampleAdapter;
+    private Spinner exampleSpinner;
+    private int examplespinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write);
+        setContentView(R.layout.activity_foreign_write);
 
+        houseSpinner = findViewById(R.id.spinnerHouse);
+        //어댑터 설정
+        ArrayAdapter houseaAdapter = ArrayAdapter.createFromResource(this, R.array.houseForeigner, R.layout.support_simple_spinner_dropdown_item);
+        houseSpinner.setAdapter(houseaAdapter);
 
-        /*//카메라를 사용하기 위한 퍼미션을 요청한다.
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA
-        }, 0);*/
+        classSpinner = findViewById(R.id.spinnerClass);
+        //어댑터 설정
+        ArrayAdapter classAdapter = ArrayAdapter.createFromResource(this, R.array.exampleClass, R.layout.support_simple_spinner_dropdown_item);
+        classSpinner.setAdapter(classAdapter);
 
+        exampleSpinner = findViewById(R.id.spinnerExample);
+
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               if (classSpinner.getSelectedItem().equals("Electric")) {
+                   classpinner = 0;
+                   setExamplespinner();
+               } else if (classSpinner.getSelectedItem().equals("Furnicture")) {
+                   classpinner = 1;
+                   setExamplespinner();
+               } else if (classSpinner.getSelectedItem().equals("Other")) {
+                   classpinner = 2;
+                   setExamplespinner();
+               }
+           }
+           @Override
+           public void onNothingSelected(AdapterView<?> adapterView) {
+           }
+       });
 
         mImgProfile = findViewById(R.id.imgWrite);
         mEdtStuNum = findViewById(R.id.edtStuNum);
         mEdtName = findViewById(R.id.edtName);
-        mSpinner=findViewById(R.id.spinnerHouse);
         mEdtRoomNum = findViewById(R.id.edtRoomNum);
         mEdtDeskNum = findViewById(R.id.edtDeskNum);
         mEdtContent = findViewById(R.id.edtContent);
 
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        houseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mintHouse=i;
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
-        findViewById(R.id.engVersion).setOnClickListener(new View.OnClickListener() {
+        exampleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
-             public void onClick(View view) {
-                 startActivity(new Intent(WriteActivity.this, ForeignWrite.class));
+             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                 if (exampleSpinner.getSelectedItem().equals("1. Replacement of lights(Room)")) {
+                     contents = "방 전등 교체";
+                 } else if (exampleSpinner.getSelectedItem().equals("2. Replacement of lights(Desk)")) {
+                     contents = "책상 전등 교체";
+                 } else if (exampleSpinner.getSelectedItem().equals("3. Refrigerator malfunction") ) {
+                     contents = "냉장고 오작동";
+                 } else if (exampleSpinner.getSelectedItem().equals("4. Power plug/socket problem") ) {
+                     contents = "전원 플러그/소켓 문제";
+                 } else if ( exampleSpinner.getSelectedItem().equals("5. Problems with drawers in the closet")) {
+                     contents = "벽장 서랍 문제";
+                 } else if (exampleSpinner.getSelectedItem().equals("6. Problems with bed drawers" )) {
+                     contents = "침대 서랍 문제";
+                 } else if ( exampleSpinner.getSelectedItem().equals("7. Problems with chairs")) {
+                     contents = "의자의 문제";
+                 } else if ( exampleSpinner.getSelectedItem().equals("8. A fallen mirror") ){
+                     contents = "떨어진 거울";
+                 } else if ( exampleSpinner.getSelectedItem().equals("9. Problems with insect screen")) {
+                     contents = "방충망 문제";
+                 } else if ( exampleSpinner.getSelectedItem().equals("10. Problems with WIFI")) {
+                     contents = "WIFI 문제";
+                 } else if ( exampleSpinner.getSelectedItem().equals("11. Problems with an insect")) {
+                     contents = "곤충 문제";
+                 }else if ( exampleSpinner.getSelectedItem().equals("12. Water dropping from the Air Conditioner")) {
+                     contents = "에어컨에서 떨어지는 물";
+                 } else if ( exampleSpinner.getSelectedItem().equals("13. Cell phone dropped between the beds")) {
+                     contents = "침대 사이에 휴대전화가 떨어졌어요.";
+                 } else if ( exampleSpinner.getSelectedItem().equals("14. A fallen acrylic plate")) {
+                     contents = "떨어진 아크릴판";
+                 } else if ( exampleSpinner.getSelectedItem().equals("15. Other")) {
+                     contents = "그 외 문제";
+                 }
+             }
+             @Override
+             public void onNothingSelected(AdapterView<?> adapterView) {
+
              }
          });
+
 
         findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,37 +196,35 @@ public class WriteActivity extends AppCompatActivity {
             }
         });
 
-
         findViewById(R.id.btnStuSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(TextUtils.isEmpty(mEdtStuNum.getText().toString())){
-                    Toast.makeText(getApplicationContext(),"학번을 입력하세요",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please enter your Student Number",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(TextUtils.isEmpty(mEdtName.getText().toString())){
-                    Toast.makeText(getApplicationContext(),"이름을 입력하세요",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please enter your Name",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(TextUtils.isEmpty(mEdtRoomNum.getText().toString())){
-                    Toast.makeText(getApplicationContext(),"호수를 입력하세요",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Please enter your Room Number",Toast.LENGTH_SHORT).show();
                     return;
                 }
                /* else if(TextUtils.isEmpty(mEdtDeskNum.getText().toString())){
                     Toast.makeText(getApplicationContext(),"번호를 입력하세요",Toast.LENGTH_SHORT).show();
                     return;
                 }*/
-                else if(TextUtils.isEmpty(mEdtContent.getText().toString())){
-                    Toast.makeText(getApplicationContext(),"수리내용을 입력하세요",Toast.LENGTH_SHORT).show();
+                else if(TextUtils.isEmpty(contents)){
+                    Toast.makeText(getApplicationContext(),"Please choose the Description of repair",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
-                builder.setTitle("경고");
-                builder.setMessage("기사님께서 게시글을 확인하신 후에는 수정이나 삭제가 불가합니다.");
-                builder.setNegativeButton("뒤로가기",null);
-                builder.setPositiveButton("게시물 등록", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ForeignWrite.this);
+                builder.setTitle("Warning");
+                builder.setMessage("After the driver has checked the post, it cannot be modified or deleted.");
+                builder.setNegativeButton("Backward",null);
+                builder.setPositiveButton("Register post", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(mBoardBean==null){
@@ -172,11 +240,11 @@ public class WriteActivity extends AppCompatActivity {
         findViewById(R.id.btnStuCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(WriteActivity.this);
-                builder.setTitle("알림창");
-                builder.setMessage("게시글 작성을 취소하고 뒤로 가시겠습니까?");
-                builder.setNegativeButton("아니오",null);
-                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ForeignWrite.this);
+                builder.setTitle("Notification");
+                builder.setMessage("Are you sure you want to cancel the posting and go back");
+                builder.setNegativeButton("No",null);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         finish();
@@ -185,11 +253,20 @@ public class WriteActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
-
-
-
     }
 
+    public void setExamplespinner() {
+        if (classpinner == 0 ) {
+            ArrayAdapter exampleAdapter1 = ArrayAdapter.createFromResource(this, R.array.electricExmaple, R.layout.support_simple_spinner_dropdown_item);
+            exampleSpinner.setAdapter(exampleAdapter1);
+        } else if (classpinner == 1) {
+            ArrayAdapter exampleAdapter2 = ArrayAdapter.createFromResource(this, R.array.furnictureExmaple, R.layout.support_simple_spinner_dropdown_item);
+            exampleSpinner.setAdapter(exampleAdapter2);
+        } else if (classpinner == 2) {
+            ArrayAdapter exampleAdapter3 = ArrayAdapter.createFromResource(this, R.array.otherExmaple, R.layout.support_simple_spinner_dropdown_item);
+            exampleSpinner.setAdapter(exampleAdapter3);
+        }
+    }
 
     private void upload(){
 
@@ -215,7 +292,7 @@ public class WriteActivity extends AppCompatActivity {
 
             boardBean.roomNum = mEdtRoomNum.getText().toString();
             boardBean.deskNum = mEdtDeskNum.getText().toString();
-            boardBean.content = mEdtContent.getText().toString();
+            boardBean.content = contents;
 
             boardBean.millisecond = System.currentTimeMillis();
 
@@ -226,7 +303,7 @@ public class WriteActivity extends AppCompatActivity {
 
             String guid = getUseridFromUUID(boardBean.userId);
             dbRef.child("board").child(guid).child(boardBean.id).setValue(boardBean);
-            Toast.makeText(this,"게시물이 등록되었습니다",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"The post has been registered.",Toast.LENGTH_SHORT).show();
             finish();
 
         }else {
@@ -274,6 +351,8 @@ public class WriteActivity extends AppCompatActivity {
                 });
             }
         }
+
+
     }
 
 
@@ -312,7 +391,7 @@ public class WriteActivity extends AppCompatActivity {
         //고유번호를 생성한다
         String guid = getUseridFromUUID(boardBean.userId);
         dbRef.child("board").child(guid).child(boardBean.id).setValue(boardBean);
-        Toast.makeText(this,"게시물이 등록되었습니다",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"The post has been registered.",Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -501,4 +580,7 @@ public class WriteActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
 }

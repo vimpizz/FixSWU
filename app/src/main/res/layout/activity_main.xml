@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:background="@color/SWUPURPLE"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/baseline_account_circle_white_18dp"
+            app:srcCompat="@drawable/ic_account_circle_black_24dp"
             android:padding="5dp"/>
 
             <ImageButton
@@ -51,7 +51,6 @@
                 android:background="@color/SWUPURPLE"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_add_black_24dp"/>
-
 
         </LinearLayout>
 

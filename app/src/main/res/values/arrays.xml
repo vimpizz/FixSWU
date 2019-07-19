@@ -15,4 +15,42 @@
         <item>바롬관 10층</item>
     </string-array>
 
+    <string-array name="houseForeigner">
+        <item>Shalomhouse A-dong</item>
+        <item>Shalomhouse B-dong</item>
+        <item>International House</item>
+        <item>Bahrom 10th floor</item>
+    </string-array>
+
+    <string-array name="exampleClass">
+        <item>Electric</item>
+        <item>Furnicture</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="electricExmaple">
+        <item>1. Replacement of lights(Room)</item>
+        <item>2. Replacement of lights(Desk)</item>
+        <item>3. Refrigerator malfunction</item>
+        <item>4. Power plug/socket problem</item>
+    </string-array>
+
+    <string-array name="furnictureExmaple">
+        <item>5. Problems with drawers in the closet</item>
+        <item>6. Problems with bed drawers</item>
+        <item>7. Problems with chairs</item>
+        <item>8. A fallen mirror</item>
+        <item>9. Problems with insect screen</item>
+    </string-array>
+
+    <string-array name="otherExmaple">
+        <item>10. Problems with WIFI</item>
+        <item>11. Problems with an insect</item>
+        <item>12. Water dropping from the Air Conditioner</item>
+        <item>13. Cell phone dropped between the beds</item>
+        <item>14. A fallen acrylic plate</item>
+        <item>15. Other</item>
+    </string-array>
+
+
 </resources>
