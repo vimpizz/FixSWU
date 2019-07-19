@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -153,6 +155,8 @@ public class LoginActivity extends AppCompatActivity {
                     ad.setMessage("비밀번호를 입력하세요");   // 내용 설정
 
                     final EditText et = new EditText(LoginActivity.this);
+                    et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                    et.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     ad.setView(et);
 
                     // 확인 버튼 설정
