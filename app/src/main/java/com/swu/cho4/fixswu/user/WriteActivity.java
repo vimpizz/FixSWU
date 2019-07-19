@@ -35,7 +35,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.swu.cho4.fixswu.LoginActivity;
 import com.swu.cho4.fixswu.R;
+import com.swu.cho4.fixswu.UserInfoActivity;
 import com.swu.cho4.fixswu.bean.BoardBean;
 import com.swu.cho4.fixswu.foregin.ForeignWrite;
 
@@ -96,7 +98,8 @@ public class WriteActivity extends AppCompatActivity {
         findViewById(R.id.engVersion).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 startActivity(new Intent(WriteActivity.this, ForeignWrite.class));
+                 Intent i = new Intent(WriteActivity.this, ForeignWrite.class);
+                 startActivityForResult(i, 3333);
              }
          });
 
@@ -471,9 +474,13 @@ public class WriteActivity extends AppCompatActivity {
                 case REQUEST_IMAGE_CAPTURE:
                     sendPicture();
                     break;
-
                 case GALLERY_CODE:
                     getPictureFromGallery(data.getData());
+                    break;
+                case 3333:
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
                     break;
                 default:
                     break;

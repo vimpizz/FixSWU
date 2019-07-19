@@ -228,6 +228,7 @@ public class ForeignWrite extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(mBoardBean==null){
+                            setResult(RESULT_OK);
                             Toast.makeText(getApplicationContext(),"Loading...", Toast.LENGTH_SHORT).show();
                             upload();
                         }
