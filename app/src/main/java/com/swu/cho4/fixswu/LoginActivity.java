@@ -1,6 +1,5 @@
 package com.swu.cho4.fixswu;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +8,7 @@ import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,12 +35,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.swu.cho4.fixswu.admin.AdminMainActivity;
 import com.swu.cho4.fixswu.bean.AdminBean;
-import com.swu.cho4.fixswu.bean.BoardBean;
-import com.swu.cho4.fixswu.user.DetailBoardActivity;
 import com.swu.cho4.fixswu.user.MainActivity;
-import com.swu.cho4.fixswu.user.ModifyWriteActivity;
 
-import java.net.URL;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -78,15 +71,12 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-
         findViewById(R.id.account).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, Pop.class));
-
             }
         });
-
     }
 
     @Override
@@ -180,11 +170,12 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
+                            findViewById(R.id.btnGoogleSignIn).setVisibility(view.getVisibility());
+                            findViewById(R.id.btnGoogleSignInAdmin).setVisibility(view.GONE);
+                            onResume();
                         }
                     });
                     ad.show();
-
-
                     break;
                 case R.id.appTitle:
                     btnPressTime++;
@@ -269,7 +260,6 @@ public class LoginActivity extends AppCompatActivity {
                             //고유번호를 생성한다
                             String guid = getUseridFromUUID(adminBean.userId);
                             dbRef.child("admin").child(guid).setValue(adminBean);
-
 
                             //메인화면으로 이동한다.
                             Toast.makeText(getBaseContext(), "관리자 목록으로 이동합니다",Toast.LENGTH_SHORT).show();
