@@ -140,17 +140,15 @@ public class AdminMainActivity extends AppCompatActivity {
         mListView.setAdapter(mBoardAdapter);
 
 
-        //Firebase 데이터베이스에 관리자를 등록한다
+/*        //Firebase 데이터베이스에 관리자를 등록한다
         DatabaseReference dbRef = mFirebaseDB.getReference();
-        String id = dbRef.push().getKey();
         //데이터베이스에 저장한다.
         AdminBean adminBean = new AdminBean();
         adminBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
         adminBean.admin = true;
         //고유번호를 생성한다
         String guid = getUseridFromUUID(adminBean.userId);
-        adminEmail=guid;
-        dbRef.child("admin").child(guid).setValue(adminBean);
+        dbRef.child("admin").child(guid).setValue(adminBean);*/
 
     } // onCreate() 끝
 

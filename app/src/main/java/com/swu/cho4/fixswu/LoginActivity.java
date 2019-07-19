@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.swu.cho4.fixswu.admin.AdminMainActivity;
@@ -49,10 +50,12 @@ public class LoginActivity extends AppCompatActivity {
     //FireBase 인증객체
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     final FirebaseUser user = mFirebaseAuth.getCurrentUser();
-    private long backPressedAt;
+    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
+    private long backPressedAt;
     private int btnNum = -1;
     private long btnPressTime = 0;
+    private boolean mAdmin=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,23 +94,27 @@ public class LoginActivity extends AppCompatActivity {
             long val = UUID.nameUUIDFromBytes(mFirebaseAuth.getCurrentUser().getEmail().getBytes()).getMostSignificantBits();
             String uuid = String.valueOf(val);
 
-            FirebaseDatabase.getInstance().getReference().child("admin").child(uuid).addValueEventListener(
+            FirebaseDatabase.getInstance().getReference().child("admin").child(uuid).addListenerForSingleValueEvent(
                     new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             AdminBean adminBean = dataSnapshot.getValue(AdminBean.class);
-                            if(adminBean!=null){
-                                if(adminBean.admin){
+                            mAdmin=adminBean.admin;
+                            if(mAdmin) {
                                 goAdminMainActivity();
-                                }
-                        } else {
-                            goMainActivity();
-                        }
+                            }else
+                            {
+                                goMainActivity();
+                            }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) { }
                     }
             );
+
+
+
+
         }
     }
 
@@ -214,6 +221,17 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             //FireBase 로그인 성공
 
+                            //Firebase 데이터베이스에 관리자를 등록한다
+                            DatabaseReference dbRef = mFirebaseDatabase.getReference();
+                            //데이터베이스에 저장한다.
+                            AdminBean adminBean = new AdminBean();
+                            adminBean.userId=mFirebaseAuth.getCurrentUser().getEmail();
+                            adminBean.admin = true;
+                            //고유번호를 생성한다
+                            String guid = getUseridFromUUID(adminBean.userId);
+                            dbRef.child("admin").child(guid).setValue(adminBean);
+
+
                             //메인화면으로 이동한다.
                             Toast.makeText(getBaseContext(), "관리자 목록으로 이동합니다",Toast.LENGTH_SHORT).show();
                             goAdminMainActivity();
@@ -224,6 +242,11 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public static String getUseridFromUUID(String userEmail){
+        long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits();
+        return String.valueOf(val);
     }
 
     @Override

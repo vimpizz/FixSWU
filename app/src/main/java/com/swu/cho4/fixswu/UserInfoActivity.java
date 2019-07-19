@@ -17,12 +17,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.swu.cho4.fixswu.bean.AdminBean;
+
+import java.util.UUID;
 
 public class UserInfoActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
     private GoogleSignInClient mGoogleSignInClient;
+    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,24 @@ public class UserInfoActivity extends AppCompatActivity {
 
     private void logout(){
         try{
+            String uuid = getUseridFromUUID(user.getEmail());
+            FirebaseDatabase.getInstance().getReference().child("admin").child(uuid).addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            AdminBean adminBean = dataSnapshot.getValue(AdminBean.class);
+                            if(adminBean!=null){
+                                adminBean.userId=user.getEmail();
+                                adminBean.admin=false;
+                                DatabaseReference dbRef = mFirebaseDatabase.getReference();
+                                dbRef.child("admin").child(uuid).setValue(adminBean);
+
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) { }
+                    }
+            );
             mGoogleSignInClient.signOut();
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "로그아웃 되었습니다", Toast.LENGTH_SHORT).show();
@@ -66,6 +93,11 @@ public class UserInfoActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static String getUseridFromUUID(String userEmail){
+        long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits();
+        return String.valueOf(val);
     }
 
 }
