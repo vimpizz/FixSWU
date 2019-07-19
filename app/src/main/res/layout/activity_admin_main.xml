@@ -53,7 +53,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/heart" />
+                    app:srcCompat="@drawable/nheart" />
 
                 <TextView
                     android:id="@+id/heartNum"
