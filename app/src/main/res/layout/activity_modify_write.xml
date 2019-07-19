@@ -170,6 +170,9 @@
         </LinearLayout>
     </LinearLayout>
 
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -178,14 +181,25 @@
         android:layout_margin="10dp"
         android:padding="20dp">
 
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:fontFamily="@font/kopubdotummedium"
+            android:gravity="center|left"
+            android:text="사진"
+            android:textSize="15dp" />
+
         <ImageView
             android:id="@+id/imgWriteModify"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="5"
             android:contextClickable="false"
             android:scaleType="fitCenter"
-            android:src="@drawable/picture_box" />
+            android:src="@drawable/picturedefault2" />
 
 
         <LinearLayout

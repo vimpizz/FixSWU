@@ -74,15 +74,6 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
-
-        /*//카메라를 사용하기 위한 퍼미션을 요청한다.
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA
-        }, 0);*/
-
-
         mImgProfile = findViewById(R.id.imgWrite);
         mEdtStuNum = findViewById(R.id.edtStuNum);
         mEdtName = findViewById(R.id.edtName);
@@ -178,9 +169,6 @@ public class WriteActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
-
-
-
     }
 
 
@@ -329,12 +317,6 @@ public class WriteActivity extends AppCompatActivity {
         }
 
         i.putExtra(MediaStore.EXTRA_OUTPUT, mCaptureUri);
-
-        //내가 원하는 액티비티로 이동하고, 그 액티비티가 종료되면 (finish되면)
-        //다시금 나의 액티비티의 onActivityResult() 메서드가 호출되는 구조이다.
-        //내가 어떤 데이터를 받고 싶을때 상대 액티비티를 호출해주고 그 액티비티에서
-        //호출한 나의 액티비티로 데이터를 넘겨주는 구조이다. 이때 호출되는 메서드가
-        //onActivityResult() 메서드 이다.
         startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
 
     }
@@ -400,9 +382,6 @@ public class WriteActivity extends AppCompatActivity {
 
         Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath);//경로를 통해 비트맵으로 전환
         mImgProfile.setImageBitmap(roate(bitmap, exifDegree));//이미지 뷰에 비트맵 넣기
-
-        //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this,"mCaptureUri : "+ mCaptureUri, Toast.LENGTH_LONG).show();
     }
 
     private String getRealPathFromURI(Uri contentUri) {

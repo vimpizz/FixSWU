@@ -330,12 +330,6 @@ public class ModifyWriteActivity extends AppCompatActivity {
         }
 
         i.putExtra(MediaStore.EXTRA_OUTPUT, mCaptureUri);
-
-        //내가 원하는 액티비티로 이동하고, 그 액티비티가 종료되면 (finish되면)
-        //다시금 나의 액티비티의 onActivityResult() 메서드가 호출되는 구조이다.
-        //내가 어떤 데이터를 받고 싶을때 상대 액티비티를 호출해주고 그 액티비티에서
-        //호출한 나의 액티비티로 데이터를 넘겨주는 구조이다. 이때 호출되는 메서드가
-        //onActivityResult() 메서드 이다.
         startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
 
     }
@@ -383,8 +377,6 @@ public class ModifyWriteActivity extends AppCompatActivity {
         mImgProfile.setImageBitmap( rotatedBmp );
 
         saveBitmapToFileCache(resizedBmp, mPhotoPath);
-
-        //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
     }
 
     private void getPictureFromGallery(Uri imgUri){
@@ -403,9 +395,6 @@ public class ModifyWriteActivity extends AppCompatActivity {
 
         Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath);//경로를 통해 비트맵으로 전환
         mImgProfile.setImageBitmap(roate(bitmap, exifDegree));//이미지 뷰에 비트맵 넣기
-
-        //Toast.makeText(this,"사진경로 : "+ mPhotoPath, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this,"mCaptureUri : "+ mCaptureUri, Toast.LENGTH_LONG).show();
     }
 
     private String getRealPathFromURI(Uri contentUri) {

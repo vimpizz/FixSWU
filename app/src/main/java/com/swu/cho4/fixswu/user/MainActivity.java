@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.swu.cho4.fixswu.LoginActivity;
+import com.swu.cho4.fixswu.Pop;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.UserInfoActivity;
 import com.swu.cho4.fixswu.bean.BoardBean;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //카메라를 사용하기 위한 퍼미션을 요청한다.
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // 회원정보 상세보기 버튼, 추가 버튼
         findViewById(R.id.btnUserInfo).setOnClickListener(mBtnClick);
         findViewById(R.id.btnWrite).setOnClickListener(mBtnClick);
+
 
         // 최초 데이터 세팅
         mBoardAdapter = new BoardAdapter(this, mBoardList);
@@ -104,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
 
     @Override
     public void onBackPressed() {

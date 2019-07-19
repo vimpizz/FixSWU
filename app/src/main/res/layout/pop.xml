@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/picture_box">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="기숙사 영선신청"
+        android:textSize="20dp"
+        android:drawableStart="@drawable/ic_live_help_black_24dp"/>
+
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="영선신청하기(샬롬,국생)"
+        android:textColor="@color/SWUPURPLE"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 매주 월~금 (주 5일) 오후 1시~3시 (※토,일 영선 불가)"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 세면대, 샤워실 막힘, 변기고장, 선반 떨어짐, 도어락 고장 등"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 와이파이, 랜선 연결 안됨."/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 부재 시에 연락 후 방문. 귀중품 등 관리 철저히!"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 외국인 학생은 영선신청 예문 참고하여 번호 기록! (외국인 학생에 한하여 샬롬하우스 행정실 직접 방문하여 영선신청 가능)"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="주의 !최대한 작업 위치를 자세히 기재"
+        android:textColor="#FF0000"/>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="영선신청하기(바롬10층)"
+        android:textColor="@color/SWUPURPLE"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 매주 월~금 (주 5일) 오후 4시 (※토,일 영선 불가)" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 세면대, 샤워실 막힘, 변기고장, 선반 떨어짐, 도어락 고장 등" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 와이파이, 랜선 연결 안됨." />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 부재 시에 연락 후 방문. 귀중품 등 관리 철저히!" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 오후 4시에 영선노트 확인" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 바롬 10층 담당선생님이 동행하여 영선 진행" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="주의 !최대한 작업 위치를 자세히 기재"
+        android:textColor="#FF0000"/>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="영선처리는……"
+        android:textColor="@color/Pantone2747C"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 12시 이전에 신청하면 당일 수리 가능" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 금요일 오전12시 이후에는 다음주 월요일에 수리" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 기숙사행정실 영선선생님(상시영선담당) 영선처리절차" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="▶ 내선전화 연락 없이 영선처리 시간에 단위실 노크 후 처리" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="▶ 학생이 방에 없을 경우 -> 마스터키로 문을 열고 들어가 수리함." />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="- 영선선생님 외 다른 부서의 추가 수리 처리절차" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="▶ 방문 전, 내선 전화로 단위실에 연락 후 -> 방문하여 처리" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="▶ 학생이 방에 없을 경우 -> 행정실 담당자 혹은 인턴이 동행하여 마스터키로 문을 열고 들어가 수리함." />
+
+</LinearLayout>
