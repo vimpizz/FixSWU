@@ -131,10 +131,7 @@ public class AdminMainActivity extends AppCompatActivity {
             }
             });
 
-
                 findViewById(R.id.btnUserInfoAdmin).setOnClickListener(mBtnClick);
-
-
                 hearNum = findViewById(R.id.heartNum);
         //TODO 하트 수 표시
 

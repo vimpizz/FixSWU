@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="condition">
+        <item>모두</item>
+        <item>확인전</item>
+        <item>읽음</item>
+        <item>수리완료</item>
+    </string-array>
+
+    <string-array name="house">
+        <item>모두</item>
+        <item>샬롬하우스 A동</item>
+        <item>샬롬하우스 B동</item>
+        <item>국제생활관</item>
+        <item>바롬관 10층</item>
+    </string-array>
+
+
+</resources>
