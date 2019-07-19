@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
 
+import static com.swu.cho4.fixswu.user.WriteActivity.getUseridFromUUID;
+
 public class DetailBoardActivity extends AppCompatActivity {
 
     public static final String STORAGE_DB_URI = "gs://fixswu.appspot.com";
@@ -44,7 +47,7 @@ public class DetailBoardActivity extends AppCompatActivity {
 
     private BoardBean mBoardBean;
 
-    private ImageView mImgProfile, mImgLlike;
+    private ImageView mImgProfile; // , mImgLlike;
     private TextView mTxtStuNum, mTxtName,mTxtHouse,mTxtRoomNum,mTxtDeskNum,mTxtDate,mTxtCondition,mTxtContent,mTxtComment;
 
     private String strImgUri;
@@ -55,7 +58,7 @@ public class DetailBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_board);
 
-        mImgLlike = findViewById(R.id.imgLike);
+        //mImgLlike = findViewById(R.id.imgLike);
         mImgProfile = findViewById(R.id.imgWriteDetail);
         mTxtStuNum = findViewById(R.id.txtStuNumDetail);
         mTxtName = findViewById(R.id.txtNameDetail);
@@ -183,10 +186,13 @@ public class DetailBoardActivity extends AppCompatActivity {
     }
 
     private void setmImgLlike() {
-        if(mBoardBean.like==true)
-            mImgLlike.setImageResource(R.drawable.heart_on);
-        else if (mBoardBean.like==false)
-            mImgLlike.setImageResource(R.drawable.heart);
+        Button btnLike = (Button) findViewById(R.id.btnLike);
+        if (mBoardBean.like == true) {
+            btnLike.setBackgroundResource(R.drawable.heart_on);
+        }
+        else if (mBoardBean.like == false) {
+            btnLike.setBackgroundResource(R.drawable.heart);
+        }
     }
 
     private void uploadLike() {

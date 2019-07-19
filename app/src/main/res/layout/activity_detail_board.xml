@@ -267,23 +267,23 @@
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="3"
             android:fontFamily="@font/kopubdotumbold"
-            android:layout_weight="2"
+            android:gravity="center|left"
             android:text="기사님
             코멘트"
-            android:textSize="15dp"
-            android:gravity="center|left"/>
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/txtCommentDetail"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:fontFamily="@font/kopubdotumbold"
-            android:textSize="15dp"
-            android:gravity="center|left"
+            android:layout_weight="8"
             android:background="@drawable/square_box"
-            android:paddingLeft="10dp"/>
+            android:fontFamily="@font/kopubdotumbold"
+            android:gravity="center|left"
+            android:paddingLeft="10dp"
+            android:textSize="15dp" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -292,21 +292,12 @@
             android:orientation="vertical"
             android:layout_marginLeft="10dp">
 
-            <ImageView
-                android:id="@+id/imgLike"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="7"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/heart" />
-
             <Button
                 android:id="@+id/btnLike"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
-                android:text="좋아요"
-                android:background="@color/PantoneCoolGray4C"/>
+                android:background="@drawable/heart"/>
 
         </LinearLayout>
 
