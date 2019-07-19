@@ -3,7 +3,10 @@ package com.swu.cho4.fixswu.admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,17 @@ public class AdminMainActivity extends AppCompatActivity {
 
     private TextView hearNum;
 
+    private ArrayAdapter conditionAdapter;
+    private Spinner conditionSpinner;
+
+    private String selectedCondition = "";
+    private int conditionspinner;
+
+    private ArrayAdapter houseAdapter;
+    private Spinner houseSpinner;
+
+    private int housespinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +68,74 @@ public class AdminMainActivity extends AppCompatActivity {
 
         mListView = findViewById(R.id.lstBoard);
 
-        findViewById(R.id.btnUserInfoAdmin).setOnClickListener(mBtnClick);
+        //매칭
+        conditionSpinner = findViewById(R.id.conditionSpinner);
 
-        hearNum = findViewById(R.id.heartNum);
+        //어댑터 설정
+        ArrayAdapter conditionAdapter = ArrayAdapter.createFromResource(this, R.array.condition, R.layout.support_simple_spinner_dropdown_item);
+        conditionSpinner.setAdapter(conditionAdapter);
+
+        conditionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(conditionSpinner.getSelectedItem().equals("모두")) {
+                    conditionspinner = 0;
+                    onResume();
+                } else if(conditionSpinner.getSelectedItem().equals("확인전")) {
+                    conditionspinner = 1;
+                    onResume();
+                }else if(conditionSpinner.getSelectedItem().equals("읽음")) {
+                    conditionspinner = 2;
+                    onResume();
+                }else if(conditionSpinner.getSelectedItem().equals("수리완료")) {
+                    conditionspinner = 3;
+                    onResume();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        houseSpinner = findViewById(R.id.houseSpinner);
+        //어댑터 설정
+        ArrayAdapter houseaAdapter = ArrayAdapter.createFromResource(this, R.array.house, R.layout.support_simple_spinner_dropdown_item);
+        houseSpinner.setAdapter(houseaAdapter);
+
+        houseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(houseSpinner.getSelectedItem().equals("모두")) {
+                    housespinner = 0;
+                    onResume();
+                } else if(houseSpinner.getSelectedItem().equals("샬롬하우스 A동")) {
+                    housespinner = 1;
+                    onResume();
+                }else if(houseSpinner.getSelectedItem().equals("샬롬하우스 B동")) {
+                    housespinner = 2;
+                    onResume();
+                }else if(houseSpinner.getSelectedItem().equals("국제생활관")) {
+                    housespinner = 3;
+                    onResume();
+                }else if(houseSpinner.getSelectedItem().equals("바롬관 10층")) {
+                    housespinner = 4;
+                    onResume();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+            });
+
+
+                findViewById(R.id.btnUserInfoAdmin).setOnClickListener(mBtnClick);
+
+
+                hearNum = findViewById(R.id.heartNum);
         //TODO 하트 수 표시
 
         // 최초 데이터 셋팅
@@ -110,13 +189,37 @@ public class AdminMainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int countHeartNum=0;
+
+
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     for(DataSnapshot ds2 : ds.getChildren()) {
                         BoardBean bean = ds2.getValue(BoardBean.class);
                         if(bean.like == true) {
                             countHeartNum ++;
                         }
-                        newBoardList.add(bean);
+                        //newBoardList.add(bean);
+
+                        if (conditionspinner == 0 && housespinner == 0) {newBoardList.add(bean);}
+                        else if (conditionspinner == 0 && housespinner == 1 && bean.intHouse == 0) { newBoardList.add(bean);}
+                        else if (conditionspinner == 0 && housespinner == 2 && bean.intHouse == 1) { newBoardList.add(bean);}
+                        else if (conditionspinner == 0 && housespinner == 3 && bean.intHouse == 2) { newBoardList.add(bean);}
+                        else if (conditionspinner == 0 && housespinner == 4 && bean.intHouse == 3) { newBoardList.add(bean);}
+                        else if (conditionspinner == 1 && bean.intCondition == 0 && housespinner == 0) { newBoardList.add(bean);}
+                        else if (conditionspinner == 1 && bean.intCondition == 0 && housespinner == 1 && bean.intHouse == 0 ) { newBoardList.add(bean);}
+                        else if (conditionspinner == 1 && bean.intCondition == 0 && housespinner == 2 && bean.intHouse == 1) { newBoardList.add(bean);}
+                        else if (conditionspinner == 1 && bean.intCondition == 0 && housespinner == 3 && bean.intHouse == 2) { newBoardList.add(bean);}
+                        else if (conditionspinner == 1 && bean.intCondition == 0 && housespinner == 4 && bean.intHouse == 3) { newBoardList.add(bean);}
+                        else if (conditionspinner == 2 && bean.intCondition == 1 && housespinner == 0) { newBoardList.add(bean);}
+                        else if (conditionspinner == 2 && bean.intCondition == 1 && housespinner == 1 && bean.intHouse == 0) { newBoardList.add(bean);}
+                        else if (conditionspinner == 2 && bean.intCondition == 1 && housespinner == 2 && bean.intHouse == 1) { newBoardList.add(bean);}
+                        else if (conditionspinner == 2 && bean.intCondition == 1 && housespinner == 3 && bean.intHouse == 2) { newBoardList.add(bean);}
+                        else if (conditionspinner == 2 && bean.intCondition == 1 && housespinner == 4 && bean.intHouse == 3) { newBoardList.add(bean);}
+                        else if (conditionspinner == 3 && bean.intCondition == 2 && housespinner == 0) { newBoardList.add(bean);}
+                        else if (conditionspinner == 3 && bean.intCondition == 2 && housespinner == 1 && bean.intHouse == 0) { newBoardList.add(bean);}
+                        else if (conditionspinner == 3 && bean.intCondition == 2 && housespinner == 2 && bean.intHouse == 1) { newBoardList.add(bean);}
+                        else if (conditionspinner == 3 && bean.intCondition == 2 && housespinner == 3 && bean.intHouse == 2) { newBoardList.add(bean);}
+                        else if (conditionspinner == 3 && bean.intCondition == 2 && housespinner == 4 && bean.intHouse == 3) { newBoardList.add(bean);}
                     }
                 }
 
@@ -131,6 +234,7 @@ public class AdminMainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
+
 
     @Override
     public void onBackPressed() {

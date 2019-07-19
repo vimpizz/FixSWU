@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.swu.cho4.fixswu.bean.BoardBean;
@@ -21,6 +22,7 @@ public class AdminBoardAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<BoardBean> mBoardList;
+    private LayoutInflater inflater;
 
 
     public AdminBoardAdapter(Context context, List<BoardBean> boardList) {
