@@ -40,7 +40,7 @@
             android:id="@+id/imgWriteAdmin"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="3"
             app:srcCompat="@drawable/picturedefault2"
             android:scaleType="fitCenter"/>
 
@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:layout_weight="4"
+            android:layout_weight="6"
             android:orientation="vertical">
 
             <LinearLayout
@@ -59,11 +59,21 @@
                 android:gravity="center|left">
 
                 <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/kopubdotummedium"
+                    android:gravity="center|left"
+                    android:text="기관"
+                    android:textSize="15dp" />
+
+                <TextView
                     android:id="@+id/txtHouse"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/kopubdotummedium"
-                    android:layout_weight="1"
+                    android:layout_weight="8"
                     android:hint="기관"
                     android:gravity="center|left"
                     android:textSize="15dp"/>
@@ -76,27 +86,54 @@
                 android:layout_weight="2"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/kopubdotummedium"
+                    android:gravity="center|left"
+                    android:text="이름"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="8"
                     android:fontFamily="@font/kopubdotummedium"
                     android:gravity="center|left"
                     android:hint="이름"
                     android:textSize="15dp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtDate"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
                 android:fontFamily="@font/kopubdotummedium"
-                android:gravity="center|right"
+                android:gravity="center|left"
+                android:text="날짜"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:fontFamily="@font/kopubdotummedium"
+                android:gravity="center|left"
                 android:hint="시간"
                 android:textSize="15dp" />
+
+        </LinearLayout>
 
         </LinearLayout>
 

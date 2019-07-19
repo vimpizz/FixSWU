@@ -161,14 +161,6 @@ public class AdminWriteActivity extends AppCompatActivity {
         String uuid = getUseridFromUUID(mBoardBean.userId);
         dbRef.child("board").child(uuid).child(mBoardBean.id).setValue(mBoardBean);
 
-/*        //DB 업로드
-        DatabaseReference dbRef = mFirebaseDatabase.getReference();
-        String uuid = getUseridFromUUID(mBoardBean.userId);
-
-        // 동일 ID로 데이터 수정
-        dbRef.child("board").child(uuid).child(mBoardBean.id).child("comment").setValue(mBoardBean.comment);
-        dbRef.child("board").child(uuid).child(mBoardBean.id).child("intCondition").setValue(mBoardBean.intCondition);*/
-
         Toast.makeText(this,"저장되었습니다",Toast.LENGTH_SHORT).show();
         finish();
         return;
