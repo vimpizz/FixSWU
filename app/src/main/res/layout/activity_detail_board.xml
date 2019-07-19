@@ -221,7 +221,7 @@
             android:layout_weight="8"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:src="@drawable/heart"/>
+            android:src="@drawable/picturedefault2"/>
 
     </LinearLayout>
 
