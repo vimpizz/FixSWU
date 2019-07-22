@@ -222,7 +222,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/kopubdotummedium"
-                android:text="Take pictures"
+                android:text="Take a picture"
                 android:textColor="#FFFFFF"
                 android:textSize="12dp"/>
 
