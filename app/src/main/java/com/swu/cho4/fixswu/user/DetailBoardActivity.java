@@ -1,14 +1,8 @@
 package com.swu.cho4.fixswu.user;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,12 +25,8 @@ import com.swu.cho4.fixswu.PopupActivity;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.bean.BoardBean;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
-
-import static com.swu.cho4.fixswu.user.WriteActivity.getUseridFromUUID;
 
 public class DetailBoardActivity extends AppCompatActivity {
 

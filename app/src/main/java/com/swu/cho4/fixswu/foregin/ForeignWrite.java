@@ -1,10 +1,5 @@
 package com.swu.cho4.fixswu.foregin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -27,6 +22,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +38,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.bean.BoardBean;
-import com.swu.cho4.fixswu.user.WriteActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -379,7 +378,7 @@ public class ForeignWrite extends AppCompatActivity {
 
         boardBean.roomNum = mEdtRoomNum.getText().toString();
         boardBean.deskNum = mEdtDeskNum.getText().toString();
-        boardBean.content = mEdtContent.getText().toString();
+        boardBean.content = contents;
 
         boardBean.imgUri=imgUri;
         boardBean.imgName=imgName;
@@ -416,12 +415,6 @@ public class ForeignWrite extends AppCompatActivity {
         }
 
         i.putExtra(MediaStore.EXTRA_OUTPUT, mCaptureUri);
-
-        //내가 원하는 액티비티로 이동하고, 그 액티비티가 종료되면 (finish되면)
-        //다시금 나의 액티비티의 onActivityResult() 메서드가 호출되는 구조이다.
-        //내가 어떤 데이터를 받고 싶을때 상대 액티비티를 호출해주고 그 액티비티에서
-        //호출한 나의 액티비티로 데이터를 넘겨주는 구조이다. 이때 호출되는 메서드가
-        //onActivityResult() 메서드 이다.
         startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
 
     }
@@ -445,7 +438,7 @@ public class ForeignWrite extends AppCompatActivity {
 
     private void sendPicture() {
         Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath);
-        Bitmap resizedBmp = getResizedBitmap(bitmap, 3, 100, 100);
+        Bitmap resizedBmp = getResizedBitmap(bitmap, 2, 300, 600);
 
         bitmap.recycle();
 
@@ -576,12 +569,16 @@ public class ForeignWrite extends AppCompatActivity {
                 case GALLERY_CODE:
                     getPictureFromGallery(data.getData());
                     break;
+
+
+/*                case 3333:
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
+                    break;*/
                 default:
                     break;
             }
         }
     }
-
-
-
 }

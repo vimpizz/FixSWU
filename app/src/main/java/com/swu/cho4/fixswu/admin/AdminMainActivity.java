@@ -21,15 +21,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.swu.cho4.fixswu.DownloadImgTask;
 import com.swu.cho4.fixswu.LoginActivity;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.UserInfoActivity;
-import com.swu.cho4.fixswu.bean.AdminBean;
 import com.swu.cho4.fixswu.bean.BoardBean;
-import com.swu.cho4.fixswu.user.DetailBoardActivity;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

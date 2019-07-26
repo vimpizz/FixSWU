@@ -2,18 +2,16 @@ package com.swu.cho4.fixswu.admin;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.swu.cho4.fixswu.bean.BoardBean;
 import com.swu.cho4.fixswu.R;
+import com.swu.cho4.fixswu.bean.BoardBean;
 import com.swu.cho4.fixswu.bean.Utils;
 
 import java.util.List;

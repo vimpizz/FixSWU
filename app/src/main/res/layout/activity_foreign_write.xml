@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +21,6 @@
             android:text="Apply for repairs"
             android:fontFamily="@font/kopubdotummedium"
             android:gravity="center|left"/>
-
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -233,7 +231,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/kopubdotummedium"
-                android:text="Select photo"
+                android:text="Select a photo"
                 android:textColor="#FFFFFF"
                 android:textSize="12dp"/>
         </LinearLayout>

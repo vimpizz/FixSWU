@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
-import com.swu.cho4.fixswu.R;
-
 public class Pop extends Activity {
 
     @Override

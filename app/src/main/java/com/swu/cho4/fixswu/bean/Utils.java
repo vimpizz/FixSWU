@@ -1,8 +1,6 @@
 package com.swu.cho4.fixswu.bean;
 
 
-import com.swu.cho4.fixswu.bean.BoardBean;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;

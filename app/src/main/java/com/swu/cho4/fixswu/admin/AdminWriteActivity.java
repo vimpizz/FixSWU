@@ -2,7 +2,6 @@ package com.swu.cho4.fixswu.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -25,7 +24,6 @@ import com.swu.cho4.fixswu.DownloadImgTask;
 import com.swu.cho4.fixswu.PopupActivity;
 import com.swu.cho4.fixswu.R;
 import com.swu.cho4.fixswu.bean.BoardBean;
-import com.swu.cho4.fixswu.user.DetailBoardActivity;
 
 import java.net.URL;
 import java.util.ArrayList;
